@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "kendo-react-assistant": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@progress/kendo-react-mcp@latest"],
+      "env": {
+        "TELERIK_LICENSE_PATH": "./telerik-license.txt"
+      }
+    }
+  }
+}
