@@ -1,0 +1,187 @@
+{
+  "componentName": "result-Button-2025-09-08T12-43-05-402Z.md",
+  "imports": [
+    "import { Editor, EditorTools } from '@progress/kendo-react-editor';",
+    "import { Editor } from '@progress/kendo-react-editor';",
+    "import { EditorTools } from '@progress/kendo-react-editor';"
+  ],
+  "examples": [
+    {
+      "title": "Example 1",
+      "code": "import { Editor, EditorTools } from '@progress/kendo-react-editor';\n\nconst {\n    Bold, Italic, Underline, Strikethrough,\n    Subscript, Superscript, ForeColor, BackColor,\n    CleanFormatting, AlignLeft, AlignCenter, AlignRight, AlignJustify,\n    Indent, Outdent, OrderedList, UnorderedList,\n    NumberedList, BulletedList, Undo, Redo,\n    FontSize, FontName, FormatBlock, Link, Unlink,\n    InsertImage, ViewHtml, InsertTable, InsertFile,\n    SelectAll, Print, Pdf, TableProperties, TableCellProperties,\n    AddRowBefore, AddRowAfter, AddColumnBefore, AddColumnAfter,\n    DeleteRow, DeleteColumn, DeleteTable, MergeCells, SplitCell\n} = EditorTools;",
+      "description": "React component implementation example"
+    }
+  ],
+  "props": {
+    "disabled": {
+      "name": "disabled",
+      "fullName": "",
+      "summary": ">- Specifies if the Button is disabled ([see example]({% slug disabled_button %})). Defaults to `false` .",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "endIcon": {
+      "name": "endIcon",
+      "fullName": "",
+      "summary": "\"Sets an SVG icon or custom element after the content of the Button. For the custom component, consider using\\r\\n[Phrasing content](https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content).\\r\\nDo not use [Interactive content](https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#interactive_content).\"",
+      "syntax": {
+        "return": {
+          "type": "ReactNode"
+        }
+      }
+    },
+    "fillMode": {
+      "name": "fillMode",
+      "fullName": "",
+      "summary": "|- Configures the `fillMode`",
+      "syntax": {
+        "return": {
+          "type": "null | \"flat\" | \"solid\" | \"outline\" | \"link\" | \"clear\""
+        }
+      }
+    },
+    "icon": {
+      "name": "icon",
+      "fullName": "",
+      "summary": ">- Defines the name for an existing icon in a KendoReact theme ([see example]({% slug icons_button %})). The icon is rendered inside the Button by a `span.k-icon` element.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "iconClass": {
+      "name": "iconClass",
+      "fullName": "",
+      "summary": ">- Defines a CSS class&mdash;or multiple classes separated by spaces&mdash;which are applied to a `span` element inside the Button ([see example]({% slug icons_button %})). Allows the usage of custom icons.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "iconSize": {
+      "name": "iconSize",
+      "fullName": "",
+      "summary": "|- Configures the `size` of the SVG icon displayed inside the Button.",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\""
+        }
+      }
+    },
+    "imageAlt": {
+      "name": "imageAlt",
+      "fullName": "",
+      "summary": ">- Defines the alternative text of the image rendered inside the Button component.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "imageUrl": {
+      "name": "imageUrl",
+      "fullName": "",
+      "summary": "|- Defines a URL which is used as an `img` element inside the Button ([see example]({% slug icons_button %})). The URL can be relative or absolute. If relative, it is evaluated with relation to the URL of the web page.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "rounded": {
+      "name": "rounded",
+      "fullName": "",
+      "summary": "|- Configures the `roundness`",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\" | \"full\""
+        }
+      }
+    },
+    "selected": {
+      "name": "selected",
+      "fullName": "",
+      "summary": "Sets the selected state of the Button. Can be used for controlled mode.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "size": {
+      "name": "size",
+      "fullName": "",
+      "summary": "|- Configures the `size`",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\""
+        }
+      }
+    },
+    "startIcon": {
+      "name": "startIcon",
+      "fullName": "",
+      "summary": "\"Sets an SVG icon or custom element before the content of the Button. For the custom component, consider using\\r\\n[Phrasing content](https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content).\\r\\nDo not use [Interactive content](https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#interactive_content).\"",
+      "syntax": {
+        "return": {
+          "type": "ReactNode"
+        }
+      }
+    },
+    "svgIcon": {
+      "name": "svgIcon",
+      "fullName": "",
+      "summary": "Defines the SVG icon rendered inside the Button component.",
+      "syntax": {
+        "return": {
+          "type": "SVGIcon"
+        }
+      }
+    },
+    "themeColor": {
+      "name": "themeColor",
+      "fullName": "",
+      "summary": "|- Configures the `themeColor`",
+      "syntax": {
+        "return": {
+          "type": ">-"
+        }
+      }
+    },
+    "title": {
+      "name": "title",
+      "fullName": "",
+      "summary": "|- Sets the `title` HTML attribute of the Button.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "togglable": {
+      "name": "togglable",
+      "fullName": "",
+      "summary": ">- Provides visual styling that indicates if the Button is selected ([see example]({% slug toggleable_button %})). Defaults to `false` .",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "unstyled": {
+      "name": "unstyled",
+      "fullName": "",
+      "summary": "The unstyled option classes.",
+      "syntax": {
+        "return": {
+          "type": "ButtonsClassStructure"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "componentName": "result-RadioButton-2025-09-08T12-43-05-402Z.md",
+  "imports": [
+    "import { RadioButton } from '@progress/kendo-react-inputs';",
+    "import { Editor, EditorTools } from '@progress/kendo-react-editor';",
+    "import { Editor } from '@progress/kendo-react-editor';",
+    "import { EditorTools } from '@progress/kendo-react-editor';"
+  ],
+  "examples": [
+    {
+      "title": "Example 1",
+      "code": "import * as React from 'react';\nimport { RadioButton } from '@progress/kendo-react-inputs';\n\nexport default function App() {\n    return (\n        <div className=\"k-d-flex k-flex-col\">\n            <label>Choose a payment method:</label>\n            <div>\n                <RadioButton name={'payment'} value={'credit_card'} label={'Credit Card'} />\n            </div>\n            <div>\n                <RadioButton name={'payment'} value={'paypal'} label={'PayPal'} />\n            </div>\n        </div>\n    );\n}",
+      "description": "React component implementation example"
+    },
+    {
+      "title": "Example 2",
+      "code": "import { Editor, EditorTools } from '@progress/kendo-react-editor';\n\nconst {\n    Bold, Italic, Underline, Strikethrough,\n    Subscript, Superscript, ForeColor, BackColor,\n    CleanFormatting, AlignLeft, AlignCenter, AlignRight, AlignJustify,\n    Indent, Outdent, OrderedList, UnorderedList,\n    NumberedList, BulletedList, Undo, Redo,\n    FontSize, FontName, FormatBlock, Link, Unlink,\n    InsertImage, ViewHtml, InsertTable, InsertFile,\n    SelectAll, Print, Pdf, TableProperties, TableCellProperties,\n    AddRowBefore, AddRowAfter, AddColumnBefore, AddColumnAfter,\n    DeleteRow, DeleteColumn, DeleteTable, MergeCells, SplitCell\n} = EditorTools;",
+      "description": "React component implementation example"
+    }
+  ],
+  "props": {
+    "RadioButtonProps": {
+      "name": "RadioButtonProps",
+      "fullName": "",
+      "summary": "\"Represents the props of the [KendoReact RadioButton component]({% slug overview_radiobutton %}).\\r\\nExtends the [native input props](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement).\"",
+      "syntax": {
+        "return": {
+          "type": ""
+        }
+      }
+    },
+    "props": {
+      "name": "props",
+      "fullName": "",
+      "summary": "",
+      "syntax": {
+        "return": {
+          "type": "RadioButtonProps | RefAttributes"
+        }
+      }
+    }
+  }
+}

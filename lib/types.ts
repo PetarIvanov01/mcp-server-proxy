@@ -33,11 +33,8 @@ export const PlanStepSchema = z.object({
 export const ExecutionPlanSchema = z.object({
   id: z.string(),
   userQuery: z.string(),
-  steps: z.string().describe('Execution plan in markdown format'),
-  createdAt: z.date().default(() => new Date()),
-  status: z
-    .enum(['pending', 'in_progress', 'completed', 'failed'])
-    .default('pending')
+  plan: z.string().describe('Execution plan in markdown format'),
+  createdAt: z.date().default(() => new Date())
 });
 
 export type PlanStep = z.infer<typeof PlanStepSchema>;
@@ -59,6 +56,15 @@ export const KendoComponentMappingSchema = z.object({
 });
 
 export type KendoComponentMapping = z.infer<typeof KendoComponentMappingSchema>;
+
+// Enhanced mapping type for the new system
+export type EnhancedKendoComponentMapping = {
+  component: string;
+  category?: string;
+  seriesType?: string;
+  props?: Record<string, any>;
+  priority?: number;
+};
 
 // Agent Response Schemas
 export const AgentResponseSchema = z.object({
@@ -88,3 +94,23 @@ export const UserQuerySchema = z.object({
 });
 
 export type UserQuery = z.infer<typeof UserQuerySchema>;
+
+// Component Prop Details Schema
+export interface PropDetails {
+  name: string;
+  fullName: string;
+  summary: string;
+  syntax: {
+    return: {
+      type: string;
+    };
+  };
+}
+
+// Structured Component Documentation Schema
+export interface StructuredComponentDocs {
+  componentName: string;
+  props: Record<string, PropDetails>;
+  rawDocumentation: string;
+  extractedAt: string;
+}

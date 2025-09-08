@@ -1,0 +1,430 @@
+{
+  "componentName": "result-NumericTextBox-2025-09-08T12-43-05-402Z.md",
+  "imports": [
+    "import { NumericTextBox } from '@progress/kendo-react-inputs';",
+    "import { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react-inputs';",
+    "import { Editor, EditorTools } from '@progress/kendo-react-editor';",
+    "import { NumericTextBoxChangeEvent } from '@progress/kendo-react-inputs';",
+    "import { Editor } from '@progress/kendo-react-editor';",
+    "import { EditorTools } from '@progress/kendo-react-editor';"
+  ],
+  "examples": [
+    {
+      "title": "Example 1",
+      "code": "import * as React from 'react';\nimport { NumericTextBox } from '@progress/kendo-react-inputs';\n\nexport default function App() {\n    return <NumericTextBox label=\"Select quantity\" name=\"quantity\" />;\n}",
+      "description": "React component implementation example"
+    },
+    {
+      "title": "Example 2",
+      "code": "import * as React from 'react';\nimport { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react-inputs';\n\nexport default function App() {\n    const [value, setValue] = React.useState<number | null | undefined>(0);\n\n    const handleChange = (event: NumericTextBoxChangeEvent) => {\n        setValue(event.value);\n    };\n\n    return <NumericTextBox value={value} onChange={handleChange} />;\n}",
+      "description": "React component implementation example"
+    },
+    {
+      "title": "Example 3",
+      "code": "import { Editor, EditorTools } from '@progress/kendo-react-editor';\n\nconst {\n    Bold, Italic, Underline, Strikethrough,\n    Subscript, Superscript, ForeColor, BackColor,\n    CleanFormatting, AlignLeft, AlignCenter, AlignRight, AlignJustify,\n    Indent, Outdent, OrderedList, UnorderedList,\n    NumberedList, BulletedList, Undo, Redo,\n    FontSize, FontName, FormatBlock, Link, Unlink,\n    InsertImage, ViewHtml, InsertTable, InsertFile,\n    SelectAll, Print, Pdf, TableProperties, TableCellProperties,\n    AddRowBefore, AddRowAfter, AddColumnBefore, AddColumnAfter,\n    DeleteRow, DeleteColumn, DeleteTable, MergeCells, SplitCell\n} = EditorTools;",
+      "description": "React component implementation example"
+    }
+  ],
+  "props": {
+    "props": {
+      "name": "props",
+      "fullName": "",
+      "summary": "",
+      "syntax": {
+        "return": {
+          "type": "NumericTextBoxProps | RefAttributes"
+        }
+      }
+    },
+    "accessKey": {
+      "name": "accessKey",
+      "fullName": "",
+      "summary": "|- Specifies the `accessKey` of the NumericTextBox.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "ariaDescribedBy": {
+      "name": "ariaDescribedBy",
+      "fullName": "",
+      "summary": "\"Identifies the element(s) which will describe the component, similar to [HTML aria-describedby attribute](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute).\\r\\nFor example these elements could contain error or hint message.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "ariaLabel": {
+      "name": "ariaLabel",
+      "fullName": "",
+      "summary": "The accessible label of the component.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "ariaLabelledBy": {
+      "name": "ariaLabelledBy",
+      "fullName": "",
+      "summary": "Identifies the element(s) which will label the component.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "autoFocus": {
+      "name": "autoFocus",
+      "fullName": "",
+      "summary": "|- Represents the `autoFocus` HTML attribute that will be applied to the input element of the NumericTextBox. (Defaults to `false` )",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "className": {
+      "name": "className",
+      "fullName": "",
+      "summary": "Sets a class of the NumericTextBox DOM element.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "defaultValue": {
+      "name": "defaultValue",
+      "fullName": "",
+      "summary": "Specifies the initial value. Leaves the subsequent updates uncontrolled.",
+      "syntax": {
+        "return": {
+          "type": "null | number"
+        }
+      }
+    },
+    "dir": {
+      "name": "dir",
+      "fullName": "",
+      "summary": "|- Represents the `dir` HTML attribute.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "disabled": {
+      "name": "disabled",
+      "fullName": "",
+      "summary": "Determines whether the NumericTextBox is disabled.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "fillMode": {
+      "name": "fillMode",
+      "fullName": "",
+      "summary": "\"Configures the \\n`fillMode`\\n of the NumericTextBox.\\r\\n\\r\\nThe available options are:\\r\\n- solid\\r\\n- outline\\r\\n- flat\\r\\n- null&mdash;Does not set a fillMode \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"flat\" | \"solid\" | \"outline\""
+        }
+      }
+    },
+    "format": {
+      "name": "format",
+      "fullName": "",
+      "summary": ">- Specifies the number format which is used for formatting the value ([see example]({% slug formats_numerictextbox %})). If set to `an empty string` or `undefined` , the default format will be used. Format cannot contain decimal separators or numbers. Power signs are supported.",
+      "syntax": {
+        "return": {
+          "type": "string | NumberFormatOptions"
+        }
+      }
+    },
+    "id": {
+      "name": "id",
+      "fullName": "",
+      "summary": "|- Sets the `id` of the `input` DOM element.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "inputAttributes": {
+      "name": "inputAttributes",
+      "fullName": "",
+      "summary": "\"Sets the HTML attributes of the inner focusable input element.\\r\\nAttributes which are essential for certain component functionalities cannot be changed.\"",
+      "syntax": {
+        "return": {
+          "type": "InputHTMLAttributes"
+        }
+      }
+    },
+    "inputStyle": {
+      "name": "inputStyle",
+      "fullName": "",
+      "summary": "|- Represents the input element `style` HTML attribute.",
+      "syntax": {
+        "return": {
+          "type": "CSSProperties"
+        }
+      }
+    },
+    "inputType": {
+      "name": "inputType",
+      "fullName": "",
+      "summary": "\"Sets the \\n`type`\\n of the \\n`input`\\n DOM element.\\r\\n\\r\\nThe available options are:\\r\\n- (Default) \\n`tel`\\n\\r\\n- \\n`text`\"",
+      "syntax": {
+        "return": {
+          "type": "NumericTextBoxInputType"
+        }
+      }
+    },
+    "label": {
+      "name": "label",
+      "fullName": "",
+      "summary": "Renders a floating label for the NumericTextBox.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "max": {
+      "name": "max",
+      "fullName": "",
+      "summary": "Specifies the greatest value that can be entered.",
+      "syntax": {
+        "return": {
+          "type": "number"
+        }
+      }
+    },
+    "min": {
+      "name": "min",
+      "fullName": "",
+      "summary": "Specifies the smallest value that can be entered.",
+      "syntax": {
+        "return": {
+          "type": "number"
+        }
+      }
+    },
+    "name": {
+      "name": "name",
+      "fullName": "",
+      "summary": "|- Specifies the name of the `input` DOM element.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "onBlur": {
+      "name": "onBlur",
+      "fullName": "",
+      "summary": "The event handler that will be fired when NumericTextBox is blurred.",
+      "syntax": {
+        "return": {
+          "type": "'(event: NumericTextBoxBlurEvent) => void'"
+        }
+      }
+    },
+    "onChange": {
+      "name": "onChange",
+      "fullName": "",
+      "summary": "Determines the event handler that will be fired when the user edits the value.",
+      "syntax": {
+        "return": {
+          "type": "'(event: NumericTextBoxChangeEvent) => void'"
+        }
+      }
+    },
+    "onFocus": {
+      "name": "onFocus",
+      "fullName": "",
+      "summary": "The event handler that will be fired when NumericTextBox is focused.",
+      "syntax": {
+        "return": {
+          "type": "'(event: NumericTextBoxFocusEvent) => void'"
+        }
+      }
+    },
+    "placeholder": {
+      "name": "placeholder",
+      "fullName": "",
+      "summary": "Specifies the input placeholder.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "prefix": {
+      "name": "prefix",
+      "fullName": "",
+      "summary": "Sets a custom prefix to the NumericTextBox component.",
+      "syntax": {
+        "return": {
+          "type": "CustomComponent"
+        }
+      }
+    },
+    "rangeOnEnter": {
+      "name": "rangeOnEnter",
+      "fullName": "",
+      "summary": "\"If enabled, the NumericTextBox will handle the \\n`enter`\\n key to range the current invalid value between \\n`min`\\n and \\n`max`\\n props.\\r\\nThe available options are:\\r\\n- (Default) \\n`true`\\n\\r\\n- \\n`false`\\n\\r\\nCan be disabled when form submit is required on pressing the \\n`enter`\\n key.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "readOnly": {
+      "name": "readOnly",
+      "fullName": "",
+      "summary": "Determines whether the NumericTextBox is in its read-only state.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "required": {
+      "name": "required",
+      "fullName": "",
+      "summary": "\"Specifies if \\n`null`\\n is a valid value for the component.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rounded": {
+      "name": "rounded",
+      "fullName": "",
+      "summary": "\"Configures the \\n`roundness`\\n of the NumericTextBox.\\r\\n\\r\\nThe available options are:\\r\\n- small\\r\\n- medium\\r\\n- large\\r\\n- full\\r\\n- null&mdash;Does not set a rounded \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\" | \"full\""
+        }
+      }
+    },
+    "size": {
+      "name": "size",
+      "fullName": "",
+      "summary": "\"Configures the \\n`size`\\n of the NumericTextBox.\\r\\n\\r\\nThe available options are:\\r\\n- small\\r\\n- medium\\r\\n- large\\r\\n- null&mdash;Does not set a size \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\""
+        }
+      }
+    },
+    "spinners": {
+      "name": "spinners",
+      "fullName": "",
+      "summary": ">- Specifies whether the **Up** and **Down** spin buttons will be rendered ([see example]({% slug spinbuttons_numerictextbox %})).",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "step": {
+      "name": "step",
+      "fullName": "",
+      "summary": ">- Specifies the value that is used to increment or decrement the value of the NumericTextBox ([see example]({% slug predefinedsteps_numerictextbox %})).",
+      "syntax": {
+        "return": {
+          "type": "number"
+        }
+      }
+    },
+    "style": {
+      "name": "style",
+      "fullName": "",
+      "summary": "|- Represents the `style` HTML attribute.",
+      "syntax": {
+        "return": {
+          "type": "CSSProperties"
+        }
+      }
+    },
+    "suffix": {
+      "name": "suffix",
+      "fullName": "",
+      "summary": "Sets a custom suffix to the NumericTextBox component.",
+      "syntax": {
+        "return": {
+          "type": "CustomComponent"
+        }
+      }
+    },
+    "tabIndex": {
+      "name": "tabIndex",
+      "fullName": "",
+      "summary": "|- Sets the `tabIndex` property of the NumericTextBox.",
+      "syntax": {
+        "return": {
+          "type": "number"
+        }
+      }
+    },
+    "title": {
+      "name": "title",
+      "fullName": "",
+      "summary": "|- Sets the title of the `input` element of the NumericTextBox.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "valid": {
+      "name": "valid",
+      "fullName": "",
+      "summary": "\"Overrides the validity state of the component.\\r\\nIf \\n`valid`\\n is set, the \\n`required`\\n property will be ignored.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "validationMessage": {
+      "name": "validationMessage",
+      "fullName": "",
+      "summary": "\"Controls the form error message of the component. If set to an empty string, no error will be thrown.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "validityStyles": {
+      "name": "validityStyles",
+      "fullName": "",
+      "summary": "\"If set to \\n`false`\\n, no visual representation of the invalid state of the component will be applied.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "width": {
+      "name": "width",
+      "fullName": "",
+      "summary": "Specifies the width of the NumericTextBox.",
+      "syntax": {
+        "return": {
+          "type": "string | number"
+        }
+      }
+    }
+  }
+}

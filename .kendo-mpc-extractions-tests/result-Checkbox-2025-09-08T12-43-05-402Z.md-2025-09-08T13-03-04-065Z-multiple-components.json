@@ -1,0 +1,298 @@
+{
+  "componentName": "result-Checkbox-2025-09-08T12-43-05-402Z.md",
+  "imports": [
+    "import { Checkbox } from '@progress/kendo-react-inputs';",
+    "import { Editor, EditorTools } from '@progress/kendo-react-editor';",
+    "import { Editor } from '@progress/kendo-react-editor';",
+    "import { EditorTools } from '@progress/kendo-react-editor';"
+  ],
+  "examples": [
+    {
+      "title": "Example 1",
+      "code": "import * as React from 'react';\nimport { Checkbox } from '@progress/kendo-react-inputs';\n\nexport default function App() {\n    return <Checkbox label=\"Accept terms\" />;\n}",
+      "description": "React component implementation example"
+    },
+    {
+      "title": "Example 2",
+      "code": "import * as React from 'react';\nimport { Checkbox } from '@progress/kendo-react-inputs';\n\nexport default function App() {\n    const [checked, setChecked] = React.useState(false);\n\n    return (\n        <Checkbox\n            label={checked ? 'Task Completed' : 'Task Incomplete'}\n            value={checked}\n            onChange={(e) => setChecked(e.value)}\n        />\n    );\n}",
+      "description": "React component implementation example"
+    },
+    {
+      "title": "Example 3",
+      "code": "import { Editor, EditorTools } from '@progress/kendo-react-editor';\n\nconst {\n    Bold, Italic, Underline, Strikethrough,\n    Subscript, Superscript, ForeColor, BackColor,\n    CleanFormatting, AlignLeft, AlignCenter, AlignRight, AlignJustify,\n    Indent, Outdent, OrderedList, UnorderedList,\n    NumberedList, BulletedList, Undo, Redo,\n    FontSize, FontName, FormatBlock, Link, Unlink,\n    InsertImage, ViewHtml, InsertTable, InsertFile,\n    SelectAll, Print, Pdf, TableProperties, TableCellProperties,\n    AddRowBefore, AddRowAfter, AddColumnBefore, AddColumnAfter,\n    DeleteRow, DeleteColumn, DeleteTable, MergeCells, SplitCell\n} = EditorTools;",
+      "description": "React component implementation example"
+    }
+  ],
+  "props": {
+    "props": {
+      "name": "props",
+      "fullName": "",
+      "summary": "",
+      "syntax": {
+        "return": {
+          "type": "CheckboxProps | RefAttributes"
+        }
+      }
+    },
+    "ariaDescribedBy": {
+      "name": "ariaDescribedBy",
+      "fullName": "",
+      "summary": "\"Identifies the element(s) which will describe the component, similar to [HTML aria-describedby attribute](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute).\\r\\nFor example these elements could contain error or hint message.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "ariaLabelledBy": {
+      "name": "ariaLabelledBy",
+      "fullName": "",
+      "summary": "Identifies the element(s) which will label the component.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "autoFocus": {
+      "name": "autoFocus",
+      "fullName": "",
+      "summary": "|- Represents the `autoFocus` HTML attribute that will be applied to the input element of the Checkbox. (Defaults to `false` )",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "checked": {
+      "name": "checked",
+      "fullName": "",
+      "summary": "\"Sets the checked state of the Checkbox.\\r\\nSet to null to enable the indeterminate state of the Checkbox ([see example]({% slug overview_checkbox %})).\"",
+      "syntax": {
+        "return": {
+          "type": "null | boolean"
+        }
+      }
+    },
+    "children": {
+      "name": "children",
+      "fullName": "",
+      "summary": "The React elements that are passed as children to the rendered component.",
+      "syntax": {
+        "return": {
+          "type": "any"
+        }
+      }
+    },
+    "className": {
+      "name": "className",
+      "fullName": "",
+      "summary": "|- Sets the `className` of the wrapping element of the Checkbox.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "defaultChecked": {
+      "name": "defaultChecked",
+      "fullName": "",
+      "summary": ">- Sets the default value of checked attribute when used in uncontrolled mode ([see example]({% slug default_state %})).",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "defaultValue": {
+      "name": "defaultValue",
+      "fullName": "",
+      "summary": "The default value of the Checkbox.",
+      "syntax": {
+        "return": {
+          "type": "any"
+        }
+      }
+    },
+    "dir": {
+      "name": "dir",
+      "fullName": "",
+      "summary": "|- Represents the `dir` HTML attribute. This is used to switch from LTR to RTL.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "disabled": {
+      "name": "disabled",
+      "fullName": "",
+      "summary": "\"Sets the disabled state of the Checkbox\\r\\n([see example]({% slug disabled_checkbox %})).\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "id": {
+      "name": "id",
+      "fullName": "",
+      "summary": "|- Sets the `id` of the Checkbox.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "label": {
+      "name": "label",
+      "fullName": "",
+      "summary": ">- Sets the label of the Checkbox component ([see example]({% slug labels_checkbox %})).",
+      "syntax": {
+        "return": {
+          "type": "ReactNode"
+        }
+      }
+    },
+    "labelClassName": {
+      "name": "labelClassName",
+      "fullName": "",
+      "summary": "|- Sets the `className` of the label element of the Checkbox.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "labelOptional": {
+      "name": "labelOptional",
+      "fullName": "",
+      "summary": "Sets the optional text after the label of the Checkbox component.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "labelPlacement": {
+      "name": "labelPlacement",
+      "fullName": "",
+      "summary": ">- Sets the label position of the Checkbox component ([see example]({% slug labels_checkbox %})).",
+      "syntax": {
+        "return": {
+          "type": "'\"before\" | \"after\"'"
+        }
+      }
+    },
+    "name": {
+      "name": "name",
+      "fullName": "",
+      "summary": "\"Specifies the \\n`name`\\n property of the \\n`input`\\n DOM element.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "onBlur": {
+      "name": "onBlur",
+      "fullName": "",
+      "summary": "The event handler that will be fired when Checkbox is blurred.",
+      "syntax": {
+        "return": {
+          "type": "'(event: CheckboxBlurEvent) => void'"
+        }
+      }
+    },
+    "onChange": {
+      "name": "onChange",
+      "fullName": "",
+      "summary": "The event handler that will be fired when the user edits the value.",
+      "syntax": {
+        "return": {
+          "type": "'(event: CheckboxChangeEvent) => void'"
+        }
+      }
+    },
+    "onFocus": {
+      "name": "onFocus",
+      "fullName": "",
+      "summary": "The event handler that will be fired when Checkbox is focused.",
+      "syntax": {
+        "return": {
+          "type": "'(event: CheckboxFocusEvent) => void'"
+        }
+      }
+    },
+    "required": {
+      "name": "required",
+      "fullName": "",
+      "summary": "\"Specifies if \\n`null`\\n is a valid value for the component.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rounded": {
+      "name": "rounded",
+      "fullName": "",
+      "summary": "\"Configures the \\n`rounded`\\n style of the Checkbox.\\r\\n\\r\\nThe available options are:\\r\\n- small\\r\\n- medium\\r\\n- large\\r\\n- null&mdash;Does not set a rounded \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\""
+        }
+      }
+    },
+    "size": {
+      "name": "size",
+      "fullName": "",
+      "summary": "\"Configures the \\n`size`\\n of the Checkbox.\\r\\n\\r\\nThe available options are:\\r\\n- small\\r\\n- medium\\r\\n- large\\r\\n- null&mdash;Does not set a size \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\""
+        }
+      }
+    },
+    "tabIndex": {
+      "name": "tabIndex",
+      "fullName": "",
+      "summary": "\"Sets the \\n`tabIndex`\\n property of the Checkbox.\\r\\nDefaults to \\n`0`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "number"
+        }
+      }
+    },
+    "valid": {
+      "name": "valid",
+      "fullName": "",
+      "summary": "\"Overrides the validity state of the component.\\r\\nIf \\n`valid`\\n is set, the \\n`required`\\n property will be ignored.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "validationMessage": {
+      "name": "validationMessage",
+      "fullName": "",
+      "summary": "\"Controls the form error message of the component. If set to an empty string, no error will be thrown.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "validityStyles": {
+      "name": "validityStyles",
+      "fullName": "",
+      "summary": "\"If set to \\n`false`\\n, no visual representation of the invalid state of the component will be applied.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "structure": {
+    "component": "container",
+    "description": "The main container for the funny page about apples",
+    "children": [
+      {
+        "component": "header",
+        "description": "The header section containing the logo and navigation menu",
+        "children": [
+          {
+            "component": "logo",
+            "description": "Displays the branding/logo of the page",
+            "children": ""
+          },
+          {
+            "component": "navigation",
+            "description": "Provides links to different sections of the page",
+            "children": [
+              {
+                "component": "link",
+                "description": "Link to Home",
+                "children": "Home"
+              },
+              {
+                "component": "link",
+                "description": "Link to Jokes",
+                "children": "Jokes"
+              },
+              {
+                "component": "link",
+                "description": "Link to Fun Facts",
+                "children": "Fun Facts"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "main",
+        "description": "The main content area of the page",
+        "children": [
+          {
+            "component": "hero",
+            "description": "Shows a large, funny image related to apples",
+            "children": ""
+          },
+          {
+            "component": "intro",
+            "description": "Introduces the theme of the page with humor",
+            "children": "A short humorous paragraph about apples."
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "description": "Section dedicated to fun facts about apples",
+        "children": [
+          {
+            "component": "list",
+            "description": "Displays interesting and funny facts about apples",
+            "children": "List of fun facts about apples."
+          }
+        ]
+      },
+      {
+        "component": "section",
+        "description": "Section dedicated to jokes about apples",
+        "children": [
+          {
+            "component": "card",
+            "description": "Displays individual jokes in card format",
+            "children": "Multiple jokes about apples."
+          }
+        ]
+      },
+      {
+        "component": "gallery",
+        "description": "Displays a collection of funny apple-related images",
+        "children": "List of funny apple images with captions."
+      },
+      {
+        "component": "footer",
+        "description": "The footer section containing social media links and copyright information",
+        "children": [
+          {
+            "component": "socialmedia",
+            "description": "Provides links to social media profiles related to the page",
+            "children": "List of social media platforms and URLs."
+          },
+          {
+            "component": "copyright",
+            "description": "Displays copyright information",
+            "children": "2025 © Company Name."
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "totalComponents": 18,
+    "maxDepth": 3,
+    "componentTypes": [
+      "container",
+      "header",
+      "logo",
+      "navigation",
+      "link",
+      "main",
+      "hero",
+      "intro",
+      "section",
+      "list",
+      "card",
+      "gallery",
+      "footer",
+      "socialmedia",
+      "copyright"
+    ],
+    "description": "A humorous landing page dedicated to apples, focusing on fun facts, jokes, and images."
+  }
+}

@@ -1,23 +1,14 @@
 import { Agent, run } from '@openai/agents';
 import { z } from 'zod';
-import { ExecutionPlanSchema, PlanStepSchema, AgentResponse } from '../types';
+import { AgentResponse } from '../types';
+import { randomUUID } from 'crypto';
 
 const planSchema = z.object({
-  plan: z.object({
-    id: z.string().describe('Unique identifier for this plan'),
-    userQuery: z.string().describe('The original user query'),
-    steps: z
-      .string()
-      .describe(
-        'Structural plan in markdown format describing page layout, component hierarchy, and data requirements'
-      ),
-    estimatedTotalDuration: z
-      .number()
-      .describe('Total estimated duration in seconds'),
-    complexity: z
-      .enum(['simple', 'medium', 'complex'])
-      .describe('Overall complexity assessment')
-  })
+  plan: z
+    .string()
+    .describe(
+      'Structural plan in markdown format describing page layout, component hierarchy, and data requirements'
+    )
 });
 
 export class PlannerAgent {
@@ -26,30 +17,31 @@ export class PlannerAgent {
   constructor() {
     this.agent = new Agent<{}, typeof planSchema>({
       name: 'planner-agent',
-      instructions: `You are a planning agent responsible for creating execution plans for page generation tasks.
+      instructions: `
+      You are a planning agent responsible for creating execution plans for page generation tasks.
 
-                    Your role is to:
-                    1. Analyze user queries for page generation
-                    2. Identify the structural components needed
-                    3. Create a logical component hierarchy
-                    4. Define the page layout and organization
-                    5. Provide clear structural guidance in markdown format
+      Your role is to:
+      1. Analyze user queries for page generation
+      2. Identify the structural components needed
+      3. Create a logical component hierarchy
+      4. Define the page layout and organization
+      5. Provide clear structural guidance in markdown format
 
-                    You should create plans that focus on:
-                    - Page structure and layout
-                    - Component hierarchy and nesting
-                    - Data flow and component relationships
-                    - UI organization and sections
-                    - Component types and their purposes
+      You should create plans that focus on:
+      - Page structure and layout
+      - Component hierarchy and nesting
+      - Data flow and component relationships
+      - UI organization and sections
+      - Component types and their purposes
 
-                    The steps should be formatted as a markdown document with:
-                    - Clear headings for each structural section
-                    - Component lists and their purposes
-                    - Layout descriptions and organization
-                    - Data requirements for each component
-                    - Component relationships and dependencies
+      The steps should be formatted as a markdown document with:
+      - Clear headings for each structural section
+      - Component lists and their purposes
+      - Layout descriptions and organization
+      - Data requirements for each component
+      - Component relationships and dependencies
 
-                    Focus on structural aspects that help the LLM understand what components to create and how to organize them. Avoid project management details like time estimates, testing phases, or complexity assessments.`,
+      Focus on structural aspects that help the LLM understand what components to create and how to organize them.`,
       model: 'gpt-4o-mini',
       outputType: planSchema
     });
@@ -87,12 +79,14 @@ export class PlannerAgent {
 
       this.logToolExecutionInfo(result);
 
+      console.log('🔧 Planner Agent: Result', result.finalOutput);
+
       const planData = planSchema.parse(result.finalOutput);
 
       const validatedPlan = {
-        id: planData.plan.id,
-        userQuery: planData.plan.userQuery,
-        steps: planData.plan.steps,
+        id: randomUUID(),
+        userQuery: userQuery,
+        plan: planData.plan,
         createdAt: new Date()
       };
 
@@ -100,8 +94,6 @@ export class PlannerAgent {
         success: true,
         data: validatedPlan,
         metadata: {
-          complexity: planData.plan.complexity,
-          estimatedDuration: planData.plan.estimatedTotalDuration,
           format: 'markdown'
         }
       };

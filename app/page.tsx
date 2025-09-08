@@ -12,7 +12,16 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Loader2, Code, FileText, Settings, Play, Bug } from 'lucide-react';
+import {
+  Loader2,
+  Code,
+  FileText,
+  Settings,
+  Play,
+  Bug,
+  Copy,
+  Check
+} from 'lucide-react';
 import { ExecutionPlan } from '@/lib/types';
 
 interface GenerationResult {
@@ -38,6 +47,15 @@ export default function Home() {
   const [result, setResult] = useState<GenerationResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [debugMode, setDebugMode] = useState(false);
+  const [copiedStates, setCopiedStates] = useState<{
+    plan: boolean;
+    structure: boolean;
+    code: boolean;
+  }>({
+    plan: false,
+    structure: false,
+    code: false
+  });
 
   const handleGenerate = async () => {
     if (!query.trim()) {
@@ -59,12 +77,9 @@ export default function Home() {
       });
 
       const data = await response.json();
-
-      // Always set the result, even if there are errors
-      console.log('data', data);
+      console.log(data);
       setResult(data);
 
-      // Only throw error if the request itself failed (not partial success)
       if (!response.ok && !data.data) {
         throw new Error(data.error || 'Failed to generate components');
       }
@@ -79,6 +94,21 @@ export default function Home() {
     setQuery('');
     setResult(null);
     setError(null);
+  };
+
+  const copyToClipboard = async (
+    text: string,
+    section: 'plan' | 'structure' | 'code'
+  ) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedStates((prev) => ({ ...prev, [section]: true }));
+      setTimeout(() => {
+        setCopiedStates((prev) => ({ ...prev, [section]: false }));
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err);
+    }
   };
 
   return (
@@ -117,6 +147,7 @@ export default function Home() {
 
               <div className="flex gap-2">
                 <Button
+                  type="submit"
                   onClick={handleGenerate}
                   disabled={isGenerating || !query.trim()}
                   className="flex-1"
@@ -210,10 +241,6 @@ export default function Home() {
                       {result.metadata?.agentsUsed?.join(', ') || 'N/A'}
                     </div>
                     <div>
-                      <strong>Plan Complexity:</strong>{' '}
-                      {result.metadata?.planMetadata?.complexity || 'N/A'}
-                    </div>
-                    <div>
                       <strong>Estimated Duration:</strong>{' '}
                       {result.metadata?.planMetadata?.estimatedDuration
                         ? `${result.metadata.planMetadata.estimatedDuration}s`
@@ -277,7 +304,9 @@ export default function Home() {
                           <div>
                             <span className="font-medium">Status:</span>{' '}
                             <Badge variant="outline" className="ml-1">
-                              {result.data?.executionPlan?.status || 'N/A'}
+                              {result.data?.executionPlan?.plan
+                                ? 'Completed'
+                                : 'Failed'}
                             </Badge>
                           </div>
                           <div>
@@ -292,14 +321,14 @@ export default function Home() {
                             </Badge>
                           </div>
                         </div>
-                        {result.data?.executionPlan?.steps && (
+                        {result.data?.executionPlan?.plan && (
                           <div className="mt-3">
                             <span className="font-medium text-sm">
                               Plan Preview:
                             </span>
                             <div className="mt-1 text-sm text-gray-600 bg-gray-50 p-2 rounded max-h-64 overflow-y-auto">
                               <pre className="whitespace-pre-wrap text-xs">
-                                {result.data.executionPlan.steps}
+                                {result.data.executionPlan.plan}
                               </pre>
                             </div>
                           </div>
@@ -355,7 +384,9 @@ export default function Home() {
                           <div>
                             <span className="font-medium">Status:</span>{' '}
                             <Badge variant="outline">
-                              {result.data?.executionPlan?.status || 'N/A'}
+                              {result.data?.executionPlan?.plan
+                                ? 'Completed'
+                                : 'Failed'}
                             </Badge>
                           </div>
                           <div>
@@ -375,12 +406,37 @@ export default function Home() {
                         </div>
                       </div>
 
-                      {result.data?.executionPlan?.steps && (
+                      {result.data?.executionPlan?.plan && (
                         <div className="space-y-3">
-                          <h4 className="font-semibold">Execution Plan</h4>
+                          <div className="flex items-center justify-between">
+                            <h4 className="font-semibold">Execution Plan</h4>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() =>
+                                copyToClipboard(
+                                  result.data?.executionPlan?.plan || '',
+                                  'plan'
+                                )
+                              }
+                              className="flex items-center gap-2"
+                            >
+                              {copiedStates.plan ? (
+                                <>
+                                  <Check className="h-4 w-4" />
+                                  Copied!
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="h-4 w-4" />
+                                  Copy
+                                </>
+                              )}
+                            </Button>
+                          </div>
                           <div className="border rounded-lg p-4 bg-white">
                             <pre className="whitespace-pre-wrap text-sm text-gray-700 font-mono">
-                              {result.data.executionPlan.steps}
+                              {result.data.executionPlan.plan}
                             </pre>
                           </div>
                         </div>
@@ -397,9 +453,41 @@ export default function Home() {
 
                   <TabsContent value="structure">
                     {result.data?.actStructure ? (
-                      <pre className="text-xs bg-gray-50 p-3 rounded overflow-auto max-h-96">
-                        {JSON.stringify(result.data.actStructure, null, 2)}
-                      </pre>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <h4 className="font-semibold">ACT Structure</h4>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() =>
+                              copyToClipboard(
+                                JSON.stringify(
+                                  result.data?.actStructure || {},
+                                  null,
+                                  2
+                                ),
+                                'structure'
+                              )
+                            }
+                            className="flex items-center gap-2"
+                          >
+                            {copiedStates.structure ? (
+                              <>
+                                <Check className="h-4 w-4" />
+                                Copied!
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="h-4 w-4" />
+                                Copy
+                              </>
+                            )}
+                          </Button>
+                        </div>
+                        <pre className="text-xs bg-gray-50 p-3 rounded overflow-auto max-h-96">
+                          {JSON.stringify(result.data.actStructure, null, 2)}
+                        </pre>
+                      </div>
                     ) : (
                       <div className="p-4 text-center text-gray-500">
                         <p>ACT structure generation failed</p>
@@ -416,7 +504,34 @@ export default function Home() {
                     {result.data?.kendoComponents ? (
                       <div className="space-y-4">
                         <div>
-                          <h4 className="font-semibold mb-2">Imports</h4>
+                          <div className="flex items-center justify-between mb-2">
+                            <h4 className="font-semibold">Imports</h4>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() =>
+                                copyToClipboard(
+                                  result.data?.kendoComponents?.code?.imports?.join(
+                                    '\n'
+                                  ) || 'No imports',
+                                  'code'
+                                )
+                              }
+                              className="flex items-center gap-2"
+                            >
+                              {copiedStates.code ? (
+                                <>
+                                  <Check className="h-4 w-4" />
+                                  Copied!
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="h-4 w-4" />
+                                  Copy
+                                </>
+                              )}
+                            </Button>
+                          </div>
                           <pre className="text-xs bg-gray-50 p-3 rounded overflow-auto">
                             {result.data.kendoComponents.code?.imports?.join(
                               '\n'
@@ -424,7 +539,33 @@ export default function Home() {
                           </pre>
                         </div>
                         <div>
-                          <h4 className="font-semibold mb-2">Main Component</h4>
+                          <div className="flex items-center justify-between mb-2">
+                            <h4 className="font-semibold">Main Component</h4>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() =>
+                                copyToClipboard(
+                                  result.data?.kendoComponents?.code
+                                    ?.mainComponent || 'No code generated',
+                                  'code'
+                                )
+                              }
+                              className="flex items-center gap-2"
+                            >
+                              {copiedStates.code ? (
+                                <>
+                                  <Check className="h-4 w-4" />
+                                  Copied!
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="h-4 w-4" />
+                                  Copy
+                                </>
+                              )}
+                            </Button>
+                          </div>
                           <pre className="text-xs bg-gray-50 p-3 rounded overflow-auto max-h-96">
                             {result.data.kendoComponents.code?.mainComponent ||
                               'No code generated'}

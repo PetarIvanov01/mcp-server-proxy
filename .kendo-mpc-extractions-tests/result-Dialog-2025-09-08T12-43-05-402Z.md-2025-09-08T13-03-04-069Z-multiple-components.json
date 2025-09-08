@@ -1,0 +1,43 @@
+{
+  "componentName": "result-Dialog-2025-09-08T12-43-05-402Z.md",
+  "imports": [
+    "import { Dialog } from '@progress/kendo-react-dialogs';",
+    "import { Editor, EditorTools } from '@progress/kendo-react-editor';",
+    "import { Editor } from '@progress/kendo-react-editor';",
+    "import { EditorTools } from '@progress/kendo-react-editor';"
+  ],
+  "examples": [
+    {
+      "title": "Example 1",
+      "code": "import * as React from 'react';\nimport { Dialog } from '@progress/kendo-react-dialogs';\n\nfunction App() {\n    return (\n        <Dialog title=\"Dialog\">\n            <div>Dialog content</div>\n        </Dialog>\n    );\n}\n\nexport default App;",
+      "description": "React component implementation example"
+    },
+    {
+      "title": "Example 2",
+      "code": "import { Editor, EditorTools } from '@progress/kendo-react-editor';\n\nconst {\n    Bold, Italic, Underline, Strikethrough,\n    Subscript, Superscript, ForeColor, BackColor,\n    CleanFormatting, AlignLeft, AlignCenter, AlignRight, AlignJustify,\n    Indent, Outdent, OrderedList, UnorderedList,\n    NumberedList, BulletedList, Undo, Redo,\n    FontSize, FontName, FormatBlock, Link, Unlink,\n    InsertImage, ViewHtml, InsertTable, InsertFile,\n    SelectAll, Print, Pdf, TableProperties, TableCellProperties,\n    AddRowBefore, AddRowAfter, AddColumnBefore, AddColumnAfter,\n    DeleteRow, DeleteColumn, DeleteTable, MergeCells, SplitCell\n} = EditorTools;",
+      "description": "React component implementation example"
+    }
+  ],
+  "props": {
+    "DialogProps": {
+      "name": "DialogProps",
+      "fullName": "",
+      "summary": ">- Represents the props of the [KendoReact Dialog component]({% slug overview_dialog %}).",
+      "syntax": {
+        "return": {
+          "type": ""
+        }
+      }
+    },
+    "props": {
+      "name": "props",
+      "fullName": "",
+      "summary": "",
+      "syntax": {
+        "return": {
+          "type": "DialogProps | RefAttributes"
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,13 @@
 import { Agent, run } from '@openai/agents';
 import { z } from 'zod';
 import { ACTComponentSchema, AgentResponse, ExecutionPlan } from '../types';
+import {
+  ACT_ELEMENTS,
+  ACT_ELEMENTS_FLAT,
+  getKendoComponentForACT,
+  getACTElementsByCategory,
+  formatACTElementsForPrompt
+} from '../kendo-components';
 
 const actSchema = z.object({
   act: z.object({
@@ -28,7 +35,16 @@ export class StructureAgent {
   constructor() {
     this.agent = new Agent<{}, typeof actSchema>({
       name: 'structure-agent',
-      instructions: `
+      instructions: this.buildInstructions(),
+      model: 'gpt-4o-mini',
+      outputType: actSchema
+    });
+
+    this.initializeEvents();
+  }
+
+  private buildInstructions(): string {
+    return `
         You are a structure agent responsible for converting user queries into Abstract Component Trees (ACT).
 
         Your role is to:
@@ -38,33 +54,23 @@ export class StructureAgent {
         4. Provide clear descriptions for each component's purpose
         5. Handle both simple and complex layouts with proper nesting
 
-        Component Guidelines:
-        - Use familiar concepts: container, header, footer, sidebar, main, section, article, aside
-        - For navigation: nav, breadcrumb, tabs, pagination, stepper
-        - For inputs: button, input, textarea, select, checkbox, radio, switch, slider
-        - For display: text, heading, paragraph, image, badge, chip, avatar, progress, loader
-        - For data: table, list, tree, chart, calendar, timeline
-        - For feedback: dialog, modal, notification, alert, error, hint, tooltip
+        Available ACT Components (use these semantic components for building your structure):
+        
+        ${formatACTElementsForPrompt()}
 
         Structure Rules:
         - Always start with a root container
         - Use semantic HTML-like structure
-        - Provide meaningful descriptions for each component
+        - Provide meaningful descriptions for each component's purpose
         - Handle both nested components and leaf text nodes
         - Consider responsive design and accessibility
+        - Choose components from the available list above
+        - Use the most appropriate component for each use case
+        - Consider the semantic meaning and purpose of each component
 
-        The ACT should be a complete representation of the page structure that can be easily converted to actual UI components.`,
-      model: 'gpt-4o-mini',
-      outputType: actSchema
-    });
-
-    // Initialize event tracking
-    this.initializeEvents();
+        The ACT should be a complete representation of the page structure that can be easily converted to actual UI components.`;
   }
 
-  /**
-   * Generate ACT structure from user query and execution plan
-   */
   async generateACT(
     userQuery: string,
     executionPlan: ExecutionPlan
@@ -76,27 +82,12 @@ export class StructureAgent {
         this.agent,
         `Generate an Abstract Component Tree (ACT) for the following page generation request:
 
-          "${userQuery}"
+        "${userQuery}"
 
-          Execution Plan Context:
-          ${JSON.stringify(executionPlan, null, 2)}
+        Execution Plan Context:
+        ${JSON.stringify(executionPlan, null, 2)}
 
-          Please create a complete ACT structure that represents the page layout. Consider:
-
-          1. What is the main purpose of this page?
-          2. What are the key sections/components needed?
-          3. How should they be organized hierarchically?
-          4. What are the relationships between components?
-          5. Are there any interactive elements or data displays?
-
-          Create a structure that:
-          - Uses intuitive component names (container, header, button, etc.)
-          - Provides clear descriptions for each component's purpose
-          - Handles proper nesting and relationships
-          - Includes all necessary components for the requested functionality
-          - Is ready for conversion to actual UI components
-
-          Return a complete ACT structure with metadata about the generated components.`
+        Return a complete ACT structure with metadata about the generated components.`
       );
 
       // Log tool execution information from the result
@@ -166,5 +157,111 @@ export class StructureAgent {
       // Log the full result structure for debugging
       resultKeys: Object.keys(result)
     });
+  }
+
+  // Helper method to get component suggestions based on context
+  getComponentSuggestions(context: string): string[] {
+    const suggestions: string[] = [];
+
+    // Analyze context and suggest relevant components
+    const contextLower = context.toLowerCase();
+
+    // Layout suggestions
+    if (contextLower.includes('page') || contextLower.includes('layout')) {
+      suggestions.push('container', 'wrapper', 'main', 'content', 'section');
+    }
+
+    // Navigation suggestions
+    if (
+      contextLower.includes('nav') ||
+      contextLower.includes('menu') ||
+      contextLower.includes('breadcrumb')
+    ) {
+      suggestions.push(
+        'navigation',
+        'menu',
+        'breadcrumb',
+        'tabs',
+        'pagination'
+      );
+    }
+
+    // Form suggestions
+    if (
+      contextLower.includes('form') ||
+      contextLower.includes('input') ||
+      contextLower.includes('submit')
+    ) {
+      suggestions.push(
+        'form',
+        'input',
+        'button',
+        'submit',
+        'field',
+        'fieldset'
+      );
+    }
+
+    // Data display suggestions
+    if (
+      contextLower.includes('table') ||
+      contextLower.includes('list') ||
+      contextLower.includes('data')
+    ) {
+      suggestions.push('table', 'grid', 'list', 'card', 'item');
+    }
+
+    // Chart suggestions
+    if (
+      contextLower.includes('chart') ||
+      contextLower.includes('graph') ||
+      contextLower.includes('visualization')
+    ) {
+      suggestions.push('chart', 'barchart', 'linechart', 'piechart', 'gauge');
+    }
+
+    // Media suggestions
+    if (
+      contextLower.includes('image') ||
+      contextLower.includes('photo') ||
+      contextLower.includes('video')
+    ) {
+      suggestions.push('image', 'avatar', 'gallery', 'carousel');
+    }
+
+    // Feedback suggestions
+    if (
+      contextLower.includes('alert') ||
+      contextLower.includes('notification') ||
+      contextLower.includes('error')
+    ) {
+      suggestions.push('alert', 'notification', 'error', 'warning', 'success');
+    }
+
+    return suggestions.slice(0, 10); // Return top 10 suggestions
+  }
+
+  // Helper method to validate ACT component against available elements
+  validateACTComponent(component: string): boolean {
+    return ACT_ELEMENTS_FLAT.includes(component as any);
+  }
+
+  // Helper method to get Kendo mapping for an ACT component
+  getKendoMapping(actComponent: string) {
+    return getKendoComponentForACT(actComponent);
+  }
+
+  // Helper method to get components by category
+  getComponentsByCategory(
+    category:
+      | 'layout'
+      | 'navigation'
+      | 'input'
+      | 'display'
+      | 'data'
+      | 'charts'
+      | 'feedback'
+  ): string[] {
+    return getACTElementsByCategory(category);
   }
 }

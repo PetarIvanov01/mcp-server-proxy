@@ -1,0 +1,556 @@
+{
+  "componentName": "result-DatePicker-2025-09-08T12-43-05-402Z.md",
+  "imports": [
+    "import { DatePicker, DatePickerChangeEvent } from '@progress/kendo-react-dateinputs';",
+    "import { Label } from '@progress/kendo-react-labels';",
+    "import { Editor, EditorTools } from '@progress/kendo-react-editor';",
+    "import { DatePicker } from '@progress/kendo-react-dateinputs';",
+    "import { DatePickerChangeEvent } from '@progress/kendo-react-dateinputs';",
+    "import { Editor } from '@progress/kendo-react-editor';",
+    "import { EditorTools } from '@progress/kendo-react-editor';"
+  ],
+  "examples": [
+    {
+      "title": "Example 1",
+      "code": "import * as React from 'react';\n\nimport { DatePicker, DatePickerChangeEvent } from '@progress/kendo-react-dateinputs';\nimport { Label } from '@progress/kendo-react-labels';\n\nconst App = () => {\n    const [value, setValue] = React.useState<Date | null>(new Date());\n\n    const handleChange = (event: DatePickerChangeEvent) => {\n        setValue(event.value);\n    };\n\n    return (\n        <div className=\"row\">\n            <div className=\"example-config col-xs-12 col-md-12 example-col\">\n                Selected date: {`${value?.toDateString()}`}\n            </div>\n            <div className=\"col-xs-12 col-md-12 example-col\">\n                <Label editorId=\"date\">Select date</Label>\n                <DatePicker id=\"date\" value={value} onChange={handleChange} />\n            </div>\n        </div>\n    );\n};\n\nexport default App;",
+      "description": "React component implementation example"
+    },
+    {
+      "title": "Example 2",
+      "code": "import { Editor, EditorTools } from '@progress/kendo-react-editor';\n\nconst {\n    Bold, Italic, Underline, Strikethrough,\n    Subscript, Superscript, ForeColor, BackColor,\n    CleanFormatting, AlignLeft, AlignCenter, AlignRight, AlignJustify,\n    Indent, Outdent, OrderedList, UnorderedList,\n    NumberedList, BulletedList, Undo, Redo,\n    FontSize, FontName, FormatBlock, Link, Unlink,\n    InsertImage, ViewHtml, InsertTable, InsertFile,\n    SelectAll, Print, Pdf, TableProperties, TableCellProperties,\n    AddRowBefore, AddRowAfter, AddColumnBefore, AddColumnAfter,\n    DeleteRow, DeleteColumn, DeleteTable, MergeCells, SplitCell\n} = EditorTools;",
+      "description": "React component implementation example"
+    }
+  ],
+  "props": {
+    "props": {
+      "name": "props",
+      "fullName": "",
+      "summary": "",
+      "syntax": {
+        "return": {
+          "type": "DatePickerProps | RefAttributes"
+        }
+      }
+    },
+    "adaptive": {
+      "name": "adaptive",
+      "fullName": "",
+      "summary": ">- Providing different rendering of the popup element based on the screen dimensions.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "adaptiveSubtitle": {
+      "name": "adaptiveSubtitle",
+      "fullName": "",
+      "summary": "\"Specifies the text that is rendered as subtitle in the adaptive popup(action sheet).\\r\\nApplicable only when \\n`adaptive`\\n is set to \\n`true`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "adaptiveTitle": {
+      "name": "adaptiveTitle",
+      "fullName": "",
+      "summary": "\"Specifies the text that is rendered as title in the adaptive popup(action sheet).\\r\\nApplicable only when \\n`adaptive`\\n is set to \\n`true`\\n.\\r\\nIf not provided, the title will be the same as the label.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "allowCaretMode": {
+      "name": "allowCaretMode",
+      "fullName": "",
+      "summary": ">- Determines if the users should see a blinking caret inside the Date Input when possible.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ariaDescribedBy": {
+      "name": "ariaDescribedBy",
+      "fullName": "",
+      "summary": "\"Identifies the element(s) which will describe the component, similar to [HTML aria-describedby attribute](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute).\\r\\nFor example these elements could contain error or hint message.\\r\\nExample usage of the \\n`ariaDescribedBy`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker ariaDescribedBy=\\\"description-id\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "ariaLabel": {
+      "name": "ariaLabel",
+      "fullName": "",
+      "summary": "\"The accessible label of the component.\\r\\nExample usage of the \\n`ariaLabel`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker ariaLabel=\\\"Date Picker\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "ariaLabelledBy": {
+      "name": "ariaLabelledBy",
+      "fullName": "",
+      "summary": "\"Identifies the element(s) which will label the component.\\r\\nExample usage of the \\n`ariaLabelledBy`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker ariaLabelledBy=\\\"label-id\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "autoCorrectParts": {
+      "name": "autoCorrectParts",
+      "fullName": "",
+      "summary": "Determines whether to autocorrect invalid segments automatically.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "autoFill": {
+      "name": "autoFill",
+      "fullName": "",
+      "summary": ">- When enabled, the DatePicker will autofill the rest of the date to the current date when the component loses focus.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "autoFocus": {
+      "name": "autoFocus",
+      "fullName": "",
+      "summary": "|- Represents the `autoFocus` HTML attribute that will be applied to the input element of the DatePicker. (Defaults to `false` )",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "autoSwitchKeys": {
+      "name": "autoSwitchKeys",
+      "fullName": "",
+      "summary": ">- A string array representing custom keys, which will move the focus to the next date format segment.",
+      "syntax": {
+        "return": {
+          "type": "Array<string>"
+        }
+      }
+    },
+    "autoSwitchParts": {
+      "name": "autoSwitchParts",
+      "fullName": "",
+      "summary": ">- Determines whether to automatically move to the next segment after the user completes the current one.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "calendar": {
+      "name": "calendar",
+      "fullName": "",
+      "summary": "\"Enables the customization or the override of the default Calendar which is rendered by the DatePicker\\r\\n([see example]({% slug custom_rendering_datepicker %}#toc-customizing-the-calendar)).\\r\\nExample usage of the \\n`calendar`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker calendar={CustomCalendar} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "ComponentType | ComponentType"
+        }
+      }
+    },
+    "className": {
+      "name": "className",
+      "fullName": "",
+      "summary": "\"Sets the \\n`className`\\n of the DatePicker.\\r\\nExample usage of the \\n`className`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker className=\\\"custom-class\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "dateInput": {
+      "name": "dateInput",
+      "fullName": "",
+      "summary": "\"Enables the customization or the override of the default DateInput which is rendered by the DatePicker\\r\\n([see example]({% slug custom_rendering_datepicker %}#toc-customizing-the-dateinput)).\\r\\nExample usage of the \\n`dateInput`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker dateInput={CustomDateInput} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "ComponentType"
+        }
+      }
+    },
+    "defaultShow": {
+      "name": "defaultShow",
+      "fullName": "",
+      "summary": "\"Sets the default state of the DatePicker upon render ([see example]({% slug default_value_datepicker %})).\\r\\nExample usage of the \\n`defaultShow`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker defaultShow={true} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "defaultValue": {
+      "name": "defaultValue",
+      "fullName": "",
+      "summary": ">- Sets the default value of the DatePicker ([see example]({% slug default_value_datepicker %})).",
+      "syntax": {
+        "return": {
+          "type": "null | Date"
+        }
+      }
+    },
+    "disabled": {
+      "name": "disabled",
+      "fullName": "",
+      "summary": "\"Determines whether the DatePicker is disabled ([see example]({% slug disabled_datepicker %})).\\r\\nExample usage of the \\n`disabled`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker disabled={true} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "enableMouseWheel": {
+      "name": "enableMouseWheel",
+      "fullName": "",
+      "summary": ">- Indicates whether the mouse scroll can be used to increase/decrease the date segments values.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "fillMode": {
+      "name": "fillMode",
+      "fullName": "",
+      "summary": "\"Configures the \\n`fillMode`\\n of the DatePicker.\\r\\n\\r\\nThe available options are:\\r\\n- solid\\r\\n- outline\\r\\n- flat\\r\\n- null&mdash;Does not set a fillMode \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"flat\" | \"solid\" | \"outline\""
+        }
+      }
+    },
+    "focusedDate": {
+      "name": "focusedDate",
+      "fullName": "",
+      "summary": "\"Specifies the focused date of the DatePicker ([see example]({% slug dates_datepicker %})).\\r\\nExample usage of the \\n`focusedDate`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker focusedDate={new Date()} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "Date"
+        }
+      }
+    },
+    "format": {
+      "name": "format",
+      "fullName": "",
+      "summary": "\"Specifies the date format that is used to display the input value ([see example]({% slug formats_datepicker %})).\\r\\nExample usage of the \\n`format`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker format=\\\"MM/dd/yyyy\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "string | DateFormatOptions"
+        }
+      }
+    },
+    "formatPlaceholder": {
+      "name": "formatPlaceholder",
+      "fullName": "",
+      "summary": "\"Defines the descriptions of the format sections in the input field ([more information and examples]({% slug placeholders_datepicker %})).\\r\\nExample usage of the \\n`formatPlaceholder`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker formatPlaceholder=\\\"Enter date\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "DateInputFormatPlaceholder"
+        }
+      }
+    },
+    "id": {
+      "name": "id",
+      "fullName": "",
+      "summary": "\"Specifies the \\n`id`\\n of the DatePicker.\\r\\nExample usage of the \\n`id`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker id=\\\"datepicker-id\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "inputAttributes": {
+      "name": "inputAttributes",
+      "fullName": "",
+      "summary": "\"Sets the HTML attributes of the inner focusable input element.\\r\\nAttributes which are essential for certain component functionalities cannot be changed.\"",
+      "syntax": {
+        "return": {
+          "type": "InputHTMLAttributes"
+        }
+      }
+    },
+    "label": {
+      "name": "label",
+      "fullName": "",
+      "summary": "\"Renders a floating label for the DatePicker.\\r\\nExample usage of the \\n`label`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker label=\\\"Date Picker Label\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "ReactNode"
+        }
+      }
+    },
+    "max": {
+      "name": "max",
+      "fullName": "",
+      "summary": "\"Specifies the greatest valid date ([see example]({% slug dateranges_datepicker %})).\\r\\nExample usage of the \\n`max`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker max={new Date(2099, 11, 31)} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "Date"
+        }
+      }
+    },
+    "min": {
+      "name": "min",
+      "fullName": "",
+      "summary": "\"Specifies the smallest valid date ([see example]({% slug dateranges_datepicker %})).\\r\\nExample usage of the \\n`min`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker min={new Date(1900, 0, 1)} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "Date"
+        }
+      }
+    },
+    "name": {
+      "name": "name",
+      "fullName": "",
+      "summary": "\"Specifies the \\n`name`\\n property of the \\n`input`\\n DOM element.\\r\\nExample usage of the \\n`name`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker name=\\\"datepicker-name\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "onBlur": {
+      "name": "onBlur",
+      "fullName": "",
+      "summary": "\"Fires each time any of the DatePicker elements gets blurred.\\r\\nExample usage of the \\n`onBlur`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker onBlur={(event) => console.log('Blur event:', event)} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "'(event: FocusEvent<HTMLDivElement | HTMLSpanElement, Element>) => void'"
+        }
+      }
+    },
+    "onChange": {
+      "name": "onChange",
+      "fullName": "",
+      "summary": ">- Fires each time the user selects a new value ([see example]({% slug controlled_datepicker %}#toc-controlling-the-date-value)).",
+      "syntax": {
+        "return": {
+          "type": "'(event: DatePickerChangeEvent) => void'"
+        }
+      }
+    },
+    "onClose": {
+      "name": "onClose",
+      "fullName": "",
+      "summary": "Fires each time the popup is closed.",
+      "syntax": {
+        "return": {
+          "type": "'(event: DatePickerCloseEvent) => void'"
+        }
+      }
+    },
+    "onFocus": {
+      "name": "onFocus",
+      "fullName": "",
+      "summary": "\"Fires each time the user focuses any of the DatePicker elements.\\r\\nExample usage of the \\n`onFocus`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker onFocus={(event) => console.log('Focus event:', event)} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "'(event: FocusEvent<HTMLDivElement | HTMLSpanElement, Element>) => void'"
+        }
+      }
+    },
+    "onOpen": {
+      "name": "onOpen",
+      "fullName": "",
+      "summary": "Fires each time the popup is opened.",
+      "syntax": {
+        "return": {
+          "type": "'(event: DatePickerOpenEvent) => void'"
+        }
+      }
+    },
+    "pickerWrap": {
+      "name": "pickerWrap",
+      "fullName": "",
+      "summary": "",
+      "syntax": {
+        "return": {
+          "type": "ComponentType"
+        }
+      }
+    },
+    "placeholder": {
+      "name": "placeholder",
+      "fullName": "",
+      "summary": "\"Specifies the hint the DateInput displays when its value is \\n`null`\\n or there is no partial selection.\\r\\nFor more information, refer to the article on\\r\\n[placeholders]({% slug placeholders_datepicker %}).\\r\\nExample usage of the \\n`placeholder`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker placeholder=\\\"Enter a date\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "null | string"
+        }
+      }
+    },
+    "popup": {
+      "name": "popup",
+      "fullName": "",
+      "summary": "\"Enables the customization or the override of the default Popup which is rendered by the DatePicker\\r\\n([see example]({% slug custom_rendering_datepicker %}#toc-customizing-the-popup)).\\r\\nExample usage of the \\n`popup`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker popup={CustomPopup} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "ComponentType"
+        }
+      }
+    },
+    "popupSettings": {
+      "name": "popupSettings",
+      "fullName": "",
+      "summary": "\"Configures the popup options of the DatePicker.\\r\\n\\r\\nThe available options are:\\r\\n- \\n`animate: Boolean`\\n&mdash;Controls the popup animation. By default, the open and close animations are enabled.\\r\\n- \\n`appendTo`\\n: &mdash; Defines the container to which the Popup will be appended. Defaults to [\\n`body`\\n](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body).\\r\\n- \\n`popupClass: String`\\n&mdash;Specifies a list of CSS classes that are used to style the popup.\\r\\nExample usage of the \\n`popupSettings`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker popupSettings={{ animate: true, popupClass: 'custom-popup' }} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "DateInputsPopupSettings"
+        }
+      }
+    },
+    "required": {
+      "name": "required",
+      "fullName": "",
+      "summary": "\"Specifies if \\n`null`\\n is a valid value for the component.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rounded": {
+      "name": "rounded",
+      "fullName": "",
+      "summary": "\"Configures the \\n`roundness`\\n of the DatePicker.\\r\\n\\r\\nThe available options are:\\r\\n- small\\r\\n- medium\\r\\n- large\\r\\n- full\\r\\n- null&mdash;Does not set a rounded \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\" | \"full\""
+        }
+      }
+    },
+    "show": {
+      "name": "show",
+      "fullName": "",
+      "summary": "\"Specifies if the calendar will be displayed ([see example]({% slug controlled_datepicker %}#toc-controlling-the-popup-state)).\\r\\nExample usage of the \\n`show`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker show={true} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "size": {
+      "name": "size",
+      "fullName": "",
+      "summary": "\"Configures the \\n`size`\\n of the DatePicker.\\r\\n\\r\\nThe available options are:\\r\\n- small\\r\\n- medium\\r\\n- large\\r\\n- null&mdash;Does not set a size \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\""
+        }
+      }
+    },
+    "tabIndex": {
+      "name": "tabIndex",
+      "fullName": "",
+      "summary": "\"Sets the \\n`tabIndex`\\n property of the DatePicker.\\r\\nExample usage of the \\n`tabIndex`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker tabIndex={0} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "number"
+        }
+      }
+    },
+    "title": {
+      "name": "title",
+      "fullName": "",
+      "summary": "\"Sets the title of the \\n`input`\\n element of the DatePicker.\\r\\nExample usage of the \\n`title`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker title=\\\"Date Picker Title\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "toggleButton": {
+      "name": "toggleButton",
+      "fullName": "",
+      "summary": "\"Enables the customization or the override of the default Toggle button which is rendered by the DatePicker\\r\\n([see example]({% slug custom_rendering_datepicker %}#toc-customizing-the-toggle-button)).\\r\\nExample usage of the \\n`toggleButton`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker toggleButton={CustomToggleButton} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "ComponentType"
+        }
+      }
+    },
+    "twoDigitYearMax": {
+      "name": "twoDigitYearMax",
+      "fullName": "",
+      "summary": "\"The maximum year to assume to be from the current century when typing two-digit year value ([see example]({% slug formats_dateinput %}#toc-two---digit-year-max)).\\r\\nThe default value of 68, indicating that typing any value less than 69 will be assumed to be 20xx, while 69 and larger will be assumed to be 19xx.\"",
+      "syntax": {
+        "return": {
+          "type": "number"
+        }
+      }
+    },
+    "valid": {
+      "name": "valid",
+      "fullName": "",
+      "summary": "\"Overrides the validity state of the component.\\r\\nIf \\n`valid`\\n is set, the \\n`required`\\n property will be ignored.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "validationMessage": {
+      "name": "validationMessage",
+      "fullName": "",
+      "summary": "\"Controls the form error message of the component. If set to an empty string, no error will be thrown.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "validityStyles": {
+      "name": "validityStyles",
+      "fullName": "",
+      "summary": "\"If set to \\n`false`\\n, no visual representation of the invalid state of the component will be applied.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "value": {
+      "name": "value",
+      "fullName": "",
+      "summary": "\"Specifies the value of the DatePicker ([see example]({% slug controlled_datepicker %}#toc-controlling-the-date-value)).\\r\\n\\r\\n> The \\n`value`\\n has to be a valid [JavaScript \\n`Date`\\n](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Date) instance.\"",
+      "syntax": {
+        "return": {
+          "type": "null | Date"
+        }
+      }
+    },
+    "weekNumber": {
+      "name": "weekNumber",
+      "fullName": "",
+      "summary": "\"Determines whether to display a week number column in the \\n`month`\\n view of the Calendar ([see example]({% slug weeknumcolumn_datepicker %})).\\r\\nExample usage of the \\n`weekNumber`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker weekNumber={true} />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "width": {
+      "name": "width",
+      "fullName": "",
+      "summary": "\"Specifies the width of the DatePicker.\\r\\nExample usage of the \\n`width`\\n property:\\r\\n\\n```jsx\\r\\n<DatePicker width=\\\"300px\\\" />\\r\\n```\"",
+      "syntax": {
+        "return": {
+          "type": "string | number"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "componentName": "result-TextBox-2025-09-08T12-43-05-402Z.md",
+  "imports": [
+    "import { TextBox, TextBoxChangeEvent } from '@progress/kendo-react-inputs';",
+    "import { Editor, EditorTools } from '@progress/kendo-react-editor';",
+    "import { TextBox } from '@progress/kendo-react-inputs';",
+    "import { TextBoxChangeEvent } from '@progress/kendo-react-inputs';",
+    "import { Editor } from '@progress/kendo-react-editor';",
+    "import { EditorTools } from '@progress/kendo-react-editor';"
+  ],
+  "examples": [
+    {
+      "title": "Example 1",
+      "code": "import * as React from 'react';\nimport { TextBox, TextBoxChangeEvent } from '@progress/kendo-react-inputs';\n\nexport default function App() {\n    const [name, setName] = React.useState<string>('');\n\n    const handleChange = (event: TextBoxChangeEvent) => {\n        setName(event.value as string);\n    };\n\n    return <TextBox value={name} onChange={handleChange} placeholder=\"Enter your name\" />;\n}",
+      "description": "React component implementation example"
+    },
+    {
+      "title": "Example 2",
+      "code": "import { Editor, EditorTools } from '@progress/kendo-react-editor';\n\nconst {\n    Bold, Italic, Underline, Strikethrough,\n    Subscript, Superscript, ForeColor, BackColor,\n    CleanFormatting, AlignLeft, AlignCenter, AlignRight, AlignJustify,\n    Indent, Outdent, OrderedList, UnorderedList,\n    NumberedList, BulletedList, Undo, Redo,\n    FontSize, FontName, FormatBlock, Link, Unlink,\n    InsertImage, ViewHtml, InsertTable, InsertFile,\n    SelectAll, Print, Pdf, TableProperties, TableCellProperties,\n    AddRowBefore, AddRowAfter, AddColumnBefore, AddColumnAfter,\n    DeleteRow, DeleteColumn, DeleteTable, MergeCells, SplitCell\n} = EditorTools;",
+      "description": "React component implementation example"
+    }
+  ],
+  "props": {
+    "props": {
+      "name": "props",
+      "fullName": "",
+      "summary": "",
+      "syntax": {
+        "return": {
+          "type": "TextBoxProps | RefAttributes"
+        }
+      }
+    },
+    "autoFocus": {
+      "name": "autoFocus",
+      "fullName": "",
+      "summary": "|- Represents the `autoFocus` HTML attribute that will be applied to the input element of the TextBox. (Defaults to `false` )",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "fillMode": {
+      "name": "fillMode",
+      "fullName": "",
+      "summary": "\"Configures the \\n`fillMode`\\n of the TextBox.\\r\\n\\r\\nThe available options are:\\r\\n- solid\\r\\n- outline\\r\\n- flat\\r\\n- null&mdash;Does not set a fillMode \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"flat\" | \"solid\" | \"outline\""
+        }
+      }
+    },
+    "inputAttributes": {
+      "name": "inputAttributes",
+      "fullName": "",
+      "summary": "\"Sets the HTML attributes of the inner focusable input element.\\r\\nAttributes which are essential for certain component functionalities cannot be changed.\"",
+      "syntax": {
+        "return": {
+          "type": "InputHTMLAttributes"
+        }
+      }
+    },
+    "onChange": {
+      "name": "onChange",
+      "fullName": "",
+      "summary": "|- The `onChange` callback of the `input` element inside the TextBox.",
+      "syntax": {
+        "return": {
+          "type": "'(event: TextBoxChangeEvent) => void'"
+        }
+      }
+    },
+    "prefix": {
+      "name": "prefix",
+      "fullName": "",
+      "summary": "Sets a custom prefix to the TextBox component.",
+      "syntax": {
+        "return": {
+          "type": "CustomComponent"
+        }
+      }
+    },
+    "rounded": {
+      "name": "rounded",
+      "fullName": "",
+      "summary": "\"Configures the \\n`roundness`\\n of the TextBox.\\r\\n\\r\\nThe available options are:\\r\\n- small\\r\\n- medium\\r\\n- large\\r\\n- full\\r\\n- null&mdash;Does not set a rounded \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\" | \"full\""
+        }
+      }
+    },
+    "size": {
+      "name": "size",
+      "fullName": "",
+      "summary": "\"Configures the \\n`size`\\n of the TextBox.\\r\\n\\r\\nThe available options are:\\r\\n- small\\r\\n- medium\\r\\n- large\\r\\n- null&mdash;Does not set a size \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\""
+        }
+      }
+    },
+    "suffix": {
+      "name": "suffix",
+      "fullName": "",
+      "summary": "Sets a custom suffix to the TextBox component.",
+      "syntax": {
+        "return": {
+          "type": "CustomComponent"
+        }
+      }
+    },
+    "valid": {
+      "name": "valid",
+      "fullName": "",
+      "summary": "|- Indicates if the component is in `valid` state",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

@@ -1,121 +1,167 @@
 'use client';
-
-import { AppBar } from '@progress/kendo-react-layout';
-import { Avatar } from '@progress/kendo-react-layout';
+import * as React from 'react';
+import { StackLayout } from '@progress/kendo-react-layout';
+import { AppBar, AppBarSection } from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
-import { Card } from '@progress/kendo-react-layout';
-import { ListView } from '@progress/kendo-react-listview';
-import { ProgressBar } from '@progress/kendo-react-progressbars';
-import { GridLayout } from '@progress/kendo-react-layout';
-import { Dialog } from '@progress/kendo-react-dialogs';
+import { Avatar } from '@progress/kendo-react-layout';
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardTitle
+} from '@progress/kendo-react-layout';
+import { Grid, GridColumn } from '@progress/kendo-react-grid';
 import { Typography } from '@progress/kendo-react-common';
-import { Form } from '@progress/kendo-react-form';
 
-const PortfolioLandingPage = () => {
-  const skills = [
-    { name: 'HTML', proficiency: 85 },
-    { name: 'CSS', proficiency: 75 },
-    { name: 'JavaScript', proficiency: 90 }
-  ];
-  const portfolioImages = [
-    'portfolio-image1.jpg',
-    'portfolio-image2.jpg',
-    'portfolio-image3.jpg'
+const FruitsLandingPage = () => {
+  const fruits = [
+    {
+      id: 1,
+      name: 'Apple',
+      price: '$1.00',
+      image: 'https://example.com/apple.jpg'
+    },
+    {
+      id: 2,
+      name: 'Banana',
+      price: '$0.50',
+      image: 'https://example.com/banana.jpg'
+    }
   ];
   const testimonials = [
-    { name: 'John Doe', feedback: 'Excellent service and quality work!' },
-    { name: 'Jane Smith', feedback: 'Highly recommend for their creativity!' }
+    {
+      name: 'John Doe',
+      text: 'The fruits here are always fresh and delicious!',
+      avatar: 'https://example.com/johndoe.jpg'
+    },
+    {
+      name: 'Jane Smith',
+      text: 'I love the variety and quality of fruits!',
+      avatar: 'https://example.com/janesmith.jpg'
+    }
   ];
-  const handleImageClick = (image) => {
-    alert(`Viewing image: ${image}`);
-  };
   return (
-    <StackLayout style={{ padding: '20px' }}>
-      <AppBar title="My Portfolio" />
-      <Card title="Welcome to My Portfolio">
-        <Avatar
-          style={{ width: '100px', height: '100px', marginBottom: '20px' }}
-          src="logo.jpg"
-        />
-      </Card>
-      <Card title="My Skills">
-        <Typography style={{ marginBottom: '10px' }}>My Skills</Typography>
-        <ListView
-          data={skills.map((skill) => ({
-            title: `${skill.name} - ${skill.proficiency}%`,
-            progress: skill.proficiency
-          }))}
-          renderItem={({ dataItem }) => (
-            <div>
-              <Typography>{dataItem.title}</Typography>
-              <ProgressBar value={dataItem.progress} />
-            </div>
-          )}
-        />
-      </Card>
-      <Card title="My Work">
-        <Typography style={{ marginBottom: '10px' }}>
-          Portfolio Gallery
-        </Typography>
-        <GridLayout>
-          {portfolioImages.map((image, index) => (
-            <Avatar
-              key={index}
-              src={image}
-              onClick={() => handleImageClick(image)}
-              style={{
-                cursor: 'pointer',
-                width: '150px',
-                height: '150px',
-                margin: '10px'
-              }}
-            />
-          ))}
-        </GridLayout>
-      </Card>
-      <Card title="What Clients Say">
-        <Typography style={{ marginBottom: '10px' }}>Testimonials</Typography>
-        <ListView
-          data={testimonials.map((item) => ({
-            name: item.name,
-            feedback: item.feedback
-          }))}
-          renderItem={({ dataItem }) => (
-            <div>
-              <Typography>{dataItem.name}</Typography>
-              <Typography>{dataItem.feedback}</Typography>
-            </div>
-          )}
-        />
-      </Card>
-      <Card title="Get in Touch">
-        <Form>
-          <FormField
-            label="Your Name"
-            name="name"
-            component={Input}
-            required
-            placeholder="Enter your Name"
+    <StackLayout>
+      {/* Header Section */}
+      <AppBar themeColor="primary">
+        <AppBarSection>
+          <img
+            src="https://example.com/logo.png"
+            alt="Brand Logo"
+            style={{ width: 50, height: 'auto' }}
           />
-          <FormField
-            label="Your Email"
-            name="email"
-            component={Input}
-            required
-            placeholder="Enter your Email"
+        </AppBarSection>
+        <AppBarSection>
+          <div>
+            <a href="#" style={{ margin: '0 10px' }}>
+              Home
+            </a>
+            <a href="#" style={{ margin: '0 10px' }}>
+              Shop
+            </a>
+            <a href="#" style={{ margin: '0 10px' }}>
+              About Us
+            </a>
+            <a href="#" style={{ margin: '0 10px' }}>
+              Contact
+            </a>
+          </div>
+        </AppBarSection>
+      </AppBar>
+
+      {/* Hero Section */}
+      <section
+        style={{
+          textAlign: 'center',
+          background:
+            'url(https://example.com/fruit-background.jpg) no-repeat center center',
+          padding: '50px 0'
+        }}
+      >
+        <Typography.h1>Fresh Fruits Delivered Daily!</Typography.h1>
+        <Typography.p>
+          Enjoy the freshest and healthiest fruits at your doorstep.
+        </Typography.p>
+        <Button onClick={() => alert('Shop Now Clicked!')} themeColor="success">
+          Shop Now
+        </Button>
+      </section>
+
+      {/* Fruits Showcase */}
+      <section>
+        <Grid data={fruits}>
+          <GridColumn field="name" title="Fruit Name" />
+          <GridColumn field="price" title="Price" />
+          <GridColumn
+            title="Add to Cart"
+            cells={{
+              data: ({ dataItem }) => (
+                <Button
+                  onClick={() => alert(`Added ${dataItem.name} to cart!`)}
+                >
+                  Add to Cart
+                </Button>
+              )
+            }}
           />
-          <FormField
-            label="Your Message"
-            name="message"
-            component={TextArea}
-            required
-            placeholder="Enter your Message"
-          />
-          <Button type="submit">Submit</Button>
-        </Form>
-      </Card>
-      <AppBar title="© 2023 My Portfolio" />
+        </Grid>
+      </section>
+
+      {/* About Us Section */}
+      <section>
+        <Typography.p>
+          We are dedicated to delivering the freshest fruits sourced from local
+          farms.
+        </Typography.p>
+        <img
+          src="https://example.com/team.jpg"
+          alt="Our Team"
+          style={{ width: '100%', height: 'auto' }}
+        />
+      </section>
+
+      {/* Testimonials Section */}
+      <section>
+        {testimonials.map((testimonial, index) => (
+          <Card key={index} style={{ margin: '10px 0' }}>
+            <CardHeader>
+              <Avatar type="image" size="large" src={testimonial.avatar} />
+              <CardTitle>{testimonial.name}</CardTitle>
+            </CardHeader>
+            <CardBody>{testimonial.text}</CardBody>
+          </Card>
+        ))}
+      </section>
+
+      {/* Subscription Section */}
+      <section
+        style={{ textAlign: 'center', padding: '20px', background: '#f5f5f5' }}
+      >
+        <Typography.p>Join our fruit lovers community!</Typography.p>
+        <Button onClick={() => alert('Subscribed!')}>Subscribe</Button>
+      </section>
+
+      {/* Footer Section */}
+      <footer style={{ padding: '20px', textAlign: 'center' }}>
+        <div>
+          <a href="#" style={{ margin: '0 10px' }}>
+            Privacy Policy
+          </a>
+          <a href="#" style={{ margin: '0 10px' }}>
+            Terms of Service
+          </a>
+        </div>
+        <div>
+          <a href="#" style={{ margin: '0 10px' }}>
+            Facebook
+          </a>
+          <a href="#" style={{ margin: '0 10px' }}>
+            Instagram
+          </a>
+        </div>
+      </footer>
     </StackLayout>
   );
 };
-export default PortfolioLandingPage;
+
+export default FruitsLandingPage;

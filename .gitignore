@@ -28,3 +28,12 @@ next-env.d.ts
 
 # kendo docs cache
 .kendo-docs-cache/
+
+# kendo mcp test results
+.kendo-mcp-tests/
+
+# merger agent test results
+.merger-test-results/
+
+# mcp server outputs
+.mcp-outputs/

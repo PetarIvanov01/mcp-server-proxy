@@ -1,0 +1,653 @@
+{
+  "componentName": "result-ComboBox-2025-09-08T12-43-05-402Z.md",
+  "imports": [
+    "import { ComboBox } from '@progress/kendo-react-dropdowns';",
+    "import { Editor, EditorTools } from '@progress/kendo-react-editor';",
+    "import { Editor } from '@progress/kendo-react-editor';",
+    "import { EditorTools } from '@progress/kendo-react-editor';"
+  ],
+  "examples": [
+    {
+      "title": "Example 1",
+      "code": "import React from 'react';\nimport { ComboBox } from '@progress/kendo-react-dropdowns';\n\nconst App = () => {\n    return <ComboBox />;\n};\n\nexport default App;",
+      "description": "React component implementation example"
+    },
+    {
+      "title": "Example 2",
+      "code": "import { Editor, EditorTools } from '@progress/kendo-react-editor';\n\nconst {\n    Bold, Italic, Underline, Strikethrough,\n    Subscript, Superscript, ForeColor, BackColor,\n    CleanFormatting, AlignLeft, AlignCenter, AlignRight, AlignJustify,\n    Indent, Outdent, OrderedList, UnorderedList,\n    NumberedList, BulletedList, Undo, Redo,\n    FontSize, FontName, FormatBlock, Link, Unlink,\n    InsertImage, ViewHtml, InsertTable, InsertFile,\n    SelectAll, Print, Pdf, TableProperties, TableCellProperties,\n    AddRowBefore, AddRowAfter, AddColumnBefore, AddColumnAfter,\n    DeleteRow, DeleteColumn, DeleteTable, MergeCells, SplitCell\n} = EditorTools;",
+      "description": "React component implementation example"
+    }
+  ],
+  "props": {
+    "props": {
+      "name": "props",
+      "fullName": "",
+      "summary": "",
+      "syntax": {
+        "return": {
+          "type": "ComboBoxProps | RefAttributes"
+        }
+      }
+    },
+    "accessKey": {
+      "name": "accessKey",
+      "fullName": "",
+      "summary": "|- Specifies the `accessKey` of the ComboBox.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "adaptive": {
+      "name": "adaptive",
+      "fullName": "",
+      "summary": ">- Providing different rendering of the popup element based on the screen dimensions.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "adaptiveFilter": {
+      "name": "adaptiveFilter",
+      "fullName": "",
+      "summary": "Sets the value of the adaptive filtering input of the ComboBox.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "adaptiveSubtitle": {
+      "name": "adaptiveSubtitle",
+      "fullName": "",
+      "summary": "\"Specifies the text that is rendered as subtitle in the adaptive popup(action sheet).\\r\\nApplicable only when \\n`adaptive`\\n is set to \\n`true`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "adaptiveTitle": {
+      "name": "adaptiveTitle",
+      "fullName": "",
+      "summary": "\"Specifies the text that is rendered as title in the adaptive popup(action sheet).\\r\\nApplicable only when \\n`adaptive`\\n is set to \\n`true`\\n.\\r\\nIf not provided, the title will be the same as the label.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "allowCustom": {
+      "name": "allowCustom",
+      "fullName": "",
+      "summary": ">- Specifies whether the ComboBox allows user-defined values that are not present in the dataset ([see example]({% slug custom_values_combobox %})). Defaults to `false` .",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ariaDescribedBy": {
+      "name": "ariaDescribedBy",
+      "fullName": "",
+      "summary": "\"Identifies the element(s) which will describe the component, similar to [HTML aria-describedby attribute](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute).\\r\\nFor example these elements could contain error or hint message.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "ariaLabel": {
+      "name": "ariaLabel",
+      "fullName": "",
+      "summary": "The accessible label of the component.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "ariaLabelledBy": {
+      "name": "ariaLabelledBy",
+      "fullName": "",
+      "summary": "Identifies the element(s) which will label the component.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "className": {
+      "name": "className",
+      "fullName": "",
+      "summary": "Sets additional classes to the ComboBox.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "clearButton": {
+      "name": "clearButton",
+      "fullName": "",
+      "summary": ">- If `clearButton` is set to `true` , the ComboBox renders a button on hovering over the component. Clicking this button resets the value of the ComboBox to `undefined` and triggers the `change` event.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "data": {
+      "name": "data",
+      "fullName": "",
+      "summary": ">- Sets the data of the ComboBox ([more information and examples]({% slug binding_combobox %})).",
+      "syntax": {
+        "return": {
+          "type": "Array<any>"
+        }
+      }
+    },
+    "dataItemKey": {
+      "name": "dataItemKey",
+      "fullName": "",
+      "summary": "|- Sets the key for comparing the data items of the ComboBox. If `dataItemKey` is not set, the ComboBox compares the items by reference ([see example]({% slug binding_combobox %}#toc-datasets-of-objects)).",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "defaultValue": {
+      "name": "defaultValue",
+      "fullName": "",
+      "summary": "|- Sets the default value of the ComboBox. Similar to the native `select` HTML element.",
+      "syntax": {
+        "return": {
+          "type": "any"
+        }
+      }
+    },
+    "dir": {
+      "name": "dir",
+      "fullName": "",
+      "summary": "|- Represents the `dir` HTML attribute.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "disabled": {
+      "name": "disabled",
+      "fullName": "",
+      "summary": "Sets the disabled state of the ComboBox.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "fillMode": {
+      "name": "fillMode",
+      "fullName": "",
+      "summary": "\"Configures the \\n`fillMode`\\n of the ComboBox.\\r\\n\\r\\nThe available options are:\\r\\n- solid\\r\\n- flat\\r\\n- outline\\r\\n- null&mdash;Does not set a fillMode \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"flat\" | \"solid\" | \"outline\""
+        }
+      }
+    },
+    "filter": {
+      "name": "filter",
+      "fullName": "",
+      "summary": ">- Sets the value of ComboBox input. Useful for making the ComboBox input a [controlled",
+      "syntax": {
+        "return": {
+          "type": "null | string"
+        }
+      }
+    },
+    "filterable": {
+      "name": "filterable",
+      "fullName": "",
+      "summary": ">- Enables the filtering functionality of the ComboBox ([more information and examples]({% slug filtering_combobox %})).",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "focusedItemIndex": {
+      "name": "focusedItemIndex",
+      "fullName": "",
+      "summary": "\"If set, the ComboBox will use it to get the focused item index.\\r\\n\\r\\nDefault functionality returns the first item which starts with the input text.\"",
+      "syntax": {
+        "return": {
+          "type": "'(data: any, inputText: string, textField?: string) => number'"
+        }
+      }
+    },
+    "footer": {
+      "name": "footer",
+      "fullName": "",
+      "summary": ">- Sets the footer component of the ComboBox ([see example]({% slug customrendering_combobox %}#toc-headers-and-footers)).",
+      "syntax": {
+        "return": {
+          "type": "ReactNode"
+        }
+      }
+    },
+    "groupField": {
+      "name": "groupField",
+      "fullName": "",
+      "summary": ">- Sets the data item field that represents the start of a group. Applicable to objects data.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "groupHeaderItemRender": {
+      "name": "groupHeaderItemRender",
+      "fullName": "",
+      "summary": ">- Fires when a ComboBox group header item is about to be rendered. Used to override the default appearance of the group's headers when the component is configured in `modern` group mode.",
+      "syntax": {
+        "return": {
+          "type": ">-"
+        }
+      }
+    },
+    "groupMode": {
+      "name": "groupMode",
+      "fullName": "",
+      "summary": "|- Defines the `classic` or `modern` type of the grouping's visualization. Defaults to `modern` .",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "groupStickyHeaderItemRender": {
+      "name": "groupStickyHeaderItemRender",
+      "fullName": "",
+      "summary": ">- Fires when a ComboBox sticky group header item is about to be rendered. Used to override the default appearance of the sticky group header of the component.",
+      "syntax": {
+        "return": {
+          "type": ">-"
+        }
+      }
+    },
+    "header": {
+      "name": "header",
+      "fullName": "",
+      "summary": ">- Sets the header component of the ComboBox ([see example]({% slug customrendering_combobox %}#toc-headers-and-footers)).",
+      "syntax": {
+        "return": {
+          "type": "ReactNode"
+        }
+      }
+    },
+    "iconClassName": {
+      "name": "iconClassName",
+      "fullName": "",
+      "summary": "|- Sets CSS classes to the expand `icon` DOM element.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "id": {
+      "name": "id",
+      "fullName": "",
+      "summary": "Specifies the id of the component.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "inputAttributes": {
+      "name": "inputAttributes",
+      "fullName": "",
+      "summary": "\"Sets the HTML attributes of the inner focusable input element.\\r\\nAttributes which are essential for certain component functionalities cannot be changed.\"",
+      "syntax": {
+        "return": {
+          "type": "InputHTMLAttributes"
+        }
+      }
+    },
+    "itemRender": {
+      "name": "itemRender",
+      "fullName": "",
+      "summary": ">- Fires when a ComboBox list item is about to be rendered ([see example]({% slug customrendering_combobox %}#toc-items)). Used to override the default appearance of the list items.",
+      "syntax": {
+        "return": {
+          "type": ">-"
+        }
+      }
+    },
+    "label": {
+      "name": "label",
+      "fullName": "",
+      "summary": "Renders a floating label for the ComboBox.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "listNoDataRender": {
+      "name": "listNoDataRender",
+      "fullName": "",
+      "summary": ">- Fires when the element which indicates no data in the popup is about to be rendered. Used to override the default appearance of the element.",
+      "syntax": {
+        "return": {
+          "type": ">-"
+        }
+      }
+    },
+    "loading": {
+      "name": "loading",
+      "fullName": "",
+      "summary": ">- Sets the loading state of the ComboBox ([see example]({% slug filtering_combobox %}#toc-basic-configuration)).",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "name": {
+      "name": "name",
+      "fullName": "",
+      "summary": "\"Specifies the \\n`name`\\n property of the \\n`input`\\n DOM element.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "onBlur": {
+      "name": "onBlur",
+      "fullName": "",
+      "summary": "Fires each time the ComboBox gets blurred.",
+      "syntax": {
+        "return": {
+          "type": "'(event: ComboBoxBlurEvent) => void'"
+        }
+      }
+    },
+    "onChange": {
+      "name": "onChange",
+      "fullName": "",
+      "summary": ">- Fires each time the value of the ComboBox is about to change ([see examples]({% slug binding_combobox %})).",
+      "syntax": {
+        "return": {
+          "type": "'(event: ComboBoxChangeEvent) => void'"
+        }
+      }
+    },
+    "onClose": {
+      "name": "onClose",
+      "fullName": "",
+      "summary": "Fires each time the popup of the ComboBox is about to close.",
+      "syntax": {
+        "return": {
+          "type": "'(event: ComboBoxCloseEvent) => void'"
+        }
+      }
+    },
+    "onFilterChange": {
+      "name": "onFilterChange",
+      "fullName": "",
+      "summary": ">- Fires each time the user types in the filter input ([see examples]({% slug filtering_combobox %}#toc-basic-configuration)). You can filter the source based on the passed filtration value.",
+      "syntax": {
+        "return": {
+          "type": "'(event: ComboBoxFilterChangeEvent) => void'"
+        }
+      }
+    },
+    "onFocus": {
+      "name": "onFocus",
+      "fullName": "",
+      "summary": "Fires each time the user focuses the ComboBox.",
+      "syntax": {
+        "return": {
+          "type": "'(event: ComboBoxFocusEvent) => void'"
+        }
+      }
+    },
+    "onOpen": {
+      "name": "onOpen",
+      "fullName": "",
+      "summary": "Fires each time the popup of the ComboBox is about to open.",
+      "syntax": {
+        "return": {
+          "type": "'(event: ComboBoxOpenEvent) => void'"
+        }
+      }
+    },
+    "onPageChange": {
+      "name": "onPageChange",
+      "fullName": "",
+      "summary": ">- Fires when both the virtual scrolling of the ComboBox is enabled and the component requires data for another page ([more information and examples]({% slug virtualization_combobox %})).",
+      "syntax": {
+        "return": {
+          "type": "'(event: ComboBoxPageChangeEvent) => void'"
+        }
+      }
+    },
+    "opened": {
+      "name": "opened",
+      "fullName": "",
+      "summary": "Sets the opened and closed state of the ComboBox.",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "placeholder": {
+      "name": "placeholder",
+      "fullName": "",
+      "summary": "The hint that is displayed when the ComboBox is empty.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "popupSettings": {
+      "name": "popupSettings",
+      "fullName": "",
+      "summary": "Configures the popup of the ComboBox.",
+      "syntax": {
+        "return": {
+          "type": "DropDownsPopupSettings"
+        }
+      }
+    },
+    "prefix": {
+      "name": "prefix",
+      "fullName": "",
+      "summary": "Sets a custom prefix to the ComboBox component.",
+      "syntax": {
+        "return": {
+          "type": "CustomComponent"
+        }
+      }
+    },
+    "required": {
+      "name": "required",
+      "fullName": "",
+      "summary": "\"Specifies if \\n`null`\\n is a valid value for the component.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rounded": {
+      "name": "rounded",
+      "fullName": "",
+      "summary": "\"Configures the \\n`roundness`\\n of the ComboBox.\\r\\n\\r\\nThe available options are:\\r\\n- small\\r\\n- medium\\r\\n- large\\r\\n- full\\r\\n- null&mdash;Does not set a rounded \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\" | \"full\""
+        }
+      }
+    },
+    "size": {
+      "name": "size",
+      "fullName": "",
+      "summary": "\"Configures the \\n`size`\\n of the ComboBox.\\r\\n\\r\\nThe available options are:\\r\\n- small\\r\\n- medium\\r\\n- large\\r\\n- null&mdash;Does not set a size \\n`className`\\n.\"",
+      "syntax": {
+        "return": {
+          "type": "null | \"small\" | \"medium\" | \"large\""
+        }
+      }
+    },
+    "skipDisabledItems": {
+      "name": "skipDisabledItems",
+      "fullName": "",
+      "summary": ">- Defines if ComboBox's disabled items will be skipped or focused when navigating through the list of items using a keyboard. Defaults to `true` .",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "style": {
+      "name": "style",
+      "fullName": "",
+      "summary": "The styles that are applied to the ComboBox.",
+      "syntax": {
+        "return": {
+          "type": "CSSProperties"
+        }
+      }
+    },
+    "suffix": {
+      "name": "suffix",
+      "fullName": "",
+      "summary": "Sets a custom suffix to the ComboBox component.",
+      "syntax": {
+        "return": {
+          "type": "CustomComponent"
+        }
+      }
+    },
+    "suggest": {
+      "name": "suggest",
+      "fullName": "",
+      "summary": ">- Enables the auto-completion of the text based on the first data item ([see example]({% slug suggestions_combobox %})).",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "svgIcon": {
+      "name": "svgIcon",
+      "fullName": "",
+      "summary": "Sets the specified SVG icon.",
+      "syntax": {
+        "return": {
+          "type": "SVGIcon"
+        }
+      }
+    },
+    "tabIndex": {
+      "name": "tabIndex",
+      "fullName": "",
+      "summary": "|- Specifies the `tabIndex` of the ComboBox.",
+      "syntax": {
+        "return": {
+          "type": "number"
+        }
+      }
+    },
+    "textField": {
+      "name": "textField",
+      "fullName": "",
+      "summary": ">- Sets the data item field that represents the item text. If the data contains only primitive values, do not define it.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "title": {
+      "name": "title",
+      "fullName": "",
+      "summary": "Sets the title attribute to the underlying input element of the ComboBox.",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "valid": {
+      "name": "valid",
+      "fullName": "",
+      "summary": "\"Overrides the validity state of the component.\\r\\nIf \\n`valid`\\n is set, the \\n`required`\\n property will be ignored.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "validationMessage": {
+      "name": "validationMessage",
+      "fullName": "",
+      "summary": "\"Controls the form error message of the component. If set to an empty string, no error will be thrown.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "string"
+        }
+      }
+    },
+    "validityStyles": {
+      "name": "validityStyles",
+      "fullName": "",
+      "summary": "\"If set to \\n`false`\\n, no visual representation of the invalid state of the component will be applied.\\r\\n\\r\\nThis property is part of the [FormComponentProps]({% slug api_common_formcomponentprops %}) interface.\"",
+      "syntax": {
+        "return": {
+          "type": "boolean"
+        }
+      }
+    },
+    "value": {
+      "name": "value",
+      "fullName": "",
+      "summary": ">- Sets the value of the ComboBox ([more information and examples]({% slug binding_combobox %})).",
+      "syntax": {
+        "return": {
+          "type": "any"
+        }
+      }
+    },
+    "valueRender": {
+      "name": "valueRender",
+      "fullName": "",
+      "summary": ">- Fires when the ComboBox input element is about to be rendered. Use it to override the default appearance of the component.",
+      "syntax": {
+        "return": {
+          "type": ">-"
+        }
+      }
+    },
+    "virtual": {
+      "name": "virtual",
+      "fullName": "",
+      "summary": ">- Configures the virtual scrolling of the ComboBox ([more information and examples]({% slug virtualization_combobox %})).",
+      "syntax": {
+        "return": {
+          "type": "VirtualizationSettings"
+        }
+      }
+    }
+  }
+}
