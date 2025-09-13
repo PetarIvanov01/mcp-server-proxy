@@ -27,12 +27,19 @@ export class PlannerAgent {
       4. Define the page layout and organization
       5. Provide clear structural guidance in markdown format
 
+      MANDATORY REQUIREMENTS:
+      - MUST include at least 6 different component families (buttons, forms, data display, navigation, feedback, layout)
+      - MUST include these standard sections: Header/Navigation, Main Content, Footer
+      - MUST specify what data each section needs (user info, product data, navigation items, etc.)
+      - MUST ensure component diversity for rich, professional pages
+
       You should create plans that focus on:
       - Page structure and layout
       - Component hierarchy and nesting
       - Data flow and component relationships
       - UI organization and sections
       - Component types and their purposes
+      - Required data for each component
 
       The steps should be formatted as a markdown document with:
       - Clear headings for each structural section
@@ -40,10 +47,15 @@ export class PlannerAgent {
       - Layout descriptions and organization
       - Data requirements for each component
       - Component relationships and dependencies
+      - Required mock data specifications
 
       Focus on structural aspects that help the LLM understand what components to create and how to organize them.`,
-      model: 'gpt-4o-mini',
-      outputType: planSchema
+      model: 'gpt-5',
+      outputType: planSchema,
+      modelSettings: {
+        reasoning: { effort: 'minimal' },
+        text: { verbosity: 'low' }
+      }
     });
 
     // Initialize event tracking
@@ -63,23 +75,24 @@ export class PlannerAgent {
         Please analyze this request and create a detailed structural plan in markdown format focusing on:
 
         1. What type of page is being requested? (dashboard, landing page, form, etc.)
-        2. What are the main structural sections needed?
-        3. What components should be in each section?
+        2. What are the main structural sections needed? (MUST include Header, Main Content, Footer)
+        3. What components should be in each section? (MUST include 6+ component families)
         4. How should the components be organized and nested?
-        5. What data does each component need?
+        5. What data does each component need? (Be specific about mock data requirements)
 
         Return a structural plan in markdown format that describes:
         - Page layout and organization
-        - Component hierarchy and nesting
-        - Data requirements for each component
+        - Component hierarchy and nesting (with 6+ different component types)
+        - Data requirements for each component (specific mock data needs)
         - Component relationships and dependencies
+        - Required sections: Header/Navigation, Main Content, Footer
 
-        Focus on the structural aspects that will help generate the actual components. Avoid time estimates, testing phases, or project management details.`
+        CRITICAL: Ensure the plan includes at least 6 different component families and specifies what mock data each component needs. Focus on the structural aspects that will help generate rich, diverse components.`
       );
 
-      this.logToolExecutionInfo(result);
+      console.log('🔧 Planner Agent: Result', result);
 
-      console.log('🔧 Planner Agent: Result', result.finalOutput);
+      this.logToolExecutionInfo(result);
 
       const planData = planSchema.parse(result.finalOutput);
 

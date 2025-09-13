@@ -1346,6 +1346,26 @@ export const ACT_TO_KENDO_MAPPINGS = {
     category: 'display',
     priority: 1,
     props: { variant: 'caption' }
+  },
+
+  // HTML element fallbacks for unmapped components
+  ul: {
+    component: 'HTML_UL',
+    category: 'content',
+    priority: 3,
+    props: { element: 'ul' }
+  },
+  ol: {
+    component: 'HTML_OL',
+    category: 'content',
+    priority: 3,
+    props: { element: 'ol' }
+  },
+  li: {
+    component: 'HTML_LI',
+    category: 'content',
+    priority: 3,
+    props: { element: 'li' }
   }
 } as const;
 

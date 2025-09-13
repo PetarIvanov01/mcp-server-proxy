@@ -11,6 +11,12 @@ export const ACTComponentSchema: z.ZodType<any> = z.lazy(() =>
     description: z
       .string()
       .describe('The reason for having this component and its purpose'),
+    styleInfo: z
+      .string()
+      .nullable()
+      .describe(
+        'Styling and layouting information using Tailwind CSS classes (e.g., "bg-blue-500 text-white p-4 flex items-center justify-center")'
+      ),
     children: z
       .union([z.array(ACTComponentSchema), z.string()])
       .describe('Child components or text content (empty string if none)')

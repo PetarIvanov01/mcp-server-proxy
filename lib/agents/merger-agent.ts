@@ -77,6 +77,7 @@ export class MergerAgent {
       6. Ensure proper component composition and nesting
       7. Generate production-ready, syntactically correct code
       8. Use React native elements (like <a>, <img>) for basic content and Kendo components for complex UI
+      9. Apply Tailwind CSS classes from the ACT component's styleInfo field to the generated components
 
       ENHANCED CAPABILITIES:
       - You now have access to real-time Kendo UI React component documentation via the MCP client
@@ -116,10 +117,27 @@ export class MergerAgent {
       - Generate clean, readable, and maintainable code
       - Make components immediately usable with sample data
       - Use appropriate HTML elements for links, images, and basic content
+      - CRITICAL: For any ACT components that don't have Kendo mappings, use standard HTML elements (<a>, <img>, <div>, <span>, <p>, <h1>-<h6>, etc.)
+      - When using HTML elements, ensure they have proper styling and semantic meaning
+      
+      STYLING AND LAYOUTING APPLICATION:
+      - CRITICAL: Apply the styleInfo field from each ACT component to the corresponding generated component
+      - Use the className prop to apply Tailwind CSS classes from the styleInfo field
+      - For Kendo components, apply styleInfo classes to the root element or appropriate wrapper
+      - For HTML elements, apply styleInfo classes directly to the element
+      - Ensure that the applied classes don't conflict with Kendo component's built-in styling
+      - If styleInfo contains responsive classes, preserve them in the generated code
+      - Combine styleInfo classes with any necessary component-specific classes
+      - Handle null styleInfo values gracefully (skip styling if styleInfo is null)
+      - Example: If ACT component has styleInfo: "bg-blue-500 text-white p-4", apply it as className="bg-blue-500 text-white p-4"
 
       The mainComponent should be complete, functional React components that can be directly used in a Kendo UI application.
       `,
-      model: 'gpt-4o-mini',
+      model: 'gpt-5',
+      modelSettings: {
+        reasoning: { effort: 'minimal' },
+        text: { verbosity: 'low' }
+      },
       outputType: kendoCodeSchema
     });
 
@@ -136,10 +154,14 @@ export class MergerAgent {
         const kendoComponent = this.mapActToKendoComponent(actComponentName);
         if (!kendoComponent) {
           console.log(
-            `❌ Merger Agent: No Kendo component found for ${actComponentName}`
+            `⚠️ Merger Agent: No Kendo component found for ${actComponentName}, will use HTML element`
           );
-        }
-        if (kendoComponent && !components.includes(kendoComponent)) {
+        } else if (kendoComponent.startsWith('HTML_')) {
+          console.log(
+            `🔗 Merger Agent: Using HTML element for ${actComponentName}`
+          );
+          // Don't add HTML elements to the Kendo components list
+        } else if (kendoComponent && !components.includes(kendoComponent)) {
           components.push(kendoComponent);
         }
       }
@@ -158,9 +180,14 @@ export class MergerAgent {
     const mapping =
       ACT_TO_KENDO_MAPPINGS[actComponent as keyof typeof ACT_TO_KENDO_MAPPINGS];
 
-    // Handle special React native components
+    // Handle special React native components - these will use HTML elements
     if (mapping?.component === 'ReactLink') {
-      return null;
+      return 'HTML_LINK'; // Special marker for HTML elements
+    }
+
+    // Handle HTML element fallbacks
+    if (mapping?.component?.startsWith('HTML_')) {
+      return mapping.component;
     }
 
     return mapping?.component || null;
@@ -330,8 +357,9 @@ export class MergerAgent {
         4. From the documentation, identify the exact data structure and prop format each component expects
         5. Create realistic mock data that matches the component's documented data schema exactly
         6. Based on the documentation and structured props, generate the appropriate code with properly formatted mock data
-        7. Ensure all imports, props, and styling are correct according to the documentation and structured prop information
-        8. Verify that components are immediately usable with the provided mock data
+        7. CRITICAL: Apply the styleInfo field from each ACT component to the corresponding generated component using className prop
+        8. Ensure all imports, props, and styling are correct according to the documentation and structured prop information
+        9. Verify that components are immediately usable with the provided mock data and applied styling
 
         Consider:
         - Which Kendo components best match each ACT component

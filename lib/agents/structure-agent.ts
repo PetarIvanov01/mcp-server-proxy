@@ -1,13 +1,7 @@
 import { Agent, run } from '@openai/agents';
 import { z } from 'zod';
 import { ACTComponentSchema, AgentResponse, ExecutionPlan } from '../types';
-import {
-  ACT_ELEMENTS,
-  ACT_ELEMENTS_FLAT,
-  getKendoComponentForACT,
-  getACTElementsByCategory,
-  formatACTElementsForPrompt
-} from '../kendo-components';
+import { formatACTElementsForPrompt } from '../kendo-components';
 
 const actSchema = z.object({
   act: z.object({
@@ -36,7 +30,11 @@ export class StructureAgent {
     this.agent = new Agent<{}, typeof actSchema>({
       name: 'structure-agent',
       instructions: this.buildInstructions(),
-      model: 'gpt-4o-mini',
+      model: 'gpt-5',
+      modelSettings: {
+        reasoning: { effort: 'minimal' },
+        text: { verbosity: 'low' }
+      },
       outputType: actSchema
     });
 
@@ -53,8 +51,12 @@ export class StructureAgent {
         3. Use intuitive component names that LLMs understand (container, header, button, etc.)
         4. Provide clear descriptions for each component's purpose
         5. Handle both simple and complex layouts with proper nesting
+        6. ENSURE component diversity across 6+ different families
+        7. Include specific data requirements in component descriptions
+        8. CREATE RICH, COMPREHENSIVE PAGE STRUCTURES with multiple components
+        9. Include styling and layouting information using Tailwind CSS classes in the styleInfo field
 
-        Available ACT Components (use these semantic components for building your structure):
+        Available ACT Components:
         
         ${formatACTElementsForPrompt()}
 
@@ -67,8 +69,39 @@ export class StructureAgent {
         - Choose components from the available list above
         - Use the most appropriate component for each use case
         - Consider the semantic meaning and purpose of each component
+        - MANDATORY: Include components from at least 6 different families (Layout, Content, Interactive, Forms, Data Display, Media, etc.)
+        - Include specific data requirements in descriptions (e.g., "user profile data", "product list", "navigation items")
+        - Ensure rich, diverse component selection for professional pages
 
-        The ACT should be a complete representation of the page structure that can be easily converted to actual UI components.`;
+        ENRICHMENT REQUIREMENTS:
+        - Create COMPREHENSIVE page structures with 15+ components minimum
+        - Include multiple instances of the same component type where appropriate (e.g., multiple buttons, cards, or form fields)
+        - Add supporting components like headers, footers, sidebars, and navigation elements
+        - Include interactive elements like modals, dropdowns, and tooltips
+        - Add data visualization components (charts, tables, lists) when relevant
+        - Include form components for user input and interaction
+        - Add media components for images, videos, or other content
+        - Create realistic, production-ready page structures that feel complete
+        - Think beyond basic layouts - include advanced UI patterns and interactions
+        - Consider user experience flows and include all necessary UI elements
+        - Add contextual components that enhance the overall page functionality
+
+        STYLING AND LAYOUTING REQUIREMENTS:
+        - For each component, include a styleInfo field with appropriate Tailwind CSS classes (or null if no styling needed)
+        - Use semantic and meaningful class combinations that reflect the component's purpose
+        - Include responsive classes where appropriate (sm:, md:, lg:, xl:)
+        - Consider layout properties like flex, grid, positioning, spacing, and sizing
+        - Use color schemes, typography, and visual hierarchy that make sense for the component
+        - Examples of good styleInfo values:
+          * Header: "bg-gray-900 text-white p-4 shadow-lg"
+          * Button: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
+          * Card: "bg-white rounded-lg shadow-md p-6 border border-gray-200"
+          * Container: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          * Flex container: "flex items-center justify-between gap-4"
+          * Grid layout: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          * No styling needed: null
+
+        The ACT should be a complete, rich representation of the page structure that can be easily converted to actual UI components.`;
   }
 
   async generateACT(
@@ -87,7 +120,13 @@ export class StructureAgent {
         Execution Plan Context:
         ${JSON.stringify(executionPlan, null, 2)}
 
-        Return a complete ACT structure with metadata about the generated components.`
+        CRITICAL REQUIREMENTS:
+        - Include components from at least 6 different families (Layout, Content, Interactive, Forms, Data Display, Media, etc.)
+        - Include specific data requirements in component descriptions (e.g., "user profile data", "product list", "navigation items")
+        - Ensure rich, diverse component selection for professional pages
+        - Follow the execution plan's component diversity requirements
+
+        `
       );
 
       // Log tool execution information from the result
@@ -138,9 +177,6 @@ export class StructureAgent {
     this.agent.on('agent_tool_end', (ctx, event) => {
       console.log('🔧 Structure Agent: Tool ended:', event);
     });
-
-    // Note: Tool call events need to be identified from the available event types
-    // The exact event names for tool tracking are not clear from the current SDK
   }
 
   private logToolExecutionInfo(result: any) {
@@ -157,111 +193,5 @@ export class StructureAgent {
       // Log the full result structure for debugging
       resultKeys: Object.keys(result)
     });
-  }
-
-  // Helper method to get component suggestions based on context
-  getComponentSuggestions(context: string): string[] {
-    const suggestions: string[] = [];
-
-    // Analyze context and suggest relevant components
-    const contextLower = context.toLowerCase();
-
-    // Layout suggestions
-    if (contextLower.includes('page') || contextLower.includes('layout')) {
-      suggestions.push('container', 'wrapper', 'main', 'content', 'section');
-    }
-
-    // Navigation suggestions
-    if (
-      contextLower.includes('nav') ||
-      contextLower.includes('menu') ||
-      contextLower.includes('breadcrumb')
-    ) {
-      suggestions.push(
-        'navigation',
-        'menu',
-        'breadcrumb',
-        'tabs',
-        'pagination'
-      );
-    }
-
-    // Form suggestions
-    if (
-      contextLower.includes('form') ||
-      contextLower.includes('input') ||
-      contextLower.includes('submit')
-    ) {
-      suggestions.push(
-        'form',
-        'input',
-        'button',
-        'submit',
-        'field',
-        'fieldset'
-      );
-    }
-
-    // Data display suggestions
-    if (
-      contextLower.includes('table') ||
-      contextLower.includes('list') ||
-      contextLower.includes('data')
-    ) {
-      suggestions.push('table', 'grid', 'list', 'card', 'item');
-    }
-
-    // Chart suggestions
-    if (
-      contextLower.includes('chart') ||
-      contextLower.includes('graph') ||
-      contextLower.includes('visualization')
-    ) {
-      suggestions.push('chart', 'barchart', 'linechart', 'piechart', 'gauge');
-    }
-
-    // Media suggestions
-    if (
-      contextLower.includes('image') ||
-      contextLower.includes('photo') ||
-      contextLower.includes('video')
-    ) {
-      suggestions.push('image', 'avatar', 'gallery', 'carousel');
-    }
-
-    // Feedback suggestions
-    if (
-      contextLower.includes('alert') ||
-      contextLower.includes('notification') ||
-      contextLower.includes('error')
-    ) {
-      suggestions.push('alert', 'notification', 'error', 'warning', 'success');
-    }
-
-    return suggestions.slice(0, 10); // Return top 10 suggestions
-  }
-
-  // Helper method to validate ACT component against available elements
-  validateACTComponent(component: string): boolean {
-    return ACT_ELEMENTS_FLAT.includes(component as any);
-  }
-
-  // Helper method to get Kendo mapping for an ACT component
-  getKendoMapping(actComponent: string) {
-    return getKendoComponentForACT(actComponent);
-  }
-
-  // Helper method to get components by category
-  getComponentsByCategory(
-    category:
-      | 'layout'
-      | 'navigation'
-      | 'input'
-      | 'display'
-      | 'data'
-      | 'charts'
-      | 'feedback'
-  ): string[] {
-    return getACTElementsByCategory(category);
   }
 }
