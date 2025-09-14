@@ -80,6 +80,8 @@ class CoreAgent {
           actStructure: actStructure,
           kendoComponents: kendoComponents,
           routePath: routePath,
+          mcpQueries: kendoComponents?.mcpQueries,
+          mcpResponses: kendoComponents?.mcpResponses,
           errors: {
             actError: actError,
             kendoError: kendoError

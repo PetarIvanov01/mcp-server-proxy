@@ -12,7 +12,8 @@
     "test:mcp:config": "dotenv -e .env.local -- npx tsx scripts/test-mcp-config.ts",
     "test:mcp:client": "dotenv -e .env.local -- npx tsx scripts/test-custom-mcp.ts",
     "test:merger": "dotenv -e .env.local -- npx tsx scripts/test-merger-integration.ts",
-    "test:merger:quick": "dotenv -e .env.local -- npx tsx scripts/run-merger-test.ts"
+    "test:merger:quick": "dotenv -e .env.local -- npx tsx scripts/run-merger-test.ts",
+    "test:generation": "dotenv -e .env.local -- npx tsx scripts/run-generation-tests.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -113,5 +114,4 @@
     "typescript": "^5"
   },
   "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac"
->>>>>>> 5283c93 (update: deps)
 }

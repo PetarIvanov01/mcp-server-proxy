@@ -35,7 +35,7 @@ export class StructureAgent {
         providerData: {
           reasoning: { effort: 'minimal' },
           text: { verbosity: 'low' }
-        },
+        }
       },
       outputType: actSchema
     });
@@ -74,9 +74,8 @@ export class StructureAgent {
         - MANDATORY: Include components from at least 6 different families (Layout, Content, Interactive, Forms, Data Display, Media, etc.)
         - Include specific data requirements in descriptions (e.g., "user profile data", "product list", "navigation items")
         - Ensure rich, diverse component selection for professional pages
-
         ENRICHMENT REQUIREMENTS:
-        - Create COMPREHENSIVE page structures with 15+ components minimum
+        - Create COMPREHENSIVE page structures with 6+ components minimum
         - Include multiple instances of the same component type where appropriate (e.g., multiple buttons, cards, or form fields)
         - Add supporting components like headers, footers, sidebars, and navigation elements
         - Include interactive elements like modals, dropdowns, and tooltips
@@ -88,7 +87,36 @@ export class StructureAgent {
         - Consider user experience flows and include all necessary UI elements
         - Add contextual components that enhance the overall page functionality
 
-        The ACT should be a complete, rich representation of the page structure that can be easily converted to actual UI components.`;
+        The ACT should be a complete, rich representation of the page structure that can be easily converted to actual UI components.
+
+        STYLING AND LAYOUTING REQUIREMENTS:
+        - For each component, include a styleInfo field with appropriate Tailwind CSS classes (or null if no styling needed)
+        - Use semantic and meaningful class combinations that reflect the component's purpose
+        - Include responsive classes where appropriate (sm:, md:, lg:, xl:)
+        - Consider layout properties like flex, grid, positioning, spacing, and sizing
+        - Use color schemes, typography, and visual hierarchy that make sense for the component
+        - Examples of good styleInfo values:
+          * Header: "bg-gray-900 text-white p-4 shadow-lg"
+          * Button: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
+          * Card: "bg-white rounded-lg shadow-md p-6 border border-gray-200"
+          * Container: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          * Flex container: "flex items-center justify-between gap-4"
+          * Grid layout: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          * No styling needed: null
+
+        MCP QUERY GENERATION REQUIREMENTS:
+        - For each component that will be mapped to a Kendo component, generate a specific mcpQuery field
+        - The mcpQuery should be a detailed request for component examples and documentation
+        - Include the component's specific use case, styling requirements, and interaction needs
+        - Ask for examples that match the component's role in the overall page structure
+        - Be specific about what you want to see (props, styling, examples, usage patterns)
+        - Consider the execution plan context when generating queries
+        - Make queries actionable and targeted to get the most relevant documentation
+
+        Example MCP Query Format:
+        "Show me [ComponentName] examples for [specific use case] with [styling/interaction requirements]. Include [specific features needed] and [context about usage]."
+
+        The mcpQuery field should only be included for components that will be mapped to actual Kendo UI components, not for generic containers or layout elements.`;
   }
 
   async generateACT(

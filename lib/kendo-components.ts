@@ -477,7 +477,7 @@ export const KENDO_COMPONENTS = [
   'StackLayout',
   'Stepper',
   'StockChart',
-  'SVGIcon',
+  'SvgIcon',
   'Switch',
   'TabStrip',
   'TaskBoard',

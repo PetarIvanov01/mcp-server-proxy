@@ -69,13 +69,15 @@ export class MergerAgent {
       1. Map ACT components to Kendo UI components or HTML elements
       2. Use MCP documentation to understand component requirements
       3. Generate complete React code with proper imports and realistic mock data
-      4. Apply Tailwind CSS classes for styling and layout
+      4. Apply Tailwind CSS classes for styling and layout using the styleInfo field from ACT components
 
       Key Requirements:
       - Use Kendo components for complex UI (buttons, forms, data display)
       - Use HTML elements for basic content (links, images, text)
       - Include realistic mock data that matches component schemas
-      - Apply Tailwind CSS classes for styling
+      - Apply Tailwind CSS classes for styling using the styleInfo field from ACT components
+      - When styleInfo is provided, use those classes as the primary styling approach
+      - When styleInfo is null, apply appropriate default styling based on component type
       - Generate production-ready, syntactically correct code
       - Follow React best practices and accessibility guidelines
 
@@ -92,10 +94,10 @@ export class MergerAgent {
       `,
       model: 'gpt-5',
       modelSettings: {
-          providerData: {
+        providerData: {
           reasoning: { effort: 'minimal' },
-            text: { verbosity: 'low' }
-        },
+          text: { verbosity: 'low' }
+        }
       },
       outputType: kendoCodeSchema
     });
@@ -162,10 +164,15 @@ export class MergerAgent {
       if (actComponentName) {
         const kendoComponent = this.mapActToKendoComponent(actComponentName);
         if (kendoComponent && !kendoComponent.startsWith('HTML_')) {
-          // Use the description from the ACT component as the prompt for MCP
-          descriptions[kendoComponent] =
-            component.description ||
-            `Create a complete ${kendoComponent} component implementation with full working code example, props, and realistic sample data`;
+          // Use the MCP query from the ACT structure if available, otherwise fall back to description
+          if (component.mcpQuery) {
+            descriptions[kendoComponent] = component.mcpQuery;
+          } else {
+            // Fallback to description-based query if no MCP query provided
+            descriptions[kendoComponent] =
+              component.description ||
+              `Create a complete ${kendoComponent} component implementation with full working code example, props, and realistic sample data`;
+          }
         }
       }
 
@@ -181,7 +188,7 @@ export class MergerAgent {
 
   private async fetchComponentDocumentation(
     components: string[],
-    actStructure: ACTComponent
+    mcpQueries: Record<string, string>
   ): Promise<Record<string, string>> {
     const docs: Record<string, string> = {};
 
@@ -192,15 +199,12 @@ export class MergerAgent {
       return docs;
     }
 
-    const componentDescriptions =
-      this.extractComponentDescriptions(actStructure);
-
     const docPromises = components.map(async (component) => {
       try {
         console.log(`📚 Merger Agent: Fetching docs for ${component}`);
 
         const componentQuery =
-          componentDescriptions[component] ||
+          mcpQueries[component] ||
           `Create a complete ${component} component implementation with full working code example, props, and realistic sample data`;
 
         const componentDocs = await this.kendoMCPClient.queryKendoComponent(
@@ -254,9 +258,12 @@ export class MergerAgent {
       );
       console.log('🎯 Merger Agent: Required components:', requiredComponents);
 
+      // Extract MCP queries from ACT structure
+      const mcpQueries = this.extractComponentDescriptions(actStructure);
+
       const componentDocs = await this.fetchComponentDocumentation(
         requiredComponents,
-        actStructure.structure
+        mcpQueries
       );
 
       console.log(
@@ -282,6 +289,13 @@ export class MergerAgent {
 
         ${docsContext ? `\n\nComponent Documentation:\n${docsContext}\n\n` : ''}
 
+        IMPORTANT STYLING INSTRUCTIONS:
+        - Each component in the ACT structure includes a styleInfo field with Tailwind CSS classes
+        - Use the styleInfo field values as the primary styling approach for each component
+        - When styleInfo is null, apply appropriate default styling based on component type
+        - Apply the classes directly to the appropriate HTML elements or Kendo component className props
+        - Ensure responsive design by using the responsive classes provided in styleInfo
+
         The MCP server has provided the most appropriate Kendo React components and their documentation above`
       );
 
@@ -290,7 +304,11 @@ export class MergerAgent {
 
       // TODO: Generate a new route for the page
       const routeId = generateRandomId();
-      const routeCreation = createGeneratedRoute(kendoData.components.mainComponent, kendoData.components.imports, routeId);
+      const routeCreation = createGeneratedRoute(
+        kendoData.components.mainComponent,
+        kendoData.components.imports,
+        routeId
+      );
 
       return {
         success: true,
@@ -298,6 +316,8 @@ export class MergerAgent {
           code: kendoData.components,
           originalACT: actStructure,
           routePath: routeCreation.routePath,
+          mcpQueries: mcpQueries,
+          mcpResponses: componentDocs
         }
       };
     } catch (error) {
@@ -341,7 +361,11 @@ function generateRandomId(): string {
   return randomBytes(16).toString('hex');
 }
 
-function createGeneratedRoute(components: string, imports: string[], routeId: string) {
+function createGeneratedRoute(
+  components: string,
+  imports: string[],
+  routeId: string
+) {
   try {
     const appDir = path.join(process.cwd(), 'app');
     const generatedDir = path.join(appDir, 'generated');
@@ -350,7 +374,7 @@ function createGeneratedRoute(components: string, imports: string[], routeId: st
     if (!fs.existsSync(generatedDir)) {
       fs.mkdirSync(generatedDir, { recursive: true });
     }
-    
+
     if (!fs.existsSync(routeDir)) {
       fs.mkdirSync(routeDir, { recursive: true });
     }

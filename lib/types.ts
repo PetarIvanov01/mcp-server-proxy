@@ -11,6 +11,18 @@ export const ACTComponentSchema: z.ZodType<any> = z.lazy(() =>
     description: z
       .string()
       .describe('The reason for having this component and its purpose'),
+    mcpQuery: z
+      .string()
+      .nullable()
+      .describe(
+        'Specific MCP query to get relevant component examples and documentation'
+      ),
+    styleInfo: z
+      .string()
+      .nullable()
+      .describe(
+        'Tailwind CSS classes for styling and layout (or null if no styling needed)'
+      ),
     children: z
       .union([z.array(ACTComponentSchema), z.string()])
       .describe('Child components or text content (empty string if none)')

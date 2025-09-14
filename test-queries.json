@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Modern SaaS Dashboard",
+    "query": "Create a comprehensive SaaS dashboard with a sleek header containing user avatar and notifications, a collapsible sidebar with navigation menu, main content area featuring KPI metric cards in a grid layout, interactive charts showing revenue and user growth trends, a data table with recent transactions, and a floating action button for quick actions. Include proper spacing, shadows, and modern UI elements."
+  },
+  {
+    "title": "E-commerce Landing Page",
+    "query": "Build a stunning e-commerce landing page with a hero section featuring a large product image carousel, compelling headline text, and prominent call-to-action buttons. Include a features section with icon cards highlighting product benefits, customer testimonials with star ratings, a pricing comparison table, and a footer with social media links and newsletter signup form. Use modern gradients and animations."
+  },
+  {
+    "title": "Analytics Dashboard",
+    "query": "Generate a data analytics dashboard with a top navigation bar, sidebar with filter options and date range picker, main dashboard area containing multiple chart widgets (line charts, bar charts, pie charts), metric summary cards with trend indicators, a data grid with export functionality, and a notification panel. Include loading states and interactive tooltips."
+  },
+  {
+    "title": "Portfolio Landing Page",
+    "query": "Create an elegant portfolio landing page with a fixed navigation header, hero section with professional photo and introduction text, skills section with progress bars, portfolio gallery with image grid and modal lightbox, client testimonials carousel, contact form with validation, and footer with social links. Use clean typography and subtle animations."
+  },
+  {
+    "title": "Admin Control Panel",
+    "query": "Build a comprehensive admin control panel with a dark theme header containing search bar and user menu, expandable sidebar with hierarchical navigation, breadcrumb navigation, main content area with tabbed interface, data tables with sorting and filtering, modal dialogs for forms, and a status bar showing system health. Include proper error states and success notifications."
+  },
+  {
+    "title": "Marketing Landing Page",
+    "query": "Generate a high-converting marketing landing page with a sticky navigation header, hero section with video background and compelling copy, feature comparison table, social proof section with logos and testimonials, FAQ accordion, pricing cards with highlighted recommended option, and a multi-step lead capture form. Use attention-grabbing colors and clear CTAs."
+  },
+  {
+    "title": "Project Management Dashboard",
+    "query": "Create a project management dashboard with a top bar showing project selector and team member avatars, left sidebar with project navigation and filters, main area with kanban board columns, task cards with drag-and-drop functionality, timeline view with milestones, team activity feed, and a quick add task floating button. Include progress indicators and status badges."
+  },
+  {
+    "title": "Financial Dashboard",
+    "query": "Build a sophisticated financial dashboard with a professional header containing account selector and date filters, sidebar with navigation and quick actions, main dashboard with financial charts (revenue, expenses, profit trends), account balance cards, transaction history table with search and filters, budget progress bars, and alerts panel for important notifications."
+  },
+  {
+    "title": "Healthcare Portal Dashboard",
+    "query": "Generate a healthcare patient portal with a secure header containing patient info and logout, navigation sidebar with appointment scheduling, medical records, prescriptions, and billing sections, main dashboard showing upcoming appointments, recent test results, medication reminders, health metrics charts, and a quick contact form for healthcare providers."
+  },
+  {
+    "title": "Real Estate Listing Dashboard",
+    "query": "Create a real estate agent dashboard with a header containing property search and map toggle, sidebar with saved searches and filters, main content area with property grid view, detailed property cards with image galleries, market analytics charts, client management table, and a floating button for adding new listings. Include map integration and property comparison features."
+  }
+]
