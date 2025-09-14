@@ -39,5 +39,3 @@ next-env.d.ts
 .mcp-outputs/
 
 telerik-license.txt
-
-app/generated/
