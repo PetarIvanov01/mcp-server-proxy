@@ -1,7 +1,11 @@
-import { Agent, ModelSettings, run } from '@openai/agents';
+import { Agent, run } from '@openai/agents';
 import { z } from 'zod';
 import { ACTComponentSchema, AgentResponse, ExecutionPlan } from '../types';
-import { formatACTElementsForPrompt } from '../kendo-components';
+import {
+  formatACTElementsForPrompt,
+  ACT_TO_KENDO_MAPPINGS,
+  generateMCPQuery
+} from '../kendo-components';
 
 const actSchema = z.object({
   act: z.object({
@@ -41,6 +45,45 @@ export class StructureAgent {
     });
 
     this.initializeEvents();
+  }
+
+  private generateGenericMCPQuery(component: string): string {
+    const mapping =
+      ACT_TO_KENDO_MAPPINGS[
+        component.toLowerCase() as keyof typeof ACT_TO_KENDO_MAPPINGS
+      ];
+
+    if (!mapping || mapping.component.startsWith('HTML_')) {
+      return '';
+    }
+
+    const kendoComponent = mapping.component;
+    const category = mapping.category || 'general';
+
+    return generateMCPQuery(kendoComponent, category);
+  }
+
+  private ensureMCPQueries(component: any): any {
+    // If this component has an empty mcpQuery, generate a generic one
+    if (
+      component.mcpQuery === '' ||
+      component.mcpQuery === null ||
+      component.mcpQuery === undefined
+    ) {
+      const genericQuery = this.generateGenericMCPQuery(component.component);
+      if (genericQuery) {
+        component.mcpQuery = genericQuery;
+      }
+    }
+
+    // Recursively process children
+    if (component.children && Array.isArray(component.children)) {
+      component.children = component.children.map((child: any) =>
+        this.ensureMCPQueries(child)
+      );
+    }
+
+    return component;
   }
 
   private buildInstructions(): string {
@@ -150,10 +193,13 @@ export class StructureAgent {
 
       const validatedACT = ACTComponentSchema.parse(actData.act.root);
 
+      // Post-process to ensure all components have MCP queries
+      const processedACT = this.ensureMCPQueries(validatedACT);
+
       return {
         success: true,
         data: {
-          structure: validatedACT,
+          structure: processedACT,
           metadata: actData.act.metadata
         }
       };

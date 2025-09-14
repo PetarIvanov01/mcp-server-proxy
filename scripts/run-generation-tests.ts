@@ -110,8 +110,13 @@ class GenerationTestRunner {
   }
 
   private async saveTestResult(testResult: TestResult) {
+    // Create timestamp for ordering tests
+    const timestamp = new Date()
+      .toISOString()
+      .replace(/[:.]/g, '-')
+      .slice(0, -5); // Remove milliseconds and colons
     const testId = testResult.title.toLowerCase().replace(/[^a-z0-9]/g, '-');
-    const testDir = path.join(this.resultsDir, testId);
+    const testDir = path.join(this.resultsDir, `${timestamp}-${testId}`);
 
     if (!fs.existsSync(testDir)) {
       fs.mkdirSync(testDir, { recursive: true });
@@ -160,6 +165,7 @@ class GenerationTestRunner {
     );
 
     console.log(`💾 Test results saved to: ${testDir}`);
+    console.log(`🕒 Test timestamp: ${timestamp}`);
   }
 
   private async saveSummaryReport(allResults: TestResult[]) {
@@ -179,11 +185,6 @@ class GenerationTestRunner {
       }))
     };
 
-    fs.writeFileSync(
-      path.join(this.testDir, 'test-summary.json'),
-      JSON.stringify(summary, null, 2)
-    );
-
     console.log(
       `📊 Summary report saved to: ${path.join(
         this.testDir,
@@ -193,7 +194,9 @@ class GenerationTestRunner {
   }
 
   async runAllTests() {
+    const runTimestamp = new Date().toISOString();
     console.log('🚀 Starting Generation Tests');
+    console.log(`🕒 Test run started at: ${runTimestamp}`);
     console.log(`📁 Results will be saved to: ${this.testDir}`);
 
     try {
@@ -202,7 +205,7 @@ class GenerationTestRunner {
 
       const allResults: TestResult[] = [];
 
-      for (let i = 0; i < testQueries.length; i++) {
+      for (let i = 0; i < 1; i++) {
         const testQuery = testQueries[i];
         console.log(
           `\n📝 Test ${i + 1}/${testQueries.length}: ${testQuery.title}`

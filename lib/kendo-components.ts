@@ -1413,3 +1413,27 @@ export function formatACTElementsForPrompt(): string {
     .map(([category, elements]) => `${category}: ${elements.join(', ')}`)
     .join('\n');
 }
+
+// MCP Query Generation based on component category
+export function generateMCPQuery(
+  kendoComponent: string,
+  category?: string
+): string {
+  if (category === 'input') {
+    return `Show me Kendo UI ${kendoComponent} examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.`;
+  } else if (category === 'data') {
+    return `Show me Kendo UI ${kendoComponent} examples with data binding, sorting, filtering, and pagination. Include examples with realistic sample data, custom cell templates, and responsive design. Provide complete implementation with all necessary props.`;
+  } else if (category === 'layout') {
+    return `Show me Kendo UI ${kendoComponent} examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.`;
+  } else if (category === 'navigation') {
+    return `Show me Kendo UI ${kendoComponent} examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.`;
+  } else if (category === 'display') {
+    return `Show me Kendo UI ${kendoComponent} examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.`;
+  } else if (category === 'feedback') {
+    return `Show me Kendo UI ${kendoComponent} examples with different types, positioning, and animation. Include examples for success, error, warning, and info states. Provide complete implementation with event handlers.`;
+  } else if (category === 'charts') {
+    return `Show me Kendo UI ${kendoComponent} examples with different chart types, data binding, and interactive features. Include examples with realistic sample data and responsive design. Provide complete implementation with all chart options.`;
+  } else {
+    return `Show me Kendo UI ${kendoComponent} examples with complete props, styling, and common use cases. Include examples for different states and configurations. Provide realistic sample data and accessibility attributes.`;
+  }
+}

@@ -167,11 +167,6 @@ export class MergerAgent {
           // Use the MCP query from the ACT structure if available, otherwise fall back to description
           if (component.mcpQuery) {
             descriptions[kendoComponent] = component.mcpQuery;
-          } else {
-            // Fallback to description-based query if no MCP query provided
-            descriptions[kendoComponent] =
-              component.description ||
-              `Create a complete ${kendoComponent} component implementation with full working code example, props, and realistic sample data`;
           }
         }
       }
@@ -259,7 +254,9 @@ export class MergerAgent {
       console.log('🎯 Merger Agent: Required components:', requiredComponents);
 
       // Extract MCP queries from ACT structure
-      const mcpQueries = this.extractComponentDescriptions(actStructure);
+      const mcpQueries = this.extractComponentDescriptions(
+        actStructure.structure
+      );
 
       const componentDocs = await this.fetchComponentDocumentation(
         requiredComponents,
