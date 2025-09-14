@@ -32,8 +32,10 @@ export class StructureAgent {
       instructions: this.buildInstructions(),
       model: 'gpt-5',
       modelSettings: {
-        reasoning: { effort: 'minimal' },
-        text: { verbosity: 'low' }
+        providerData: {
+          reasoning: { effort: 'minimal' },
+          text: { verbosity: 'low' }
+        },
       },
       outputType: actSchema
     });

@@ -49,6 +49,7 @@ class CoreAgent {
 
       // Step 3: Merge ACT to Kendo components (only if ACT was successful)
       let kendoComponents = null;
+      let routePath = null;
       let kendoError = null;
 
       if (actStructure) {
@@ -56,6 +57,7 @@ class CoreAgent {
 
         if (kendoResult.success) {
           kendoComponents = kendoResult.data;
+          routePath = kendoResult.data.routePath;
         } else {
           console.error(
             '❌ Core Agent: Kendo merge failed:',
@@ -77,6 +79,7 @@ class CoreAgent {
           executionPlan: plan.data,
           actStructure: actStructure,
           kendoComponents: kendoComponents,
+          routePath: routePath,
           errors: {
             actError: actError,
             kendoError: kendoError
