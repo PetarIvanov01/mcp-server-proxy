@@ -11,6 +11,7 @@ import {
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { randomBytes } from 'crypto';
 
 const mcpOutputDir = path.join(process.cwd(), '.mcp-outputs');
 if (!fs.existsSync(mcpOutputDir)) {
@@ -135,8 +136,10 @@ export class MergerAgent {
       `,
       model: 'gpt-5',
       modelSettings: {
-        reasoning: { effort: 'minimal' },
-        text: { verbosity: 'low' }
+        providerData: {
+          reasoning: { effort: 'minimal' },
+          text: { verbosity: 'low' }
+        },
       },
       outputType: kendoCodeSchema
     });
@@ -383,11 +386,16 @@ export class MergerAgent {
       const kendoData = kendoCodeSchema.parse(result.finalOutput);
       console.log('✅ Merger Agent: Successfully parsed schema');
 
+      // TODO: Generate a new route for the page
+      const routeId = generateRandomId();
+      const routeCreation = createGeneratedRoute(kendoData.components.mainComponent, kendoData.components.imports, routeId);
+
       return {
         success: true,
         data: {
           code: kendoData.components,
-          originalACT: actStructure
+          originalACT: actStructure,
+          routePath: routeCreation.routePath,
         }
       };
     } catch (error) {
@@ -425,4 +433,50 @@ function printToFile(dir: string, filename: string, meta: Record<string, any>) {
       2
     )
   );
+}
+
+function generateRandomId(): string {
+  return randomBytes(16).toString('hex');
+}
+
+function createGeneratedRoute(components: string, imports: string[], routeId: string) {
+  try {
+    const appDir = path.join(process.cwd(), 'app');
+    const generatedDir = path.join(appDir, 'generated');
+    const routeDir = path.join(generatedDir, routeId);
+
+    if (!fs.existsSync(generatedDir)) {
+      fs.mkdirSync(generatedDir, { recursive: true });
+    }
+    
+    if (!fs.existsSync(routeDir)) {
+      fs.mkdirSync(routeDir, { recursive: true });
+    }
+
+    const pageContent = `
+    'use client'; \n
+
+    ${imports.join('\n')}
+
+    ${components}
+    `;
+
+    const pageFilePath = path.join(routeDir, 'page.tsx');
+    fs.writeFileSync(pageFilePath, pageContent);
+
+    const routePath = `/generated/${routeId}`;
+    console.log(`✅ Generated route created at: ${routePath}`);
+    console.log(`📁 File path: ${pageFilePath}`);
+
+    return {
+      routePath,
+      success: true
+    };
+  } catch (error) {
+    console.error('❌ Failed to create route:', error);
+    return {
+      routePath: null,
+      success: false
+    };
+  }
 }

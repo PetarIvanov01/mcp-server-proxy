@@ -53,8 +53,10 @@ export class PlannerAgent {
       model: 'gpt-5',
       outputType: planSchema,
       modelSettings: {
-        reasoning: { effort: 'minimal' },
-        text: { verbosity: 'low' }
+        providerData: {
+          reasoning: { effort: 'minimal' },
+          text: { verbosity: 'low' }
+        },
       }
     });
 
