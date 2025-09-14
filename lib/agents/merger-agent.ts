@@ -1,13 +1,9 @@
-import { Agent, run } from '@openai/agents';
+import { Agent, ModelSettings, run } from '@openai/agents';
 import { z } from 'zod';
 import { ACTComponent, AgentResponse } from '../types';
 import { ACT_TO_KENDO_MAPPINGS } from '../kendo-components';
 
 import { getKendoMCPClient } from '../tools/kendo-mcp-client';
-import {
-  extractKendoComponentInfo,
-  KendoComponentInfo
-} from '../utils/kendo-extraction';
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -67,78 +63,38 @@ export class MergerAgent {
     this.agent = new Agent<{}, typeof kendoCodeSchema>({
       name: 'merger-agent',
       instructions: `
-      You are a merger agent responsible for converting Abstract Component Trees (ACT) into Kendo UI React components with React native elements where appropriate.
+      You are a merger agent that converts Abstract Component Trees (ACT) into Kendo UI React components with HTML elements where appropriate.
 
-      Your role is to:
-      1. Map ACT components to appropriate Kendo UI components OR React native/HTML elements
-      2. Use the provided Kendo MCP documentation to understand component requirements
-      3. Generate complete React component code with proper imports
-      4. Always include realistic mock data within the component code
-      5. Handle component props, styling, and configuration
-      6. Ensure proper component composition and nesting
-      7. Generate production-ready, syntactically correct code
-      8. Use React native elements (like <a>, <img>) for basic content and Kendo components for complex UI
-      9. Apply Tailwind CSS classes from the ACT component's styleInfo field to the generated components
+      Your role:
+      1. Map ACT components to Kendo UI components or HTML elements
+      2. Use MCP documentation to understand component requirements
+      3. Generate complete React code with proper imports and realistic mock data
+      4. Apply Tailwind CSS classes for styling and layout
 
-      ENHANCED CAPABILITIES:
-      - You now have access to real-time Kendo UI React component documentation via the MCP client
-      - Component documentation is automatically fetched and provided in your context
-      - Structured prop information is extracted and provided for better code generation
-      - This ensures you have the most up-to-date information about component APIs, props, and usage patterns
-
-      The MCP server will provide you with the most appropriate Kendo React components and their documentation based on the ACT component types you need to implement.
-
-      - Component props and their types (with structured extraction)
-      - Usage examples and best practices
-      - Import statements and package names
-      - Styling and theming options
-      - Component-specific configuration
-      - Structured prop details including names, types, summaries, and package information
-
-      MOCK DATA REQUIREMENT: Always generate realistic mock data within your component code. The mock data format MUST match the exact structure expected by each Kendo UI component as documented in their official documentation. This includes:
-      - Sample data for tables, lists, and grids (matching the component's data schema)
-      - Mock user information for forms and profiles (following the component's prop structure)
-      - Example content for text, images, and media (using the component's expected format)
-      - Sample navigation items and menu options (matching the component's data structure)
-      - Realistic dates, numbers, and text content (in the format the component expects)
-      - Mock API responses or state data (structured according to component documentation)
-      - Example user interactions and events (following the component's event handling patterns)
-
-      Code Generation Guidelines:
-      - Use the provided Kendo MCP documentation to understand component requirements
-      - Use proper React/TypeScript syntax
-      - Include necessary imports from @progress/kendo-react-* for Kendo components
-      - Use React native elements (<a>, <img>, <div>, <span>) for basic content
-      - ALWAYS include realistic mock data within the component code
-      - Handle component props appropriately based on the MCP documentation
-      - Use proper Kendo UI theming and component properties
-      - Ensure proper component composition and semantic HTML structure
-      - Add proper TypeScript types where needed
+      Key Requirements:
+      - Use Kendo components for complex UI (buttons, forms, data display)
+      - Use HTML elements for basic content (links, images, text)
+      - Include realistic mock data that matches component schemas
+      - Apply Tailwind CSS classes for styling
+      - Generate production-ready, syntactically correct code
       - Follow React best practices and accessibility guidelines
-      - Generate clean, readable, and maintainable code
-      - Make components immediately usable with sample data
-      - Use appropriate HTML elements for links, images, and basic content
-      - CRITICAL: For any ACT components that don't have Kendo mappings, use standard HTML elements (<a>, <img>, <div>, <span>, <p>, <h1>-<h6>, etc.)
-      - When using HTML elements, ensure they have proper styling and semantic meaning
-      
-      STYLING AND LAYOUTING APPLICATION:
-      - CRITICAL: Apply the styleInfo field from each ACT component to the corresponding generated component
-      - Use the className prop to apply Tailwind CSS classes from the styleInfo field
-      - For Kendo components, apply styleInfo classes to the root element or appropriate wrapper
-      - For HTML elements, apply styleInfo classes directly to the element
-      - Ensure that the applied classes don't conflict with Kendo component's built-in styling
-      - If styleInfo contains responsive classes, preserve them in the generated code
-      - Combine styleInfo classes with any necessary component-specific classes
-      - Handle null styleInfo values gracefully (skip styling if styleInfo is null)
-      - Example: If ACT component has styleInfo: "bg-blue-500 text-white p-4", apply it as className="bg-blue-500 text-white p-4"
 
-      The mainComponent should be complete, functional React components that can be directly used in a Kendo UI application.
+      Mock Data Requirements:
+      - Tables/Grids: Sample rows with realistic data in exact schema format
+      - Forms: Pre-filled example values using documented field structure
+      - Lists: Sample items with properties matching documented item schema
+      - Charts: Sample datasets with data structure as specified in documentation
+      - Navigation: Realistic menu items and breadcrumb paths
+      - User profiles: Sample user information structured according to prop requirements
+      - Notifications: Example messages and alerts in expected format
+
+      The mainComponent should be complete, functional React components ready for use.
       `,
       model: 'gpt-5',
       modelSettings: {
-        providerData: {
+          providerData: {
           reasoning: { effort: 'minimal' },
-          text: { verbosity: 'low' }
+            text: { verbosity: 'low' }
         },
       },
       outputType: kendoCodeSchema
@@ -196,10 +152,38 @@ export class MergerAgent {
     return mapping?.component || null;
   }
 
+  private extractComponentDescriptions(
+    actStructure: ACTComponent
+  ): Record<string, string> {
+    const descriptions: Record<string, string> = {};
+
+    const traverse = (component: ACTComponent) => {
+      const actComponentName = component.component?.toLowerCase();
+      if (actComponentName) {
+        const kendoComponent = this.mapActToKendoComponent(actComponentName);
+        if (kendoComponent && !kendoComponent.startsWith('HTML_')) {
+          // Use the description from the ACT component as the prompt for MCP
+          descriptions[kendoComponent] =
+            component.description ||
+            `Create a complete ${kendoComponent} component implementation with full working code example, props, and realistic sample data`;
+        }
+      }
+
+      // Traverse children
+      if (component.children && Array.isArray(component.children)) {
+        component.children.forEach((child: ACTComponent) => traverse(child));
+      }
+    };
+
+    traverse(actStructure);
+    return descriptions;
+  }
+
   private async fetchComponentDocumentation(
-    components: string[]
-  ): Promise<Record<string, KendoComponentInfo>> {
-    const docs: Record<string, KendoComponentInfo> = {};
+    components: string[],
+    actStructure: ACTComponent
+  ): Promise<Record<string, string>> {
+    const docs: Record<string, string> = {};
 
     if (!this.kendoMCPClient.isReady()) {
       console.warn(
@@ -208,39 +192,31 @@ export class MergerAgent {
       return docs;
     }
 
+    const componentDescriptions =
+      this.extractComponentDescriptions(actStructure);
+
     const docPromises = components.map(async (component) => {
       try {
         console.log(`📚 Merger Agent: Fetching docs for ${component}`);
 
-        const query = `Create a complete ${component} component implementation with:
-        - Full working code example with imports
-        - All available props and their types
-        - Realistic sample data
-        - Event handlers and callbacks
-        - Styling and theming options
-        - Best practices and common patterns
-        - Multiple usage examples if applicable
-        `;
+        const componentQuery =
+          componentDescriptions[component] ||
+          `Create a complete ${component} component implementation with full working code example, props, and realistic sample data`;
 
         const componentDocs = await this.kendoMCPClient.queryKendoComponent(
-          query,
+          componentQuery,
           component
         );
 
-        // Extract structured information using the new extraction function
-        const extractedInfo = extractKendoComponentInfo(
-          component,
-          componentDocs
-        );
-        docs[component] = extractedInfo;
+        // Store the raw MCP response directly as context
+        docs[component] = componentDocs;
 
         if (process.env?.DEBUG === 'true') {
           printToFile(sessionDir, `${component}-raw-response.json`, {
             component,
-            query,
+            query: componentQuery,
             timestamp: new Date().toISOString(),
-            rawResponse: componentDocs,
-            extractedInfo: extractedInfo
+            rawResponse: componentDocs
           });
         }
       } catch (error) {
@@ -258,11 +234,10 @@ export class MergerAgent {
         timestamp: new Date().toISOString(),
         components: components,
         totalComponents: components.length,
-        extractedDocs: Object.entries(docs).map(([name, info]) => ({
+        rawDocs: Object.entries(docs).map(([name, response]) => ({
           componentName: name,
-          importsCount: info.imports.length,
-          examplesCount: info.examples.length,
-          propsCount: Object.keys(info.props).length
+          responseLength: response.length,
+          hasResponse: response.length > 0
         }))
       });
     }
@@ -280,7 +255,8 @@ export class MergerAgent {
       console.log('🎯 Merger Agent: Required components:', requiredComponents);
 
       const componentDocs = await this.fetchComponentDocumentation(
-        requiredComponents
+        requiredComponents,
+        actStructure.structure
       );
 
       console.log(
@@ -288,34 +264,10 @@ export class MergerAgent {
         Object.keys(componentDocs)
       );
 
-      // Build structured context from extracted component information
+      // Build context from raw MCP responses
       const docsContext = Object.entries(componentDocs)
-        .map(([componentName, info]) => {
-          const importsSection =
-            info.imports.length > 0
-              ? `\n### Imports:\n${info.imports.join('\n')}`
-              : '';
-
-          const examplesSection =
-            info.examples.length > 0
-              ? `\n### Examples:\n${info.examples
-                  .map(
-                    (ex) => `#### ${ex.title}:\n\`\`\`tsx\n${ex.code}\n\`\`\``
-                  )
-                  .join('\n\n')}`
-              : '';
-
-          const propsSection =
-            Object.keys(info.props).length > 0
-              ? `\n### Props:\n${Object.entries(info.props)
-                  .map(
-                    ([propName, propDetails]) =>
-                      `- **${propName}**: ${propDetails.syntax.return.type} - ${propDetails.summary}`
-                  )
-                  .join('\n')}`
-              : '';
-
-          return `## ${componentName} Documentation:${importsSection}${examplesSection}${propsSection}`;
+        .map(([componentName, rawResponse]) => {
+          return `## ${componentName} Documentation:\n${rawResponse}`;
         })
         .join('\n\n---\n\n');
 
@@ -330,57 +282,7 @@ export class MergerAgent {
 
         ${docsContext ? `\n\nComponent Documentation:\n${docsContext}\n\n` : ''}
 
-        The MCP server has provided the most appropriate Kendo React components and their documentation above.
-
-        CRITICAL COMPONENT USAGE PATTERNS:
-        
-        KENDO REACT COMPONENTS:
-        - Typography: Use <Typography.h1>, <Typography.h2>, <Typography.h3>, etc. for headings
-        - Use <Typography.p> for paragraphs, <Typography.code> for inline code, <Typography.pre> for code blocks
-        - DO NOT use variant props like variant='h5' - this is Material-UI syntax, not Kendo React
-        - Use proper Kendo component names and props exactly as documented
-        - Import from correct Kendo packages (@progress/kendo-react-*)
-        
-        REACT NATIVE COMPONENTS:
-        - Links: Use <a> tags with proper href, target, and styling attributes
-        - Images: Use <img> tags with proper src, alt, and styling attributes
-        - Basic HTML elements: Use standard HTML elements like <div>, <span>, <section> when appropriate
-        - For navigation links, use semantic HTML with proper accessibility attributes
-        
-        COMPONENT SELECTION RULES:
-        - Use Kendo components for complex UI elements (buttons, forms, data display, navigation)
-        - Use React native/HTML elements for basic content (links, images, text containers)
-        - Always prioritize user experience and semantic HTML structure
-        - Ensure proper accessibility attributes (alt text, aria labels, etc.)
-
-        Process (MUST follow these steps in order):
-        1. First, identify which Kendo components you need to use from the ACT structure
-        2. Use the provided component documentation to understand each component's requirements
-        3. Review the structured prop information to understand exact prop types and requirements
-        4. From the documentation, identify the exact data structure and prop format each component expects
-        5. Create realistic mock data that matches the component's documented data schema exactly
-        6. Based on the documentation and structured props, generate the appropriate code with properly formatted mock data
-        7. CRITICAL: Apply the styleInfo field from each ACT component to the corresponding generated component using className prop
-        8. Ensure all imports, props, and styling are correct according to the documentation and structured prop information
-        9. Verify that components are immediately usable with the provided mock data and applied styling
-
-        Consider:
-        - Which Kendo components best match each ACT component
-        - How to handle component props and configuration (from documentation and structured props)
-        - Proper styling and theming (from documentation)
-        - Component relationships and nesting
-        - TypeScript types and interfaces (use structured prop type information)
-        - Code organization and readability
-        - Structured prop information for accurate prop usage and type safety
-        - Mock data examples (format must match component documentation):
-          * Tables/Grids: Sample rows with realistic data in the exact schema format documented for the component
-          * Forms: Pre-filled example values using the component's documented field structure and validation rules
-          * Lists: Sample items with properties that match the component's documented item schema
-          * Charts: Sample datasets with data structure exactly as specified in the component documentation
-          * Navigation: Realistic menu items and breadcrumb paths using the component's documented data format
-          * User profiles: Sample user information structured according to the component's prop requirements
-          * Notifications: Example messages and alerts in the format expected by the component
-        `
+        The MCP server has provided the most appropriate Kendo React components and their documentation above`
       );
 
       const kendoData = kendoCodeSchema.parse(result.finalOutput);

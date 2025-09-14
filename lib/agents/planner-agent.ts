@@ -1,4 +1,4 @@
-import { Agent, run } from '@openai/agents';
+import { Agent, ModelSettings, run } from '@openai/agents';
 import { z } from 'zod';
 import { AgentResponse } from '../types';
 import { randomUUID } from 'crypto';
@@ -47,7 +47,6 @@ export class PlannerAgent {
       - Layout descriptions and organization
       - Data requirements for each component
       - Component relationships and dependencies
-      - Required mock data specifications
 
       Focus on structural aspects that help the LLM understand what components to create and how to organize them.`,
       model: 'gpt-5',
@@ -56,7 +55,7 @@ export class PlannerAgent {
         providerData: {
           reasoning: { effort: 'minimal' },
           text: { verbosity: 'low' }
-        },
+        }
       }
     });
 
@@ -73,23 +72,7 @@ export class PlannerAgent {
         `Create a structural plan for the following page generation request:
 
         "${userQuery}"
-
-        Please analyze this request and create a detailed structural plan in markdown format focusing on:
-
-        1. What type of page is being requested? (dashboard, landing page, form, etc.)
-        2. What are the main structural sections needed? (MUST include Header, Main Content, Footer)
-        3. What components should be in each section? (MUST include 6+ component families)
-        4. How should the components be organized and nested?
-        5. What data does each component need? (Be specific about mock data requirements)
-
-        Return a structural plan in markdown format that describes:
-        - Page layout and organization
-        - Component hierarchy and nesting (with 6+ different component types)
-        - Data requirements for each component (specific mock data needs)
-        - Component relationships and dependencies
-        - Required sections: Header/Navigation, Main Content, Footer
-
-        CRITICAL: Ensure the plan includes at least 6 different component families and specifies what mock data each component needs. Focus on the structural aspects that will help generate rich, diverse components.`
+        `
       );
 
       console.log('🔧 Planner Agent: Result', result);

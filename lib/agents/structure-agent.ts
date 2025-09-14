@@ -1,4 +1,4 @@
-import { Agent, run } from '@openai/agents';
+import { Agent, ModelSettings, run } from '@openai/agents';
 import { z } from 'zod';
 import { ACTComponentSchema, AgentResponse, ExecutionPlan } from '../types';
 import { formatACTElementsForPrompt } from '../kendo-components';
@@ -56,7 +56,7 @@ export class StructureAgent {
         6. ENSURE component diversity across 6+ different families
         7. Include specific data requirements in component descriptions
         8. CREATE RICH, COMPREHENSIVE PAGE STRUCTURES with multiple components
-        9. Include styling and layouting information using Tailwind CSS classes in the styleInfo field
+        9. Focus on creating comprehensive component descriptions for better MCP integration
 
         Available ACT Components:
         
@@ -88,21 +88,6 @@ export class StructureAgent {
         - Consider user experience flows and include all necessary UI elements
         - Add contextual components that enhance the overall page functionality
 
-        STYLING AND LAYOUTING REQUIREMENTS:
-        - For each component, include a styleInfo field with appropriate Tailwind CSS classes (or null if no styling needed)
-        - Use semantic and meaningful class combinations that reflect the component's purpose
-        - Include responsive classes where appropriate (sm:, md:, lg:, xl:)
-        - Consider layout properties like flex, grid, positioning, spacing, and sizing
-        - Use color schemes, typography, and visual hierarchy that make sense for the component
-        - Examples of good styleInfo values:
-          * Header: "bg-gray-900 text-white p-4 shadow-lg"
-          * Button: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
-          * Card: "bg-white rounded-lg shadow-md p-6 border border-gray-200"
-          * Container: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-          * Flex container: "flex items-center justify-between gap-4"
-          * Grid layout: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          * No styling needed: null
-
         The ACT should be a complete, rich representation of the page structure that can be easily converted to actual UI components.`;
   }
 
@@ -127,7 +112,6 @@ export class StructureAgent {
         - Include specific data requirements in component descriptions (e.g., "user profile data", "product list", "navigation items")
         - Ensure rich, diverse component selection for professional pages
         - Follow the execution plan's component diversity requirements
-
         `
       );
 
