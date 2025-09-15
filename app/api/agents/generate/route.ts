@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { UserQuerySchema } from '@/lib/types';
 import coreAgent from '@/lib/agents/core-agent';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-
-const execAsync = promisify(exec);
 
 export async function POST(request: NextRequest) {
   try {

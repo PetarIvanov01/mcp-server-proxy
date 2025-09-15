@@ -165,11 +165,6 @@ export class KendoMCPClient {
   }
 }
 
-let kendoMCPClient: KendoMCPClient | null = null;
-
 export function getKendoMCPClient(): KendoMCPClient {
-  if (!kendoMCPClient) {
-    kendoMCPClient = new KendoMCPClient();
-  }
-  return kendoMCPClient;
+  return new KendoMCPClient();
 }
