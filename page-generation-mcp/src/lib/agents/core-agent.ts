@@ -73,15 +73,9 @@ class CoreAgent {
       if (kendoComponents) agentsUsed.push('merger');
 
       return {
-        success: !hasErrors, // Only fully successful if no errors
+        success: !hasErrors,
         data: {
-          originalQuery: userQuery,
-          executionPlan: plan.data,
-          actStructure: actStructure,
           kendoComponents: kendoComponents,
-          routePath: routePath,
-          mcpQueries: kendoComponents?.mcpQueries,
-          mcpResponses: kendoComponents?.mcpResponses,
           errors: {
             actError: actError,
             kendoError: kendoError
@@ -90,7 +84,7 @@ class CoreAgent {
             processingTime: Date.now(),
             agentsUsed: agentsUsed,
             planMetadata: plan.metadata,
-            partialSuccess: hasErrors // Indicates partial success
+            partialSuccess: hasErrors
           }
         },
         error: hasErrors
