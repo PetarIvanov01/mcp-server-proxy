@@ -1,0 +1,719 @@
+{
+  "structure": {
+    "component": "container",
+    "description": "Root page container for a responsive, elegant portfolio landing page. Applies global typography (clean sans-serif body, high-contrast heading font), color tokens, spacing scale, and motion tokens for subtle animations. Requires site metadata (title, description), brand logo asset, navigation items, and social links.",
+    "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+    "children": [
+      {
+        "component": "header",
+        "description": "Fixed header with sticky behavior and shadow on scroll. Holds brand logo, primary navigation, CTA, and mobile menu toggle. Data: brand {logoSrc, altText}, navigationItems [{label, href, icon?}], cta {label, href}.",
+        "mcpQuery": "Show me Kendo UI AppBar examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+        "children": [
+          {
+            "component": "navigation",
+            "description": "Primary horizontal navigation with anchor links and scrollspy highlight. Smooth-scroll to sections. Data: navigationItems [{label, href, icon?}] and anchors: #home, #skills, #work, #testimonials, #contact.",
+            "mcpQuery": "Show me Kendo Menu or AppBar + Menu examples for a fixed top navigation with anchor links and scrollspy highlighting. Include sticky behavior, responsive collapse, keyboard navigation, and integrating smooth-scroll. Show props for items, icons, active state styling, and theming tokens matching an elegant portfolio.",
+            "children": [
+              {
+                "component": "logo",
+                "description": "Clickable brand/logo linking to top. Data: brand {logoSrc, altText}.",
+                "mcpQuery": "Show me Kendo UI Avatar examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                "children": [
+                  {
+                    "component": "image",
+                    "description": "Brand logo image with alt text for accessibility. Data: brand.logoSrc, brand.altText.",
+                    "mcpQuery": "Show me Kendo Image component usage for logos within a header, with responsive sizing, high-DPI sources, and lazy loading disabled. Include examples for providing alt text and handling light/dark themes.",
+                    "children": ""
+                  }
+                ]
+              },
+              {
+                "component": "menu",
+                "description": "Desktop primary nav items rendered as a horizontal list.",
+                "mcpQuery": "Show me Kendo UI Menu examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                "children": ""
+              },
+              {
+                "component": "button",
+                "description": "Primary CTA in header (e.g., Hire Me / Contact) linking to #contact. Data: cta {label, href}.",
+                "mcpQuery": "Show me Kendo Button examples styled as primary CTA in an AppBar, including link navigation, focus styles, and subtle hover/press animations.",
+                "children": "Contact"
+              },
+              {
+                "component": "button",
+                "description": "Mobile hamburger toggle to open slide-in drawer. Accessible with aria-controls and aria-expanded.",
+                "mcpQuery": "Show me Kendo Button with icon-only (hamburger) patterns for toggling a Drawer. Include aria attributes, sizes, and theming.",
+                "children": "☰"
+              },
+              {
+                "component": "drawer",
+                "description": "Mobile slide-in menu containing nav items and CTA. Focus-trapped when open. Data: navigationItems, cta.",
+                "mcpQuery": "Show me Kendo Drawer examples for mobile navigation with slide-in from right, focus trap, overlay, and close on route select. Include item templates with icons and a footer CTA button.",
+                "children": [
+                  {
+                    "component": "list",
+                    "description": "Nav item list for mobile view. Data: navigationItems.",
+                    "mcpQuery": "Show me Kendo UI ListView examples with data binding, sorting, filtering, and pagination. Include examples with realistic sample data, custom cell templates, and responsive design. Provide complete implementation with all necessary props.",
+                    "children": ""
+                  },
+                  {
+                    "component": "button",
+                    "description": "CTA button inside drawer. Data: cta {label, href}.",
+                    "mcpQuery": "Show me Kendo Button secondary styling appropriate for drawer footer CTAs, with full-width layout and smooth scroll behavior to anchors.",
+                    "children": "Contact"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "component": "main",
+            "description": "Main content wrapper containing hero, skills, portfolio, testimonials, and contact sections. Stacked sections with generous whitespace and on-view animations. Data flows: hero, skills, portfolioItems, testimonials, contact details.",
+            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+            "children": [
+              {
+                "component": "section",
+                "description": "Hero section (#home) with two-column layout: professional photo and introduction text with CTAs and social icons. Animations: fade/slide-in on load. Data: hero {headline, subheadline, bio, primaryCta, secondaryCta}, profileImage {src, alt}, socialLinks [{platform, url, icon}].",
+                "mcpQuery": "Show me Kendo UI Card examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                "children": [
+                  {
+                    "component": "grid",
+                    "description": "Responsive two-column layout; stacks on mobile. Left: image, Right: text content.",
+                    "mcpQuery": "Show me Kendo Grid or Kendo Layout (Grid/Flex) examples for two-column hero layouts with responsive breakpoints (mobile/tablet/desktop) and vertical alignment center.",
+                    "children": [
+                      {
+                        "component": "column",
+                        "description": "Profile media column with professional photo and subtle frame/shadow.",
+                        "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                        "children": [
+                          {
+                            "component": "card",
+                            "description": "Framed media card for the profile image with soft elevation.",
+                            "mcpQuery": "Show me Kendo Card usage for image-focused content with minimal chrome, elevation, and rounded corners suitable for a hero profile photo.",
+                            "children": [
+                              {
+                                "component": "image",
+                                "description": "Professional headshot image with alt text and optional gentle hover scale. Data: profileImage.src, profileImage.alt.",
+                                "mcpQuery": "Show me Kendo Image with responsive sizes, object-fit cover, rounded variants, and hover transform examples.",
+                                "children": ""
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "component": "column",
+                        "description": "Hero text block with headline, subheadline, bio, CTAs, and social icons.",
+                        "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                        "children": [
+                          {
+                            "component": "h1",
+                            "description": "Primary hero headline. Data: hero.headline.",
+                            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "Hi, I’m [Name]"
+                          },
+                          {
+                            "component": "subtitle",
+                            "description": "Hero subheadline. Data: hero.subheadline.",
+                            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "Designer & Front-end Developer"
+                          },
+                          {
+                            "component": "paragraph",
+                            "description": "Short bio paragraph. Data: hero.bio.",
+                            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "I craft elegant web experiences with performance and accessibility in mind."
+                          },
+                          {
+                            "component": "group",
+                            "description": "CTA buttons group: primary (View Work) and secondary (Download CV). Data: hero.primaryCta, hero.secondaryCta.",
+                            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                            "children": [
+                              {
+                                "component": "button",
+                                "description": "Primary CTA to scroll to portfolio (#work).",
+                                "mcpQuery": "Show me Kendo Button primary with anchor navigation, large size, and subtle shadow/hover transitions.",
+                                "children": "View Work"
+                              },
+                              {
+                                "component": "button",
+                                "description": "Secondary CTA to download CV. Data: hero.secondaryCta.href.",
+                                "mcpQuery": "Show me Kendo Button outlined/secondary variant with download attribute and icon placement (left).",
+                                "children": "Download CV"
+                              }
+                            ]
+                          },
+                          {
+                            "component": "list",
+                            "description": "Row of social icons for quick access. Data: socialLinks [{platform, url, icon}].",
+                            "mcpQuery": "Show me Kendo Icons or ButtonGroup examples for social icon rows with accessible labels and external link handling.",
+                            "children": ""
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "section",
+                "description": "Skills section (#skills) with header and animated progress bars indicating proficiency. Data: skills [{name, levelPercent, category?}].",
+                "mcpQuery": "Show me Kendo UI Card examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                "children": [
+                  {
+                    "component": "header",
+                    "description": "Section header with title and description.",
+                    "mcpQuery": "Show me Kendo UI AppBar examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                    "children": [
+                      {
+                        "component": "h2",
+                        "description": "Skills section title.",
+                        "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                        "children": "Skills"
+                      },
+                      {
+                        "component": "paragraph",
+                        "description": "Brief description of expertise areas.",
+                        "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                        "children": "A snapshot of tools and technologies I work with."
+                      }
+                    ]
+                  },
+                  {
+                    "component": "grid",
+                    "description": "Skills grid of items (2–3 columns responsive).",
+                    "mcpQuery": "Show me Kendo Grid or ListView/Card layout patterns for simple responsive tiles containing a progress bar and labels.",
+                    "children": [
+                      {
+                        "component": "card",
+                        "description": "Skill item card with name, progress bar, and percentage label. Data per item: {name, levelPercent}.",
+                        "mcpQuery": "Show me Kendo UI Card examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                        "children": [
+                          {
+                            "component": "label",
+                            "description": "Skill name label.",
+                            "mcpQuery": "Show me Kendo UI Label examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "JavaScript"
+                          },
+                          {
+                            "component": "progressbar",
+                            "description": "Animated progress indicating proficiency. Accessible with aria-valuenow/min/max. Data: levelPercent 0–100.",
+                            "mcpQuery": "Show me Kendo ProgressBar determinate examples with value animation on viewport, aria attributes, and percentage label formatting.",
+                            "children": ""
+                          },
+                          {
+                            "component": "badge",
+                            "description": "Numeric proficiency label (e.g., 85%).",
+                            "mcpQuery": "Show me Kendo Badge usage for percentage indicators with neutral styling.",
+                            "children": "85%"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "section",
+                "description": "Portfolio gallery section (#work) with filters, responsive image grid, and modal lightbox for project details. Data: portfolioItems [{id, title, coverSrc, alt, media[], categories[], description, role, tools[], liveLink?}].",
+                "mcpQuery": "Show me Kendo UI Card examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                "children": [
+                  {
+                    "component": "header",
+                    "description": "Section header with title and optional description.",
+                    "mcpQuery": "Show me Kendo UI AppBar examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                    "children": [
+                      {
+                        "component": "h2",
+                        "description": "Portfolio section title.",
+                        "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                        "children": "Selected Work"
+                      },
+                      {
+                        "component": "paragraph",
+                        "description": "Short description or tagline.",
+                        "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                        "children": "A curated selection of recent projects."
+                      }
+                    ]
+                  },
+                  {
+                    "component": "toolbar",
+                    "description": "Filter chips to refine items by category. Data: categories derived from portfolioItems.",
+                    "mcpQuery": "Show me Kendo ChipList or Toolbar with Chips for filterable galleries, including selection, multi/single modes, and change events.",
+                    "children": [
+                      {
+                        "component": "chip",
+                        "description": "Filter chip for a category; 'All' shows everything.",
+                        "mcpQuery": "Show me Kendo Chip examples with selected state and icons.",
+                        "children": "All"
+                      }
+                    ]
+                  },
+                  {
+                    "component": "grid",
+                    "description": "Responsive image grid of portfolio cards with hover overlay and quick view action.",
+                    "mcpQuery": "Show me Kendo Card/Grid layout examples for image galleries with equal-height tiles, masonry-like responsiveness, and hover overlays.",
+                    "children": [
+                      {
+                        "component": "card",
+                        "description": "Portfolio card with thumbnail, title, tags, and hover quick view. Data per item: {coverSrc, alt, title, categories}.",
+                        "mcpQuery": "Show me Kendo Card with media top, title, subtitle/tags, and custom hover overlay slot.",
+                        "children": [
+                          {
+                            "component": "image",
+                            "description": "Project thumbnail image. Data: item.coverSrc, item.alt.",
+                            "mcpQuery": "Show me Kendo Image with lazy loading and responsive srcset for gallery thumbnails.",
+                            "children": ""
+                          },
+                          {
+                            "component": "overlay",
+                            "description": "Hover overlay with Quick View action.",
+                            "mcpQuery": "Show me Kendo UI Popup examples with different types, positioning, and animation. Include examples for success, error, warning, and info states. Provide complete implementation with event handlers.",
+                            "children": [
+                              {
+                                "component": "button",
+                                "description": "Opens modal lightbox with carousel and project details.",
+                                "mcpQuery": "Show me Kendo Button ghost/inverted style over images, suitable for Quick View, with keyboard accessibility.",
+                                "children": "Quick View"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "component": "modal",
+                    "description": "Lightbox modal for viewing project media and details. Keyboard-trapped with ESC to close. Data: selected portfolioItem.",
+                    "mcpQuery": "Show me Kendo Dialog/Window examples used as a lightbox with full-screen or large size, overlay, close button, and keyboard handling (ESC, focus trap).",
+                    "children": [
+                      {
+                        "component": "carousel",
+                        "description": "Media carousel (images/video) with prev/next controls and dots. Data: portfolioItem.media[].",
+                        "mcpQuery": "Show me Kendo Carousel/Slider examples with images and videos, swipe gestures, autoplay off, and custom navigation arrows/dots.",
+                        "children": ""
+                      },
+                      {
+                        "component": "panel",
+                        "description": "Project details including title, description, role, tools, and link to live/demo. Data: portfolioItem fields.",
+                        "mcpQuery": "Show me Kendo UI ExpansionPanel examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                        "children": [
+                          {
+                            "component": "h3",
+                            "description": "Project title.",
+                            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "Project Title"
+                          },
+                          {
+                            "component": "paragraph",
+                            "description": "Project description.",
+                            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "Description of goals, process, and outcomes."
+                          },
+                          {
+                            "component": "list",
+                            "description": "Tools/stack tags. Data: portfolioItem.tools[].",
+                            "mcpQuery": "Show me Kendo UI ListView examples with data binding, sorting, filtering, and pagination. Include examples with realistic sample data, custom cell templates, and responsive design. Provide complete implementation with all necessary props.",
+                            "children": ""
+                          },
+                          {
+                            "component": "button",
+                            "description": "Link to live site or demo if available. Data: portfolioItem.liveLink.",
+                            "mcpQuery": "Show me Kendo Button with external link behavior, target=_blank, rel attributes, and right-aligned icon.",
+                            "children": "View Live"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "section",
+                "description": "Testimonials section (#testimonials) with carousel of client quotes. Data: testimonials [{quote, name, title?, company?, avatarSrc?, companyLogoSrc?}].",
+                "mcpQuery": "Show me Kendo UI Card examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                "children": [
+                  {
+                    "component": "header",
+                    "description": "Section header.",
+                    "mcpQuery": "Show me Kendo UI AppBar examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                    "children": [
+                      {
+                        "component": "h2",
+                        "description": "Testimonials title.",
+                        "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                        "children": "What Clients Say"
+                      }
+                    ]
+                  },
+                  {
+                    "component": "carousel",
+                    "description": "Auto-playing testimonial carousel with pause on hover, keyboard and swipe support, and pagination dots.",
+                    "mcpQuery": "Show me Kendo Carousel examples for testimonials with variable slide content, autoplay with pause on hover, and accessible controls (aria-live polite).",
+                    "children": [
+                      {
+                        "component": "card",
+                        "description": "Testimonial card with quote, client name/title, avatar, and optional company logo. Data per item: testimonial fields.",
+                        "mcpQuery": "Show me Kendo UI Card examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                        "children": [
+                          {
+                            "component": "blockquote",
+                            "description": "Quoted testimonial text. Data: testimonial.quote.",
+                            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "“Outstanding collaboration and attention to detail.”"
+                          },
+                          {
+                            "component": "group",
+                            "description": "Client identity group with avatar and name/title.",
+                            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                            "children": [
+                              {
+                                "component": "avatar",
+                                "description": "Client avatar image. Data: testimonial.avatarSrc.",
+                                "mcpQuery": "Show me Kendo Avatar usage with image fallback to initials and different sizes.",
+                                "children": ""
+                              },
+                              {
+                                "component": "div",
+                                "description": "Name and title text container.",
+                                "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                                "children": [
+                                  {
+                                    "component": "strong",
+                                    "description": "Client name. Data: testimonial.name.",
+                                    "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                                    "children": "Alex Doe"
+                                  },
+                                  {
+                                    "component": "span",
+                                    "description": "Client title and company. Data: testimonial.title, testimonial.company.",
+                                    "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                                    "children": "CMO, Acme Inc."
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "component": "image",
+                            "description": "Optional company logo. Data: testimonial.companyLogoSrc.",
+                            "mcpQuery": "Show me Kendo Image for small monochrome logos with containment and max-height constraints.",
+                            "children": ""
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "section",
+                "description": "Contact section (#contact) with form, details panel, and submission feedback. Data: contact {apiEndpoint, successMessage, errorMessage}, contactDetails {email, phone?, location?, officeHours?}.",
+                "mcpQuery": "Show me Kendo UI Card examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                "children": [
+                  {
+                    "component": "header",
+                    "description": "Section header with title and short invitation.",
+                    "mcpQuery": "Show me Kendo UI AppBar examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                    "children": [
+                      {
+                        "component": "h2",
+                        "description": "Contact title.",
+                        "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                        "children": "Get In Touch"
+                      },
+                      {
+                        "component": "paragraph",
+                        "description": "Invitation text.",
+                        "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                        "children": "Have a project in mind? Let’s talk."
+                      }
+                    ]
+                  },
+                  {
+                    "component": "form",
+                    "description": "Contact form with validation and loading state. Fields: Name, Email, Subject, Message, Consent. Submits to contact.apiEndpoint. Displays inline errors and summary.",
+                    "mcpQuery": "Show me Kendo Form examples with field-level validation, async submit with loading spinner, and error summary. Include integration with TextBox, TextArea, and Checkbox.",
+                    "children": [
+                      {
+                        "component": "formgroup",
+                        "description": "Name field (required).",
+                        "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                        "children": [
+                          {
+                            "component": "label",
+                            "description": "Label for Name.",
+                            "mcpQuery": "Show me Kendo UI Label examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "Name"
+                          },
+                          {
+                            "component": "textinput",
+                            "description": "Name input with required validation.",
+                            "mcpQuery": "Show me Kendo TextBox with required validation, placeholder support, and success/error states.",
+                            "children": ""
+                          },
+                          {
+                            "component": "error",
+                            "description": "Inline validation message for Name.",
+                            "mcpQuery": "Show me Kendo UI Error examples with different types, positioning, and animation. Include examples for success, error, warning, and info states. Provide complete implementation with event handlers.",
+                            "children": "Please enter your name."
+                          }
+                        ]
+                      },
+                      {
+                        "component": "formgroup",
+                        "description": "Email field (required, email format).",
+                        "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                        "children": [
+                          {
+                            "component": "label",
+                            "description": "Label for Email.",
+                            "mcpQuery": "Show me Kendo UI Label examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "Email"
+                          },
+                          {
+                            "component": "email",
+                            "description": "Email input with pattern validation.",
+                            "mcpQuery": "Show me Kendo TextBox for email with type='email', validation, and debounce on blur.",
+                            "children": ""
+                          },
+                          {
+                            "component": "error",
+                            "description": "Inline validation message for Email.",
+                            "mcpQuery": "Show me Kendo UI Error examples with different types, positioning, and animation. Include examples for success, error, warning, and info states. Provide complete implementation with event handlers.",
+                            "children": "Enter a valid email address."
+                          }
+                        ]
+                      },
+                      {
+                        "component": "formgroup",
+                        "description": "Subject field (optional).",
+                        "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                        "children": [
+                          {
+                            "component": "label",
+                            "description": "Label for Subject.",
+                            "mcpQuery": "Show me Kendo UI Label examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "Subject"
+                          },
+                          {
+                            "component": "textinput",
+                            "description": "Subject input.",
+                            "mcpQuery": "Show me Kendo TextBox medium length with placeholder and optional state.",
+                            "children": ""
+                          }
+                        ]
+                      },
+                      {
+                        "component": "formgroup",
+                        "description": "Message field (required, min length).",
+                        "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                        "children": [
+                          {
+                            "component": "label",
+                            "description": "Label for Message.",
+                            "mcpQuery": "Show me Kendo UI Label examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "Message"
+                          },
+                          {
+                            "component": "textarea",
+                            "description": "Multiline message input with character counter.",
+                            "mcpQuery": "Show me Kendo TextArea with character count, min length validation, and auto-resize.",
+                            "children": ""
+                          },
+                          {
+                            "component": "error",
+                            "description": "Inline validation message for Message.",
+                            "mcpQuery": "Show me Kendo UI Error examples with different types, positioning, and animation. Include examples for success, error, warning, and info states. Provide complete implementation with event handlers.",
+                            "children": "Please enter at least 20 characters."
+                          }
+                        ]
+                      },
+                      {
+                        "component": "formgroup",
+                        "description": "Consent checkbox for privacy/terms (optional).",
+                        "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                        "children": [
+                          {
+                            "component": "checkbox",
+                            "description": "Consent agreement checkbox.",
+                            "mcpQuery": "Show me Kendo CheckBox with label linking to Privacy Policy and indeterminate state example.",
+                            "children": "I agree to the Privacy Policy"
+                          }
+                        ]
+                      },
+                      {
+                        "component": "group",
+                        "description": "Form actions with submit button and loading state.",
+                        "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                        "children": [
+                          {
+                            "component": "submit",
+                            "description": "Submit button triggers form submission to API endpoint with loading/disabled state.",
+                            "mcpQuery": "Show me Kendo Button as form submit with built-in loading indicator and success/error visual states.",
+                            "children": "Send Message"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "component": "aside",
+                    "description": "Contact details panel with email, phone, location, office hours. Data: contactDetails.",
+                    "mcpQuery": "Show me Kendo UI PanelBar examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                    "children": [
+                      {
+                        "component": "list",
+                        "description": "Details list with icons.",
+                        "mcpQuery": "Show me Kendo UI ListView examples with data binding, sorting, filtering, and pagination. Include examples with realistic sample data, custom cell templates, and responsive design. Provide complete implementation with all necessary props.",
+                        "children": ""
+                      }
+                    ]
+                  },
+                  {
+                    "component": "alert",
+                    "description": "Submission feedback banner (success or error). Data: contact.successMessage, contact.errorMessage.",
+                    "mcpQuery": "Show me Kendo Alert/Notification examples for form submission results with success and error variants, dismiss action, and auto-hide options.",
+                    "children": "Your message has been sent successfully."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "component": "footer",
+            "description": "Footer with quick links, social icons, and legal info. Data: footerLinks, socialLinks, legal {copyrightText, year}.",
+            "mcpQuery": "Show me Kendo UI AppBar examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+            "children": [
+              {
+                "component": "grid",
+                "description": "Footer top with quick links and social links columns.",
+                "mcpQuery": "Show me Kendo Grid/Flex layout for footers with multiple columns and responsive stacking.",
+                "children": [
+                  {
+                    "component": "column",
+                    "description": "Quick links list (could repeat navigation). Data: footerLinks [{label, href}].",
+                    "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                    "children": [
+                      {
+                        "component": "h4",
+                        "description": "Quick Links title.",
+                        "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                        "children": "Quick Links"
+                      },
+                      {
+                        "component": "list",
+                        "description": "Footer navigation links.",
+                        "mcpQuery": "Show me Kendo UI ListView examples with data binding, sorting, filtering, and pagination. Include examples with realistic sample data, custom cell templates, and responsive design. Provide complete implementation with all necessary props.",
+                        "children": ""
+                      }
+                    ]
+                  },
+                  {
+                    "component": "column",
+                    "description": "Social links with icons. Data: socialLinks.",
+                    "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                    "children": [
+                      {
+                        "component": "h4",
+                        "description": "Follow title.",
+                        "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                        "children": "Follow"
+                      },
+                      {
+                        "component": "list",
+                        "description": "Social icons row/stack.",
+                        "mcpQuery": "Show me Kendo Icon + Link or ButtonGroup examples for social links in footers with accessible names.",
+                        "children": ""
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "divider",
+                "description": "Subtle divider line separating footer top from bottom.",
+                "mcpQuery": "",
+                "children": ""
+              },
+              {
+                "component": "group",
+                "description": "Footer bottom row with copyright and legal links.",
+                "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                "children": [
+                  {
+                    "component": "paragraph",
+                    "description": "Copyright notice. Data: legal.year, legal.copyrightText.",
+                    "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                    "children": "© 2025 Your Name. All rights reserved."
+                  },
+                  {
+                    "component": "list",
+                    "description": "Secondary links like Privacy Policy and Terms.",
+                    "mcpQuery": "Show me Kendo UI ListView examples with data binding, sorting, filtering, and pagination. Include examples with realistic sample data, custom cell templates, and responsive design. Provide complete implementation with all necessary props.",
+                    "children": ""
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "totalComponents": 111,
+    "maxDepth": 7,
+    "componentTypes": [
+      "container",
+      "header",
+      "navigation",
+      "logo",
+      "image",
+      "menu",
+      "button",
+      "drawer",
+      "list",
+      "main",
+      "section",
+      "grid",
+      "column",
+      "card",
+      "h1",
+      "subtitle",
+      "paragraph",
+      "group",
+      "badge",
+      "progressbar",
+      "overlay",
+      "modal",
+      "carousel",
+      "panel",
+      "h3",
+      "blockquote",
+      "avatar",
+      "div",
+      "strong",
+      "span",
+      "toolbar",
+      "chip",
+      "form",
+      "formgroup",
+      "label",
+      "textinput",
+      "error",
+      "email",
+      "textarea",
+      "checkbox",
+      "submit",
+      "aside",
+      "alert",
+      "footer",
+      "h2",
+      "h4",
+      "divider"
+    ],
+    "description": "Comprehensive ACT for an elegant portfolio landing page with fixed header, hero, skills with progress bars, portfolio gallery with lightbox, testimonials carousel, contact form with validation, and rich footer. Includes Kendo-targeted MCP queries for interactive and data display components."
+  }
+}
