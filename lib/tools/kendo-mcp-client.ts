@@ -45,9 +45,7 @@ export class KendoMCPClient {
       //   }
       // });
 
-      const mcpPath = path.resolve(
-        'node_modules/@progress/kendo-react-mcp/dist/index.js'
-      );
+      const mcpPath = path.resolve('kendo-react-mcp/dist/index.js');
 
       this.transport = new StdioClientTransport({
         command: 'node',
