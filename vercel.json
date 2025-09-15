@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/**": {
+    "api/agents/generate/**": {
       "includeFiles": "node_modules/@progress/kendo-react-mcp/dist/**"
     }
   }
