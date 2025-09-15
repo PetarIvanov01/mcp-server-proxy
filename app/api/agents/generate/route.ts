@@ -6,6 +6,26 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
+    const fs = require('fs');
+    const possiblePaths = [
+      './node_modules',
+      '../node_modules',
+      '../../node_modules',
+      '/var/task/node_modules',
+      process.cwd() + '/node_modules'
+    ];
+
+    possiblePaths.forEach((path) => {
+      try {
+        if (fs.existsSync(path)) {
+          console.log(`Found node_modules at: ${path}`);
+        }
+      } catch (e) {
+        console.log(`Cannot access ${path}`);
+      }
+    });
+
+    throw new Error('test');
     const validatedBody = UserQuerySchema.parse({
       query: body.query || '',
       context: body.context || ''
