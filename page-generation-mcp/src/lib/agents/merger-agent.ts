@@ -58,10 +58,15 @@ export class MergerAgent {
 
       Key Requirements:
       - Use Kendo components for complex UI (buttons, forms, data display)
-      - Use HTML elements for basic content (links, images, text)
+      - Try to use Kendo components for all components, if not possible, use HTML elements
       - Include realistic mock data that matches component schemas
       - Generate production-ready, syntactically correct code
       - Follow React best practices and accessibility guidelines
+      - Make sure no elements overlap or overflow each other especially with absolute positioning
+      - The layout should be clean, modern and with beautiful design and UI/UX
+      - When there are multiple sections, place them vertically
+      - The header of the pages should be compact
+      - Pre-loaded Kendo Theme will handle the colors of the page
 
       Mock Data Requirements:
       - Tables/Grids: Sample rows with realistic data in exact schema format

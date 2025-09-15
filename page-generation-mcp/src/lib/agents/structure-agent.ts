@@ -117,7 +117,6 @@ export class StructureAgent {
         - MANDATORY: Include components from at least 6 different families (Layout, Content, Interactive, Forms, Data Display, Media, etc.)
         - Include specific data requirements in descriptions (e.g., "user profile data", "product list", "navigation items")
         - Ensure rich, diverse component selection for professional pages
-
         ENRICHMENT REQUIREMENTS:
         - Create COMPREHENSIVE page structures with 6+ components minimum
         - Include multiple instances of the same component type where appropriate (e.g., multiple buttons, cards, or form fields)
@@ -132,6 +131,9 @@ export class StructureAgent {
         - Add contextual components that enhance the overall page functionality
 
         The ACT should be a complete, rich representation of the page structure that can be easily converted to actual UI components.
+
+        LAYOUTING REQUIREMENTS:
+        - Focus on providing more of a wireframe than a complete design
 
         MCP QUERY GENERATION REQUIREMENTS:
         - For each component that will be mapped to a Kendo component, generate a specific mcpQuery field
