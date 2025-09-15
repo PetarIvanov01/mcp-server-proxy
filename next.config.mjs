@@ -1,14 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true
   },
   images: {
-    unoptimized: true,
+    unoptimized: true
   },
-}
+  transpilePackages: ['@progress/kendo-react-mcp']
+};
 
-export default nextConfig
+export default nextConfig;

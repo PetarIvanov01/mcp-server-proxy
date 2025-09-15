@@ -1,6 +1,7 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { z } from 'zod';
+import path from 'path';
 
 export interface KendoMCPQuery {
   query: string;
@@ -26,7 +27,6 @@ export class KendoMCPClient {
 
   private async initializeMCPConnection(): Promise<void> {
     try {
-      const path = require('path');
       const licensePath = path.join(process.cwd(), 'telerik-license.txt');
 
       // Initialize the MCP client
@@ -44,9 +44,13 @@ export class KendoMCPClient {
       //   }
       // });
 
+      const mcpPath = path.resolve(
+        'node_modules/@progress/kendo-react-mcp/dist/index.js'
+      );
+
       this.transport = new StdioClientTransport({
         command: 'node',
-        args: ['node_modules/@progress/kendo-react-mcp/dist/index.js'],
+        args: [mcpPath],
         env: {
           ...process.env,
           TELERIK_LICENSE_PATH: licensePath
