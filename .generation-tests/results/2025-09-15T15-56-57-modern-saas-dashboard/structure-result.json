@@ -1,0 +1,906 @@
+{
+  "structure": {
+    "component": "container",
+    "description": "Root app shell for SaaS dashboard. Provides grid-based layout with fixed header, collapsible sidebar, and scrollable main. Consumes global data: user, notifications, navigationItems, kpis, charts, transactions, quickActions, appSettings.",
+    "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+    "children": [
+      {
+        "component": "header",
+        "description": "Fixed top app bar with brand, global search, and user actions. Requires brand {logoUrl,name}, searchIndex suggestions, notifications[], user profile data.",
+        "mcpQuery": "Show me Kendo UI AppBar examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+        "children": [
+          {
+            "component": "container",
+            "description": "Left cluster: brand logo linking to home.",
+            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+            "children": [
+              {
+                "component": "logo",
+                "description": "Company logo image. Needs brand.logoUrl and alt text brand.name.",
+                "mcpQuery": "Show me Kendo UI Avatar examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                "children": ""
+              },
+              {
+                "component": "link",
+                "description": "Clickable brand link to route '/'.",
+                "mcpQuery": "Show me Kendo UI ReactLink examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                "children": "Home"
+              }
+            ]
+          },
+          {
+            "component": "container",
+            "description": "Center cluster: global search with autocomplete and keyboard shortcut '/' to focus. Debounced queries to searchIndex.",
+            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+            "children": [
+              {
+                "component": "search",
+                "description": "Search input with autocomplete dropdown of entities (users, invoices). Needs searchIndex endpoint; returns [{label, type, id, route}].",
+                "mcpQuery": "Show me Kendo UI AutoComplete or ComboBox examples for a global search bar with async remote filtering, keyboard shortcut focus ('/'), and custom item templates (type icon + label + route). Include props for debounce, loading indicator, no-data template, and ARIA best practices. Provide styling for dense header usage and dark mode.",
+                "children": ""
+              }
+            ]
+          },
+          {
+            "component": "container",
+            "description": "Right cluster: actions area including notifications, help menu, theme toggle, and user menu.",
+            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+            "children": [
+              {
+                "component": "button",
+                "description": "Notifications icon button with unread badge count from notifications[]. Opens popover list.",
+                "mcpQuery": "Show me Kendo UI Button + Badge + Popover/Popup examples for a notifications bell with dynamic count, click to open list, keyboard navigation, and close on outside click. Include examples for lazy loading, infinite scroll list inside, and mark-all-read action.",
+                "children": ""
+              },
+              {
+                "component": "popup",
+                "description": "Notifications popover listing latest notifications with timestamps and read state. Data: notifications[{id,type,message,createdAt,read}].",
+                "mcpQuery": "Show me Kendo UI ListView inside a Popup with virtual scrolling and item templates (icon by type, message, relative time, read indicator). Include actions per item and 'Mark all as read' button.",
+                "children": [
+                  {
+                    "component": "listview",
+                    "description": "Scrollable list of notification items; supports virtual, skeleton on loading, empty state.",
+                    "mcpQuery": "Show me Kendo UI ListView examples with data binding, sorting, filtering, and pagination. Include examples with realistic sample data, custom cell templates, and responsive design. Provide complete implementation with all necessary props.",
+                    "children": ""
+                  },
+                  {
+                    "component": "button",
+                    "description": "Mark all as read action; triggers mutation and toast.",
+                    "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                    "children": "Mark all as read"
+                  }
+                ]
+              },
+              {
+                "component": "button",
+                "description": "Help icon button opening menu (Docs, Contact).",
+                "mcpQuery": "Show me Kendo UI Menu or ContextMenu attached to an icon button with items (Docs, Contact). Include keyboard navigation and positioning in a header.",
+                "children": ""
+              },
+              {
+                "component": "switch",
+                "description": "Theme toggle (light/dark). Updates appSettings.theme.",
+                "mcpQuery": "Show me Kendo UI Switch examples for theme toggling with custom icons (sun/moon), ARIA labels, and onChange integration for global theme.",
+                "children": ""
+              },
+              {
+                "component": "dropdown",
+                "description": "User menu trigger showing avatar and name; opens menu with Profile, Settings, Sign out. Needs user {name, avatarUrl, role}.",
+                "mcpQuery": "Show me Kendo UI DropDownButton or MenuButton with custom button (avatar + name) and menu items (Profile, Settings, Sign out). Include placement control and responsive behavior for narrow headers.",
+                "children": [
+                  {
+                    "component": "avatar",
+                    "description": "User avatar image (user.avatarUrl) with fallback initials.",
+                    "mcpQuery": "Show me Kendo UI Avatar usage with image + fallback initials, sizes suitable for app bar, and status dot support.",
+                    "children": ""
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "container",
+        "description": "App body wrapper with sidebar and main content region. Uses responsive grid; sidebar collapsible to rail.",
+        "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+        "children": [
+          {
+            "component": "sidebar",
+            "description": "Collapsible navigation sidebar with sections and nested items. Data: navigationItems[{id,label,icon,route,children?}]. Remembers collapsed state per user.",
+            "mcpQuery": "Show me Kendo UI Drawer examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+            "children": [
+              {
+                "component": "button",
+                "description": "Hamburger toggle to collapse/expand sidebar; shows tooltips when collapsed.",
+                "mcpQuery": "Show me Kendo UI Button (icon-only) examples for toggling a Drawer, including aria-expanded state and tooltip integration.",
+                "children": ""
+              },
+              {
+                "component": "drawer",
+                "description": "Navigation Drawer with selectable items, active route highlight, and mini-rail mode.",
+                "mcpQuery": "Show me Kendo UI Drawer examples for collapsible side navigation with item icons, nested items, and mini mode. Include controlled state, routing integration, and tooltips for collapsed items.",
+                "children": [
+                  {
+                    "component": "list",
+                    "description": "Nav list bound to navigationItems; supports submenu expand/collapse and badges.",
+                    "mcpQuery": "Show me Kendo UI PanelBar or TreeView for hierarchical navigation with icons, route data, and selection persistence.",
+                    "children": ""
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "component": "main",
+            "description": "Primary scrollable content area with spacing and sections per plan.",
+            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+            "children": [
+              {
+                "component": "breadcrumb",
+                "description": "Breadcrumbs reflecting routeContext.segments and page title.",
+                "mcpQuery": "Show me Kendo UI Breadcrumb examples with custom separators, responsive collapse, and integration with router links.",
+                "children": ""
+              },
+              {
+                "component": "container",
+                "description": "Page header row with title and secondary actions.",
+                "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                "children": [
+                  {
+                    "component": "h1",
+                    "description": "Page title from routeContext.title (e.g., Dashboard).",
+                    "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                    "children": "Dashboard"
+                  },
+                  {
+                    "component": "toolbar",
+                    "description": "Secondary actions: Export and Refresh.",
+                    "mcpQuery": "Show me Kendo UI ToolBar with buttons (Export CSV, Refresh) and responsive overflow.",
+                    "children": [
+                      {
+                        "component": "button",
+                        "description": "Export data (KPIs, charts, transactions) to CSV/PNG; triggers server export.",
+                        "mcpQuery": "Show me Kendo UI Button with dropdown SplitButton for export formats (CSV, PNG, PDF). Include loading state and success toast.",
+                        "children": "Export"
+                      },
+                      {
+                        "component": "button",
+                        "description": "Refresh all data; invalidates queries; shows spinner while loading.",
+                        "mcpQuery": "Show me Kendo UI Button with loading indicator/spinner and tooltip for Refresh action.",
+                        "children": "Refresh"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "form",
+                "description": "Filters toolbar controlling dashboards. Data: filters {search,dateRange,status[],method}.",
+                "mcpQuery": "Show me Kendo UI Form in toolbar layout with compact spacing and controlled fields; include validation and reset/apply pattern.",
+                "children": [
+                  {
+                    "component": "daterangepicker",
+                    "description": "Date range picker with presets (7D, 30D, QTD, YTD, Custom). Updates KPIs, charts, table.",
+                    "mcpQuery": "Show me Kendo UI DateRangePicker examples with predefined ranges, custom footer (Apply/Cancel), and timezone handling.",
+                    "children": ""
+                  },
+                  {
+                    "component": "multiselect",
+                    "description": "Status filter (Paid, Pending, Failed, Refunded).",
+                    "mcpQuery": "Show me Kendo UI MultiSelect with checkbox items, tag mode compact, and clear button in a toolbar.",
+                    "children": ""
+                  },
+                  {
+                    "component": "select",
+                    "description": "Payment method select (Card, Bank, PayPal, Cash).",
+                    "mcpQuery": "Show me Kendo UI DropDownList examples with option labels, filtering, and small size styling.",
+                    "children": ""
+                  },
+                  {
+                    "component": "search",
+                    "description": "Search transactions/users; debounced; placeholder 'Search…'.",
+                    "mcpQuery": "Show me Kendo UI TextBox with built-in clear button and onChange debounce pattern for search within a toolbar.",
+                    "children": ""
+                  },
+                  {
+                    "component": "button",
+                    "description": "Apply filters; primary styling.",
+                    "mcpQuery": "Show me Kendo UI Button (primary) examples in a toolbar with form submit handling.",
+                    "children": "Apply"
+                  },
+                  {
+                    "component": "button",
+                    "description": "Reset filters to defaults.",
+                    "mcpQuery": "Show me Kendo UI Button (secondary) with tooltip 'Reset filters' and clear icon.",
+                    "children": "Reset"
+                  }
+                ]
+              },
+              {
+                "component": "section",
+                "description": "KPI Metrics Grid displaying key metrics as cards with shadows and mini sparklines. Data: kpis[], sparklineSeries per KPI.",
+                "mcpQuery": "Show me Kendo UI Card examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                "children": [
+                  {
+                    "component": "grid",
+                    "description": "Responsive grid 2–4 columns with gap 16–24px.",
+                    "mcpQuery": "Show me Kendo UI Grid examples with data binding, sorting, filtering, and pagination. Include examples with realistic sample data, custom cell templates, and responsive design. Provide complete implementation with all necessary props.",
+                    "children": [
+                      {
+                        "component": "card",
+                        "description": "KPI card template repeated for each kpi. Shows title, value, delta, unit, tooltip, and sparkline. Data: kpi {label,value,delta,trend,unit,tooltip}, series [{date,value}].",
+                        "mcpQuery": "Show me Kendo UI Card with header/body and elevation, including a small inline Sparkline chart. Include positive/negative delta styling with icons and tooltip for metric definition.",
+                        "children": [
+                          {
+                            "component": "title",
+                            "description": "Metric label from kpi.label.",
+                            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": ""
+                          },
+                          {
+                            "component": "container",
+                            "description": "Value row with big number and unit; delta badge with arrow up/down based on kpi.trend.",
+                            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                            "children": [
+                              {
+                                "component": "text",
+                                "description": "Formatted value with locale/currency when applicable.",
+                                "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                                "children": ""
+                              },
+                              {
+                                "component": "badge",
+                                "description": "Delta indicator with success/danger styling; shows kpi.delta%.",
+                                "mcpQuery": "Show me Kendo UI Badge usage for success/danger variants with icons and compact size.",
+                                "children": ""
+                              }
+                            ]
+                          },
+                          {
+                            "component": "tooltip",
+                            "description": "Hover tooltip explaining metric definition from kpi.tooltip.",
+                            "mcpQuery": "Show me Kendo UI Tooltip applied to a card with custom content.",
+                            "children": ""
+                          },
+                          {
+                            "component": "sparkline",
+                            "description": "Mini trend chart for the KPI using series data.",
+                            "mcpQuery": "Show me Kendo UI Sparkline examples for inline KPI trends with area/line styles and minimal axes.",
+                            "children": ""
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "section",
+                "description": "Charts Section with tabs for granularity (D/W/M/Q) and two chart cards: Revenue and User Growth. Data: charts.revenueSeries, charts.userGrowthSeries, chartMeta.",
+                "mcpQuery": "Show me Kendo UI Card examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                "children": [
+                  {
+                    "component": "tabs",
+                    "description": "Switch chart granularity; updates both charts in sync. Uses chartMeta.granularity.",
+                    "mcpQuery": "Show me Kendo UI TabStrip examples with controlled selection and onSelect to refetch chart data; include responsive collapse to dropdown on small screens.",
+                    "children": [
+                      {
+                        "component": "tab",
+                        "description": "Daily granularity.",
+                        "mcpQuery": "Show me Kendo UI TabStrip examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                        "children": "Daily"
+                      },
+                      {
+                        "component": "tab",
+                        "description": "Weekly granularity.",
+                        "mcpQuery": "Show me Kendo UI TabStrip examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                        "children": "Weekly"
+                      },
+                      {
+                        "component": "tab",
+                        "description": "Monthly granularity.",
+                        "mcpQuery": "Show me Kendo UI TabStrip examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                        "children": "Monthly"
+                      },
+                      {
+                        "component": "tab",
+                        "description": "Quarterly granularity.",
+                        "mcpQuery": "Show me Kendo UI TabStrip examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                        "children": "Quarterly"
+                      }
+                    ]
+                  },
+                  {
+                    "component": "grid",
+                    "description": "Two-column layout on desktop; stacks on mobile.",
+                    "mcpQuery": "Show me Kendo UI Grid examples with data binding, sorting, filtering, and pagination. Include examples with realistic sample data, custom cell templates, and responsive design. Provide complete implementation with all necessary props.",
+                    "children": [
+                      {
+                        "component": "card",
+                        "description": "Revenue chart card with controls (download CSV/PNG).",
+                        "mcpQuery": "Show me Kendo UI Card + Chart (Line/Area) examples with legend, crosshair, zoom/pan, export to image/CSV, and loading/empty states.",
+                        "children": [
+                          {
+                            "component": "title",
+                            "description": "Revenue over time with currency from chartMeta.currency.",
+                            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "Revenue"
+                          },
+                          {
+                            "component": "linechart",
+                            "description": "Interactive revenue series chart; supports hover tooltip, zoom/pan, brush range, legend toggle. Data: charts.revenueSeries[{date,value}].",
+                            "mcpQuery": "Show me Kendo UI Chart (Line/Area) configured for time series with date axis, tooltips, crosshair, pannable/zoomable, and series aggregation by granularity.",
+                            "children": ""
+                          },
+                          {
+                            "component": "toolbar",
+                            "description": "Chart actions: Download, CSV.",
+                            "mcpQuery": "Show me Kendo UI ToolBar with ButtonGroup or SplitButton for exporting chart as PNG/SVG and data as CSV.",
+                            "children": [
+                              {
+                                "component": "button",
+                                "description": "Download chart as PNG/SVG.",
+                                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                                "children": "Download"
+                              },
+                              {
+                                "component": "button",
+                                "description": "Export data as CSV.",
+                                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                                "children": "Export CSV"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "component": "card",
+                        "description": "User Growth chart card with possible bar/line combo and milestone annotations.",
+                        "mcpQuery": "Show me Kendo UI Chart combo (Column + Line) with annotations (milestones), legend, and responsive container sizing.",
+                        "children": [
+                          {
+                            "component": "title",
+                            "description": "User Growth over time.",
+                            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                            "children": "User Growth"
+                          },
+                          {
+                            "component": "barchart",
+                            "description": "Bar/line combo to show growth; syncs crosshair with revenue chart. Data: charts.userGrowthSeries[{date,value}].",
+                            "mcpQuery": "Show me Kendo UI Chart with multiple series types (Column + Line), shared tooltip, synced crosshair across multiple charts, and range selection.",
+                            "children": ""
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "section",
+                "description": "Recent Transactions data table with controls and actions. Data: transactions (paginated), totalCount, sorting, filters.",
+                "mcpQuery": "Show me Kendo UI Card examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                "children": [
+                  {
+                    "component": "card",
+                    "description": "Transactions card with sticky header and horizontal scroll on small viewports.",
+                    "mcpQuery": "Show me Kendo UI Card examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                    "children": [
+                      {
+                        "component": "toolbar",
+                        "description": "Table controls: page size, density, column visibility, export.",
+                        "mcpQuery": "Show me Kendo UI ToolBar with DropDownList (page size), ButtonToggleGroup (density), and MultiSelect for column visibility. Include CSV export button.",
+                        "children": [
+                          {
+                            "component": "select",
+                            "description": "Page size selector (10/25/50/100).",
+                            "mcpQuery": "Show me Kendo UI DropDownList for page size selection integrated with Grid paging.",
+                            "children": ""
+                          },
+                          {
+                            "component": "buttongroup",
+                            "description": "Density toggle (Compact/Comfortable).",
+                            "mcpQuery": "Show me Kendo UI ButtonGroup for toggling table row density with active state styling.",
+                            "children": [
+                              {
+                                "component": "button",
+                                "description": "Compact density.",
+                                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                                "children": "Compact"
+                              },
+                              {
+                                "component": "button",
+                                "description": "Comfortable density.",
+                                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                                "children": "Comfortable"
+                              }
+                            ]
+                          },
+                          {
+                            "component": "multiselect",
+                            "description": "Column visibility control; bound to grid columns.",
+                            "mcpQuery": "Show me Kendo UI MultiSelect to toggle Grid column visibility with checkboxes.",
+                            "children": ""
+                          },
+                          {
+                            "component": "button",
+                            "description": "Export visible rows to CSV.",
+                            "mcpQuery": "Show me Kendo UI Button to export Kendo Grid data to CSV with server-side pagination considerations.",
+                            "children": "Export CSV"
+                          }
+                        ]
+                      },
+                      {
+                        "component": "datagrid",
+                        "description": "Transactions grid with sortable, filterable columns; sticky header; row selection; actions column. Data: transactions[].",
+                        "mcpQuery": "Show me Kendo UI Grid with server-side paging/sorting/filtering, sticky header, selection, column templates (avatar + name, amount formatting, status badge), and action buttons per row. Include accessibility best practices.",
+                        "children": [
+                          {
+                            "component": "column",
+                            "description": "User column: avatar + name from transaction.user.{avatarUrl,name}.",
+                            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                            "children": [
+                              {
+                                "component": "avatar",
+                                "description": "User avatar in cell.",
+                                "mcpQuery": "Show me Kendo UI Avatar inside Grid cell with size small.",
+                                "children": ""
+                              },
+                              {
+                                "component": "text",
+                                "description": "User name text.",
+                                "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+                                "children": ""
+                              }
+                            ]
+                          },
+                          {
+                            "component": "column",
+                            "description": "Amount column: formatted amount with currency; right-aligned.",
+                            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                            "children": ""
+                          },
+                          {
+                            "component": "column",
+                            "description": "Status column with colored badge (Paid, Pending, Failed, Refunded).",
+                            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                            "children": [
+                              {
+                                "component": "badge",
+                                "description": "Status badge with semantic colors and icons.",
+                                "mcpQuery": "Show me Kendo UI Badge in Grid cell with custom color mapping by status.",
+                                "children": ""
+                              }
+                            ]
+                          },
+                          {
+                            "component": "column",
+                            "description": "Method column (Card/Bank/PayPal/Cash).",
+                            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                            "children": ""
+                          },
+                          {
+                            "component": "column",
+                            "description": "Date column (createdAt) with locale formatting and tooltip for exact timestamp.",
+                            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                            "children": [
+                              {
+                                "component": "tooltip",
+                                "description": "Exact timestamp on hover.",
+                                "mcpQuery": "Show me Kendo UI Tooltip in Grid cells with custom date formatting.",
+                                "children": ""
+                              }
+                            ]
+                          },
+                          {
+                            "component": "column",
+                            "description": "Actions column: View Invoice (link), Refund (button).",
+                            "mcpQuery": "Show me Kendo UI StackLayout examples with different orientations, spacing, and responsive behavior. Include examples for common layout patterns and styling with Tailwind CSS classes. Provide complete implementation with all props.",
+                            "children": [
+                              {
+                                "component": "link",
+                                "description": "View Invoice opens invoiceUrl in new tab.",
+                                "mcpQuery": "Show me Kendo UI ReactLink examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                                "children": "View"
+                              },
+                              {
+                                "component": "button",
+                                "description": "Refund action with confirmation dialog.",
+                                "mcpQuery": "Show me Kendo UI Button in Grid cell with Dialog confirmation pattern before destructive action.",
+                                "children": "Refund"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "component": "pagination",
+                        "description": "Pager controls for the grid; driven by server-side totalCount.",
+                        "mcpQuery": "Show me Kendo UI Pager integrated with Grid for server paging and page size changes.",
+                        "children": ""
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "component": "floatingaction",
+                "description": "Floating Action Button (FAB) bottom-right with speed-dial quickActions (Create Invoice, Add Customer, Record Payment).",
+                "mcpQuery": "Show me Kendo UI FloatingActionButton with speed-dial items, tooltips, and keyboard activation. Include elevation and shadow styling.",
+                "children": [
+                  {
+                    "component": "menu",
+                    "description": "Speed-dial actions bound to quickActions[{id,label,icon,actionType}].",
+                    "mcpQuery": "Show me Kendo UI Menu examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                    "children": [
+                      {
+                        "component": "menuitem",
+                        "description": "Create Invoice opens modal form.",
+                        "mcpQuery": "Show me Kendo UI Menu examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                        "children": "Create Invoice"
+                      },
+                      {
+                        "component": "menuitem",
+                        "description": "Add Customer opens modal form.",
+                        "mcpQuery": "Show me Kendo UI Menu examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                        "children": "Add Customer"
+                      },
+                      {
+                        "component": "menuitem",
+                        "description": "Record Payment opens modal form.",
+                        "mcpQuery": "Show me Kendo UI Menu examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                        "children": "Record Payment"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "footer",
+        "description": "Compact footer with links and app/version info. Data: footerLinks[], appVersion, locale options.",
+        "mcpQuery": "Show me Kendo UI AppBar examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+        "children": [
+          {
+            "component": "navigation",
+            "description": "Footer links (Privacy, Terms, Status).",
+            "mcpQuery": "Show me Kendo UI Menu examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+            "children": [
+              {
+                "component": "link",
+                "description": "Privacy link.",
+                "mcpQuery": "Show me Kendo UI ReactLink examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                "children": "Privacy"
+              },
+              {
+                "component": "link",
+                "description": "Terms link.",
+                "mcpQuery": "Show me Kendo UI ReactLink examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                "children": "Terms"
+              },
+              {
+                "component": "link",
+                "description": "Status link.",
+                "mcpQuery": "Show me Kendo UI ReactLink examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+                "children": "Status"
+              }
+            ]
+          },
+          {
+            "component": "text",
+            "description": "Build/version and locale selector.",
+            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+            "children": "vX.Y.Z"
+          },
+          {
+            "component": "select",
+            "description": "Locale selector bound to appSettings.locale.",
+            "mcpQuery": "Show me Kendo UI DropDownList for selecting locale with flag/icon items and persistence.",
+            "children": ""
+          }
+        ]
+      },
+      {
+        "component": "dialog",
+        "description": "Refund confirmation dialog for destructive action; shows amount and invoice id; requires user permission.",
+        "mcpQuery": "Show me Kendo UI Dialog with title, content, and primary/secondary actions, including ESC/overlay close and focus trap.",
+        "children": [
+          {
+            "component": "text",
+            "description": "Confirm refund message.",
+            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+            "children": "Are you sure you want to refund this payment?"
+          },
+          {
+            "component": "button",
+            "description": "Cancel closes dialog.",
+            "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+            "children": "Cancel"
+          },
+          {
+            "component": "button",
+            "description": "Confirm refund; danger styling; triggers mutation and toast.",
+            "mcpQuery": "Show me Kendo UI Button (danger) in Dialog footer with loading state.",
+            "children": "Refund"
+          }
+        ]
+      },
+      {
+        "component": "drawer",
+        "description": "Transaction details drawer that opens from the right on row click. Data: selectedTransaction with line items and actions.",
+        "mcpQuery": "Show me Kendo UI Drawer or PanelBar/Drawer as right-side overlay panel with header, scrollable content, and close button.",
+        "children": [
+          {
+            "component": "title",
+            "description": "Drawer title with transaction id.",
+            "mcpQuery": "Show me Kendo UI Typography examples with different variants, sizes, and styling options. Include examples for common display patterns and accessibility features. Provide complete implementation with all props.",
+            "children": "Transaction Details"
+          },
+          {
+            "component": "list",
+            "description": "Line items and timeline list.",
+            "mcpQuery": "Show me Kendo UI ListView examples with data binding, sorting, filtering, and pagination. Include examples with realistic sample data, custom cell templates, and responsive design. Provide complete implementation with all necessary props.",
+            "children": ""
+          },
+          {
+            "component": "toolbar",
+            "description": "Drawer actions: Refund, Resend invoice.",
+            "mcpQuery": "Show me Kendo UI Toolbar examples with navigation patterns, active states, and responsive behavior. Include examples for different menu structures and styling. Provide complete implementation with event handlers.",
+            "children": [
+              {
+                "component": "button",
+                "description": "Refund from drawer; opens confirmation dialog.",
+                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                "children": "Refund"
+              },
+              {
+                "component": "button",
+                "description": "Resend invoice email; shows success toast.",
+                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                "children": "Resend"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "modal",
+        "description": "Quick Action Modal: Create Invoice form.",
+        "mcpQuery": "Show me Kendo UI Dialog + Form for Create Invoice with responsive layout and validation.",
+        "children": [
+          {
+            "component": "form",
+            "description": "Create Invoice fields with validation and helper texts.",
+            "mcpQuery": "Show me Kendo UI Form examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+            "children": [
+              {
+                "component": "combobox",
+                "description": "Customer selector with async search.",
+                "mcpQuery": "Show me Kendo UI ComboBox with remote data, virtualization, and custom item template (avatar + name + company).",
+                "children": ""
+              },
+              {
+                "component": "grid",
+                "description": "Invoice items editable grid: item, qty, price, total.",
+                "mcpQuery": "Show me Kendo UI Grid with inline editing, numeric inputs, and calculated total column.",
+                "children": ""
+              },
+              {
+                "component": "numeric",
+                "description": "Amount numeric input with currency adornment.",
+                "mcpQuery": "Show me Kendo UI NumericTextBox with currency formatting and min/max validation.",
+                "children": ""
+              },
+              {
+                "component": "select",
+                "description": "Currency select bound to appSettings.currency.",
+                "mcpQuery": "Show me Kendo UI DropDownList with currency codes and symbols.",
+                "children": ""
+              },
+              {
+                "component": "datepicker",
+                "description": "Due date picker.",
+                "mcpQuery": "Show me Kendo UI DatePicker with min date = today and custom parsing.",
+                "children": ""
+              },
+              {
+                "component": "textarea",
+                "description": "Notes field, optional.",
+                "mcpQuery": "Show me Kendo UI TextArea with character counter.",
+                "children": ""
+              },
+              {
+                "component": "button",
+                "description": "Submit form; primary.",
+                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                "children": "Create Invoice"
+              },
+              {
+                "component": "button",
+                "description": "Cancel closes modal.",
+                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                "children": "Cancel"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "modal",
+        "description": "Quick Action Modal: Add Customer form.",
+        "mcpQuery": "Show me Kendo UI Dialog + Form for Add Customer with validation and tags input.",
+        "children": [
+          {
+            "component": "form",
+            "description": "Add Customer fields.",
+            "mcpQuery": "Show me Kendo UI Form examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+            "children": [
+              {
+                "component": "textinput",
+                "description": "Full name; required.",
+                "mcpQuery": "Show me Kendo UI TextBox with required validation and error messages.",
+                "children": ""
+              },
+              {
+                "component": "email",
+                "description": "Email; required; email validation.",
+                "mcpQuery": "Show me Kendo UI TextBox for email with validation and async uniqueness check.",
+                "children": ""
+              },
+              {
+                "component": "textinput",
+                "description": "Company; optional.",
+                "mcpQuery": "Show me Kendo UI TextBox examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                "children": ""
+              },
+              {
+                "component": "taginput",
+                "description": "Tags; freeform with suggestions.",
+                "mcpQuery": "Show me Kendo UI ChipList or MultiSelect used as tag input with custom additions.",
+                "children": ""
+              },
+              {
+                "component": "button",
+                "description": "Save customer.",
+                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                "children": "Save"
+              },
+              {
+                "component": "button",
+                "description": "Cancel.",
+                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                "children": "Cancel"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "modal",
+        "description": "Quick Action Modal: Record Payment form.",
+        "mcpQuery": "Show me Kendo UI Dialog + Form for recording a payment with selects and numeric inputs.",
+        "children": [
+          {
+            "component": "form",
+            "description": "Record Payment fields.",
+            "mcpQuery": "Show me Kendo UI Form examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+            "children": [
+              {
+                "component": "combobox",
+                "description": "Invoice selector with remote search.",
+                "mcpQuery": "Show me Kendo UI ComboBox with server filtering and virtualization for invoices.",
+                "children": ""
+              },
+              {
+                "component": "numeric",
+                "description": "Amount numeric input; required; min 0.01.",
+                "mcpQuery": "Show me Kendo UI NumericTextBox with validation messages and currency adornment.",
+                "children": ""
+              },
+              {
+                "component": "select",
+                "description": "Method select.",
+                "mcpQuery": "Show me Kendo UI DropDownList with icons in items (Card, Bank, PayPal, Cash).",
+                "children": ""
+              },
+              {
+                "component": "textinput",
+                "description": "Reference/notes; optional.",
+                "mcpQuery": "Show me Kendo UI TextBox examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                "children": ""
+              },
+              {
+                "component": "button",
+                "description": "Record payment.",
+                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                "children": "Record"
+              },
+              {
+                "component": "button",
+                "description": "Cancel.",
+                "mcpQuery": "Show me Kendo UI Button examples with complete props, event handlers, validation, and styling. Include examples for different states (enabled, disabled, error) and common use cases. Provide realistic sample data and accessibility attributes.",
+                "children": "Cancel"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "component": "toast",
+        "description": "Global toasts for success/error feedback on actions (export, refund, create).",
+        "mcpQuery": "Show me Kendo UI Notification/Toast examples with queueing, timeout, and variants (success, error, info).",
+        "children": ""
+      },
+      {
+        "component": "loader",
+        "description": "Global loading spinner overlay during heavy fetches.",
+        "mcpQuery": "Show me Kendo UI Loader overlay with blur background and aria-busy for main region.",
+        "children": ""
+      }
+    ]
+  },
+  "metadata": {
+    "totalComponents": 118,
+    "maxDepth": 7,
+    "componentTypes": [
+      "container",
+      "header",
+      "logo",
+      "link",
+      "search",
+      "button",
+      "popup",
+      "listview",
+      "avatar",
+      "switch",
+      "dropdown",
+      "sidebar",
+      "drawer",
+      "list",
+      "main",
+      "breadcrumb",
+      "toolbar",
+      "h1",
+      "form",
+      "daterangepicker",
+      "multiselect",
+      "select",
+      "section",
+      "grid",
+      "card",
+      "title",
+      "text",
+      "badge",
+      "tooltip",
+      "sparkline",
+      "tabs",
+      "tab",
+      "linechart",
+      "barchart",
+      "datagrid",
+      "column",
+      "pagination",
+      "floatingaction",
+      "menu",
+      "menuitem",
+      "footer",
+      "navigation",
+      "dialog",
+      "numeric",
+      "datepicker",
+      "textarea",
+      "combobox",
+      "email",
+      "textinput",
+      "taginput",
+      "buttongroup",
+      "toast",
+      "loader"
+    ],
+    "description": "A comprehensive SaaS dashboard ACT with fixed header, collapsible sidebar, KPIs, charts, transactions table, FAB with quick actions, modals, drawer, and global feedback. Includes detailed mcpQuery fields for mapping to Kendo UI components."
+  }
+}

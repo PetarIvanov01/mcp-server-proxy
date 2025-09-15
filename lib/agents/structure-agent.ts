@@ -132,20 +132,8 @@ export class StructureAgent {
 
         The ACT should be a complete, rich representation of the page structure that can be easily converted to actual UI components.
 
-        STYLING AND LAYOUTING REQUIREMENTS:
-        - For each component, include a styleInfo field with appropriate Tailwind CSS classes (or null if no styling needed)
-        - Use semantic and meaningful class combinations that reflect the component's purpose
-        - Include responsive classes where appropriate (sm:, md:, lg:, xl:)
-        - Consider layout properties like flex, grid, positioning, spacing, and sizing
-        - Use color schemes, typography, and visual hierarchy that make sense for the component
-        - Examples of good styleInfo values:
-          * Header: "bg-gray-900 text-white p-4 shadow-lg"
-          * Button: "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
-          * Card: "bg-white rounded-lg shadow-md p-6 border border-gray-200"
-          * Container: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-          * Flex container: "flex items-center justify-between gap-4"
-          * Grid layout: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          * No styling needed: null
+        LAYOUTING REQUIREMENTS:
+        - Focus on providing more of a wireframe than a complete design
 
         MCP QUERY GENERATION REQUIREMENTS:
         - For each component that will be mapped to a Kendo component, generate a specific mcpQuery field
