@@ -10,8 +10,10 @@ import * as path from 'path';
 import { randomBytes } from 'crypto';
 
 const mcpOutputDir = path.join(process.cwd(), '.mcp-outputs');
-if (!fs.existsSync(mcpOutputDir)) {
-  fs.mkdirSync(mcpOutputDir, { recursive: true });
+if (process.env?.DEBUG === 'true') {
+  if (!fs.existsSync(mcpOutputDir)) {
+    fs.mkdirSync(mcpOutputDir, { recursive: true });
+  }
 }
 
 const sessionDir = path.join(
