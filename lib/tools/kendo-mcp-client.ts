@@ -46,7 +46,7 @@ export class KendoMCPClient {
 
       this.transport = new StdioClientTransport({
         command: 'node',
-        args: ['./node_modules/@progress/kendo-react-mcp/dist/index.js'],
+        args: ['node_modules/@progress/kendo-react-mcp/dist/index.js'],
         env: {
           ...process.env,
           TELERIK_LICENSE_PATH: licensePath
