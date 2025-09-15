@@ -2,6 +2,7 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { z } from 'zod';
 import path from 'path';
+import "@progress/kendo-react-mcp/dist/index.js";
 
 export interface KendoMCPQuery {
   query: string;
