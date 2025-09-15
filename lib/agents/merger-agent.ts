@@ -69,17 +69,15 @@ export class MergerAgent {
       1. Map ACT components to Kendo UI components or HTML elements
       2. Use MCP documentation to understand component requirements
       3. Generate complete React code with proper imports and realistic mock data
-      4. Apply Tailwind CSS classes for styling and layout using the styleInfo field from ACT components
 
       Key Requirements:
       - Use Kendo components for complex UI (buttons, forms, data display)
-      - Use HTML elements for basic content (links, images, text)
+      - Try to use Kendo components for all components, if not possible, use HTML elements
       - Include realistic mock data that matches component schemas
-      - Apply Tailwind CSS classes for styling using the styleInfo field from ACT components
-      - When styleInfo is provided, use those classes as the primary styling approach
-      - When styleInfo is null, apply appropriate default styling based on component type
       - Generate production-ready, syntactically correct code
       - Follow React best practices and accessibility guidelines
+      - Make sure no elements overlap or overflow each other especially with absolute positioning
+      - The layout should be clean, modern and with beautiful design and UI/UX
 
       Mock Data Requirements:
       - Tables/Grids: Sample rows with realistic data in exact schema format
