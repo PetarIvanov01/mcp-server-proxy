@@ -45,11 +45,11 @@ export class KendoMCPClient {
       // });
 
       const mcpPath = path.resolve(
-        'node_modules/.pnpm/@progress+kendo-react-mcp@1.1.2/node_modules/@progress/kendo-react-mcp/dist/index.js'
+        'node_modules/.pnpm/@progress+kendo-react-mcp@1.1.2/node_modules/@progress/kendo-react-mcp/node_modules/.bin/kendo-react-mcp'
       );
 
       this.transport = new StdioClientTransport({
-        command: 'node',
+        command: 'sh',
         args: [mcpPath],
         env: {
           ...process.env,
