@@ -1,23 +1,9 @@
-import { Agent, ModelSettings, run } from '@openai/agents';
 import { z } from 'zod';
+import { Agent, run } from '@openai/agents';
 import { ACTComponent, AgentResponse } from '../types';
 import { ACT_TO_KENDO_MAPPINGS } from '../kendo-components';
 
 import { getKendoMCPClient } from '../tools/kendo-mcp-client';
-
-import * as fs from 'fs';
-import * as path from 'path';
-import { randomBytes } from 'crypto';
-
-const mcpOutputDir = path.join(process.cwd(), '.mcp-outputs');
-if (!fs.existsSync(mcpOutputDir)) {
-  fs.mkdirSync(mcpOutputDir, { recursive: true });
-}
-
-const sessionDir = path.join(
-  mcpOutputDir,
-  `session-${new Date().toISOString().replace(/[:.]/g, '-')}`
-);
 
 const kendoCodeSchema = z.object({
   components: z
@@ -72,12 +58,10 @@ export class MergerAgent {
 
       Key Requirements:
       - Use Kendo components for complex UI (buttons, forms, data display)
-      - Try to use Kendo components for all components, if not possible, use HTML elements
+      - Use HTML elements for basic content (links, images, text)
       - Include realistic mock data that matches component schemas
       - Generate production-ready, syntactically correct code
       - Follow React best practices and accessibility guidelines
-      - Make sure no elements overlap or overflow each other especially with absolute positioning
-      - The layout should be clean, modern and with beautiful design and UI/UX
 
       Mock Data Requirements:
       - Tables/Grids: Sample rows with realistic data in exact schema format
@@ -207,15 +191,6 @@ export class MergerAgent {
 
         // Store the raw MCP response directly as context
         docs[component] = componentDocs;
-
-        if (process.env?.DEBUG === 'true') {
-          printToFile(sessionDir, `${component}-raw-response.json`, {
-            component,
-            query: componentQuery,
-            timestamp: new Date().toISOString(),
-            rawResponse: componentDocs
-          });
-        }
       } catch (error) {
         console.error(
           `❌ Merger Agent: Failed to fetch docs for ${component}:`,
@@ -225,19 +200,6 @@ export class MergerAgent {
     });
 
     await Promise.all(docPromises);
-
-    if (process.env?.DEBUG === 'true') {
-      printToFile(sessionDir, 'session-summary.json', {
-        timestamp: new Date().toISOString(),
-        components: components,
-        totalComponents: components.length,
-        rawDocs: Object.entries(docs).map(([name, response]) => ({
-          componentName: name,
-          responseLength: response.length,
-          hasResponse: response.length > 0
-        }))
-      });
-    }
 
     return docs;
   }
@@ -259,11 +221,6 @@ export class MergerAgent {
       const componentDocs = await this.fetchComponentDocumentation(
         requiredComponents,
         mcpQueries
-      );
-
-      console.log(
-        '📖 Merger Agent: Fetched docs for components:',
-        Object.keys(componentDocs)
       );
 
       // Build context from raw MCP responses
@@ -290,22 +247,11 @@ export class MergerAgent {
       const kendoData = kendoCodeSchema.parse(result.finalOutput);
       console.log('✅ Merger Agent: Successfully parsed schema');
 
-      // TODO: Generate a new route for the page
-      const routeId = generateRandomId();
-      const routeCreation = createGeneratedRoute(
-        kendoData.components.mainComponent,
-        kendoData.components.imports,
-        routeId
-      );
-
       return {
         success: true,
         data: {
           code: kendoData.components,
-          originalACT: actStructure,
-          routePath: routeCreation.routePath,
-          mcpQueries: mcpQueries,
-          mcpResponses: componentDocs
+          originalACT: actStructure
         }
       };
     } catch (error) {
@@ -326,71 +272,5 @@ export class MergerAgent {
     if (this.kendoMCPClient) {
       this.kendoMCPClient.disconnect();
     }
-  }
-}
-
-function printToFile(dir: string, filename: string, meta: Record<string, any>) {
-  fs.mkdirSync(dir, { recursive: true });
-  const rawResponseFile = path.join(dir, filename);
-  fs.writeFileSync(
-    rawResponseFile,
-    JSON.stringify(
-      {
-        timestamp: new Date().toISOString(),
-        ...meta
-      },
-      null,
-      2
-    )
-  );
-}
-
-function generateRandomId(): string {
-  return randomBytes(16).toString('hex');
-}
-
-function createGeneratedRoute(
-  components: string,
-  imports: string[],
-  routeId: string
-) {
-  try {
-    const appDir = path.join(process.cwd(), 'app');
-    const generatedDir = path.join(appDir, 'generated');
-    const routeDir = path.join(generatedDir, routeId);
-
-    if (!fs.existsSync(generatedDir)) {
-      fs.mkdirSync(generatedDir, { recursive: true });
-    }
-
-    if (!fs.existsSync(routeDir)) {
-      fs.mkdirSync(routeDir, { recursive: true });
-    }
-
-    const pageContent = `
-    'use client'; \n
-
-    ${imports.join('\n')}
-
-    ${components}
-    `;
-
-    const pageFilePath = path.join(routeDir, 'page.tsx');
-    fs.writeFileSync(pageFilePath, pageContent);
-
-    const routePath = `/generated/${routeId}`;
-    console.log(`✅ Generated route created at: ${routePath}`);
-    console.log(`📁 File path: ${pageFilePath}`);
-
-    return {
-      routePath,
-      success: true
-    };
-  } catch (error) {
-    console.error('❌ Failed to create route:', error);
-    return {
-      routePath: null,
-      success: false
-    };
   }
 }

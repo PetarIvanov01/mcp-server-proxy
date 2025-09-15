@@ -306,7 +306,10 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               {result ? (
-                <Tabs defaultValue={result.data?.routePath ? "preview" : "overview"} className="w-full">
+                <Tabs
+                  defaultValue={result.data?.routePath ? 'preview' : 'overview'}
+                  className="w-full"
+                >
                   <TabsList className="grid w-full grid-cols-5">
                     <TabsTrigger value="overview">Overview</TabsTrigger>
                     <TabsTrigger value="preview">Preview</TabsTrigger>
@@ -331,13 +334,18 @@ export default function Home() {
                             <div className="flex items-center gap-2">
                               <Monitor className="h-4 w-4 text-green-600" />
                               <span className="text-sm font-medium text-green-800">
-                                Live at: <code className="bg-green-100 px-2 py-1 rounded text-xs font-mono">{result.data.routePath}</code>
+                                Live at:{' '}
+                                <code className="bg-green-100 px-2 py-1 rounded text-xs font-mono">
+                                  {result.data.routePath}
+                                </code>
                               </span>
                             </div>
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => window.open(result.data?.routePath, '_blank')}
+                              onClick={() =>
+                                window.open(result.data?.routePath, '_blank')
+                              }
                               className="flex items-center gap-1 text-green-700 border-green-300 hover:bg-green-100"
                             >
                               <ExternalLink className="h-3 w-3" />
@@ -450,7 +458,9 @@ export default function Home() {
                               variant="outline"
                               size="sm"
                               onClick={() => {
-                                const iframe = document.querySelector('.preview-iframe') as HTMLIFrameElement;
+                                const iframe = document.querySelector(
+                                  '.preview-iframe'
+                                ) as HTMLIFrameElement;
                                 if (iframe) {
                                   iframe.src = iframe.src;
                                 }
@@ -463,7 +473,9 @@ export default function Home() {
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => window.open(result.data?.routePath, '_blank')}
+                              onClick={() =>
+                                window.open(result.data?.routePath, '_blank')
+                              }
                               className="flex items-center gap-2"
                             >
                               <ExternalLink className="h-4 w-4" />
@@ -503,7 +515,9 @@ export default function Home() {
                                 <div className="absolute inset-0 bg-gray-50 flex items-center justify-center">
                                   <div className="flex items-center gap-3 text-gray-600">
                                     <Loader2 className="h-6 w-6 animate-spin" />
-                                    <span className="font-medium">Loading preview...</span>
+                                    <span className="font-medium">
+                                      Loading preview...
+                                    </span>
                                   </div>
                                 </div>
                               )}
@@ -521,7 +535,9 @@ export default function Home() {
                                 Interactive Preview
                               </h5>
                               <p className="text-sm text-blue-700">
-                                This is a live preview of your generated page. All Kendo UI components are fully functional and interactive.
+                                This is a live preview of your generated page.
+                                All Kendo UI components are fully functional and
+                                interactive.
                               </p>
                               <div className="mt-2 flex items-center gap-4 text-xs text-blue-600">
                                 <span>✓ Full-size preview</span>
@@ -535,24 +551,37 @@ export default function Home() {
                     ) : (
                       <div className="text-center py-12 text-gray-500">
                         <Monitor className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                        <h4 className="text-lg font-semibold mb-2">No Preview Available</h4>
+                        <h4 className="text-lg font-semibold mb-2">
+                          No Preview Available
+                        </h4>
                         <p className="text-sm mb-4">
-                          The page generation didn't complete successfully, so there's no preview to show.
+                          The page generation didn't complete successfully, so
+                          there's no preview to show.
                         </p>
                         {result.data?.errors && (
                           <div className="text-left max-w-md mx-auto">
                             <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-sm">
-                              <h5 className="font-semibold text-red-800 mb-2">Generation Errors:</h5>
+                              <h5 className="font-semibold text-red-800 mb-2">
+                                Generation Errors:
+                              </h5>
                               {result.data.errors.actError && (
                                 <div className="mb-2">
-                                  <span className="font-medium text-red-700">ACT Generation:</span>
-                                  <p className="text-red-600">{result.data.errors.actError}</p>
+                                  <span className="font-medium text-red-700">
+                                    ACT Generation:
+                                  </span>
+                                  <p className="text-red-600">
+                                    {result.data.errors.actError}
+                                  </p>
                                 </div>
                               )}
                               {result.data.errors.kendoError && (
                                 <div>
-                                  <span className="font-medium text-red-700">Component Generation:</span>
-                                  <p className="text-red-600">{result.data.errors.kendoError}</p>
+                                  <span className="font-medium text-red-700">
+                                    Component Generation:
+                                  </span>
+                                  <p className="text-red-600">
+                                    {result.data.errors.kendoError}
+                                  </p>
                                 </div>
                               )}
                             </div>
@@ -801,7 +830,10 @@ export default function Home() {
               <div className="flex items-center gap-3">
                 <Monitor className="h-5 w-5" />
                 <h3 className="font-semibold">Full Screen Preview</h3>
-                <Badge variant="secondary" className="text-xs bg-gray-700 text-gray-200">
+                <Badge
+                  variant="secondary"
+                  className="text-xs bg-gray-700 text-gray-200"
+                >
                   {result.data.routePath}
                 </Badge>
               </div>
@@ -810,7 +842,9 @@ export default function Home() {
                   variant="outline"
                   size="sm"
                   onClick={() => {
-                    const iframe = document.querySelector('.fullscreen-iframe') as HTMLIFrameElement;
+                    const iframe = document.querySelector(
+                      '.fullscreen-iframe'
+                    ) as HTMLIFrameElement;
                     if (iframe) {
                       iframe.src = iframe.src;
                     }
@@ -837,7 +871,7 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-            
+
             {/* Full Screen Iframe */}
             <div className="flex-1 relative">
               <iframe

@@ -13,11 +13,12 @@
     "test:mcp:client": "dotenv -e .env.local -- npx tsx scripts/test-custom-mcp.ts",
     "test:merger": "dotenv -e .env.local -- npx tsx scripts/test-merger-integration.ts",
     "test:merger:quick": "dotenv -e .env.local -- npx tsx scripts/run-merger-test.ts",
-    "test:generation": "dotenv -e .env.local -- npx tsx scripts/run-generation-tests.ts"
+    "test:generation": "dotenv -e .env.local -- npx tsx scripts/run-generation-tests.ts",
+    "mcp:dev": "npx tsx lib/page-generation-mcp/src/server.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
-    "@modelcontextprotocol/sdk": "^1.17.5",
+    "@modelcontextprotocol/sdk": "^1.18.0",
     "@openai/agents": "^0.1.2",
     "@progress/kendo-licensing": "^1.7.1",
     "@progress/kendo-react-animation": "^12.0.1",
@@ -84,6 +85,7 @@
     "dotenv": "^17.2.2",
     "embla-carousel-react": "8.5.1",
     "geist": "^1.3.1",
+    "hammerjs": "^2.0.8",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
     "next": "15.2.4",

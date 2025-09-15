@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "page-generation": {
+      "name": "page-generation-mcp",
+      "command": "npx",
+      "args": [
+        "tsx",
+        "page-generation-mcp/src/server.ts"
+      ],
+      "timeout": 900000,
+      "env": {
+        "NODE_ENV": "development",
+        "OPENAI_API_KEY": "OPENAI_API_KEY"
+      }
+    }
+  }
+}
