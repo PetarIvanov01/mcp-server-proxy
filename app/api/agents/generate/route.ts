@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { UserQuerySchema } from '@/lib/types';
 import coreAgent from '@/lib/agents/core-agent';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+
+const execAsync = promisify(exec);
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,6 +28,29 @@ export async function POST(request: NextRequest) {
         console.log(`Cannot access ${path}`);
       }
     });
+
+    // Execute ls command to show directories in node_modules
+    try {
+      const { stdout, stderr } = await execAsync(
+        'ls -la node_modules/ | grep "^d"'
+      );
+
+      const { stdout: stdoutProgress, stderr: stderrProgress } =
+        await execAsync('ls node_modules/@progress/');
+
+      console.log('Directories in node_modules:');
+      console.log(stdout);
+      console.log('Directories in node_modules/@progress:');
+      console.log(stdoutProgress);
+      if (stderr) {
+        console.log('LS command stderr:', stderr);
+      }
+      if (stderrProgress) {
+        console.log('LS command stderr:', stderrProgress);
+      }
+    } catch (error) {
+      console.error('Error executing ls command:', error);
+    }
 
     throw new Error('test');
     const validatedBody = UserQuerySchema.parse({
