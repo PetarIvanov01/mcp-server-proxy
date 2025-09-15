@@ -35,10 +35,18 @@ export class KendoMCPClient {
         version: '1.0.0'
       });
 
-      // Set up the transport to the Kendo React MCP server
+      // this.transport = new StdioClientTransport({
+      //   command: 'npx',
+      //   args: ['-y', '@progress/kendo-react-mcp@1.1.2'],
+      //   env: {
+      //     ...process.env,
+      //     TELERIK_LICENSE_PATH: licensePath
+      //   }
+      // });
+
       this.transport = new StdioClientTransport({
-        command: 'npx',
-        args: ['-y', '@progress/kendo-react-mcp@1.1.2'],
+        command: 'node',
+        args: ['./node_modules/@progress/kendo-react-mcp/dist/index.js'],
         env: {
           ...process.env,
           TELERIK_LICENSE_PATH: licensePath
