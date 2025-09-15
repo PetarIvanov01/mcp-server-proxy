@@ -38,6 +38,4 @@ next-env.d.ts
 # mcp server outputs
 .mcp-outputs/
 
-telerik-license.txt
-
 .cursor/mcp.json
