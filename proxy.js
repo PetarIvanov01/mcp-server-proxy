@@ -18,14 +18,44 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'POST' && req.url === '/mcp/query') {
       let body = '';
       req.on('data', (c) => (body += c));
-      req.on('end', async () => {
-        const { query, component = 'General' } = JSON.parse(body || '{}');
-        const result = await client.callTool({
-          name: 'kendo_react_assistant',
-          arguments: { query, component }
-        });
+      req.on('error', (err) => {
+        res.statusCode = 400;
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(result));
+        res.end(JSON.stringify({ error: String(err?.message || err) }));
+      });
+      req.on('end', async () => {
+        try {
+          let payload;
+          try {
+            payload = JSON.parse(body || '{}');
+          } catch {
+            res.statusCode = 400;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ error: 'Invalid JSON body' }));
+            return;
+          }
+
+          const { query, component = 'General' } = payload || {};
+          if (typeof query !== 'string' || query.trim() === '') {
+            res.statusCode = 400;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(
+              JSON.stringify({ error: 'Missing required "query" string' })
+            );
+            return;
+          }
+
+          const result = await client.callTool({
+            name: 'kendo_react_assistant',
+            arguments: { query, component }
+          });
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify(result));
+        } catch (e) {
+          res.statusCode = 500;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: String(e?.message || e) }));
+        }
       });
       return;
     }
