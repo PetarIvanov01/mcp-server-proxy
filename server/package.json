@@ -1,0 +1,39 @@
+{
+  "name": "agentic-page-builder-server",
+  "version": "1.0.0",
+  "description": "Server for Agentic Page Builder",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development dotenv -e .env.local -- tsx watch src/index.ts",
+    "build": "tsc && tsc-alias && tsc-esm-fix --ext=.js --target=./dist",
+    "start": "node dist/index.js",
+    "lint": "eslint src/**/*.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "zod": "^3",
+    "@modelcontextprotocol/sdk": "^1.18.0",
+    "@openai/agents": "^0.0.2",
+    "@progress/kendo-react-mcp": "1.1.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.5",
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
+    "@typescript-eslint/parser": "^8.0.1",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "dotenv-cli": "^7.4.2",
+    "eslint": "^9.9.0",
+    "tsc-alias": "^1.8.8",
+    "tsc-esm-fix": "^3.0.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.5.3"
+  },
+  "license": "MIT"
+}
