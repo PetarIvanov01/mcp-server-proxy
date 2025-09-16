@@ -1,7 +1,6 @@
 import { z } from 'zod';
-import { Client } from '@modelcontextprotocol/sdk/client/index.js';
-import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
-import path, { resolve } from 'path';
+import path from 'path';
+import { kendoReactAssistantTool, KENDO_COMPONENTS } from './kendo-mcp-server';
 
 export interface KendoMCPQuery {
   query: string;
@@ -16,8 +15,6 @@ export interface KendoMCPResponse {
 }
 
 export class KendoMCPClient {
-  private client: Client | null = null;
-  private transport: StdioClientTransport | null = null;
   private isConnected = false;
   private initializationPromise: Promise<void> | null = null;
 
@@ -27,28 +24,8 @@ export class KendoMCPClient {
 
   private async initializeMCPConnection(): Promise<void> {
     try {
-      const licensePath = path.join(process.cwd(), 'telerik-license.txt');
-
-      // Initialize the MCP client
-      this.client = new Client({
-        name: 'kendo-react-client',
-        version: '1.0.0'
-      });
-
-      this.transport = new StdioClientTransport({
-        command: 'node',
-        args: [
-          resolve('./node_modules/@progress/kendo-react-mcp/bin/index.js')
-        ],
-        env: {
-          ...process.env,
-          TELERIK_LICENSE_PATH: licensePath
-        }
-      });
-
-      // Connect to the MCP server
-      console.log('🔌 Kendo MCP Client: Connecting to MCP server...');
-      await this.client.connect(this.transport);
+      // The MCP server is already initialized when imported
+      console.log('🔌 Kendo MCP Client: Using direct MCP server connection...');
       this.isConnected = true;
     } catch (error) {
       this.isConnected = false;
@@ -71,7 +48,7 @@ export class KendoMCPClient {
       }
     }
 
-    if (!this.isConnected || !this.client) {
+    if (!this.isConnected) {
       console.warn(
         '⚠️ Kendo MCP Client: Not connected, returning empty response'
       );
@@ -79,13 +56,12 @@ export class KendoMCPClient {
     }
 
     try {
-      const result = await this.client.callTool({
-        name: 'kendo_react_assistant',
-        arguments: {
-          query,
-          component
-        }
+      // Call the tool function directly
+      const result = await kendoReactAssistantTool({
+        query,
+        component: component as typeof KENDO_COMPONENTS[number]
       });
+
       const content = z
         .object({
           type: z.string(),
@@ -136,20 +112,25 @@ export class KendoMCPClient {
   }
 
   isReady(): boolean {
-    return this.isConnected && this.client !== null;
+    return this.isConnected;
+  }
+
+  getAvailableComponents(): string[] {
+    return [...KENDO_COMPONENTS];
+  }
+
+  isValidComponent(component: string): boolean {
+    return KENDO_COMPONENTS.includes(component as any);
   }
 
   async disconnect(): Promise<void> {
-    if (this.client && this.isConnected) {
+    if (this.isConnected) {
       try {
-        await this.client.close();
         console.log('🔌 Kendo MCP Client: Disconnected');
       } catch (error) {
         console.error('❌ Kendo MCP Client: Error disconnecting:', error);
       }
     }
-    this.client = null;
-    this.transport = null;
     this.isConnected = false;
   }
 }
