@@ -5,10 +5,16 @@ import { resolve } from 'path';
 
 const port = process.env.PORT || 8080;
 
+const licensePath = path.join(process.cwd(), 'telerik-license.txt');
+
 const client = new Client({ name: 'kendo-mcp-proxy', version: '1.0.0' });
 const transport = new StdioClientTransport({
   command: 'npx',
-  args: ['-y', '@progress/kendo-react-mcp@latest']
+  args: ['-y', '@progress/kendo-react-mcp@latest'],
+  env: {
+    ...process.env,
+    TELERIK_LICENSE_PATH: licensePath
+  }
 });
 
 await client.connect(transport);
