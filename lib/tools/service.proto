@@ -1,0 +1,32 @@
+syntax = "proto3";
+option go_package = "github.com/telerik/ai-builder/contextapi/pkg/api/pb";
+
+
+message ContextQueryRequest {
+    string lib_name = 1;
+    string query = 2;
+    int32 text_matches_count = 3;
+    int32 code_matches_count = 4;
+    repeated string allowed_types = 5;
+    string component = 6;
+    string userId = 7;
+    string filters_json = 8;
+}
+
+message Item {
+    map<string, string> metadata = 1;
+    string content = 2;
+}
+
+message ContextQueryResponse {
+    repeated Item text = 1;
+    repeated Item code = 2;
+}
+
+message StringArray {
+    repeated string values = 1;
+}
+
+service ContextQueryService {
+    rpc Query(ContextQueryRequest) returns (StringArray);
+}
