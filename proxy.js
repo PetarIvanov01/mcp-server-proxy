@@ -5,7 +5,7 @@ import { resolve, join } from 'path';
 
 const port = process.env.PORT || 8080;
 
-const licensePath = path.join(process.cwd(), 'telerik-license.txt');
+const licensePath = join(process.cwd(), 'telerik-license.txt');
 
 const client = new Client({ name: 'kendo-mcp-proxy', version: '1.0.0' });
 const transport = new StdioClientTransport({
