@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { UserQuerySchema } from '@/lib/types';
 import coreAgent from '@/lib/agents/core-agent';
 
-export const maxDuration = 60 * 15; // 15 seconds
-export const dynamic = 'force-dynamic';
+export const maxDuration = 800;
 
 export async function POST(request: NextRequest) {
   try {
