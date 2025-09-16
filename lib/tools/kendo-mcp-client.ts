@@ -1,7 +1,7 @@
+import { z } from 'zod';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
-import { z } from 'zod';
-import path from 'path';
+import path, { resolve } from 'path';
 
 export interface KendoMCPQuery {
   query: string;
@@ -35,20 +35,11 @@ export class KendoMCPClient {
         version: '1.0.0'
       });
 
-      // this.transport = new StdioClientTransport({
-      //   command: 'npx',
-      //   args: ['-y', '@progress/kendo-react-mcp@1.1.2'],
-      //   env: {
-      //     ...process.env,
-      //     TELERIK_LICENSE_PATH: licensePath
-      //   }
-      // });
-
-      const mcpPath = path.resolve('kendo-react-mcp/dist/index.js');
-
       this.transport = new StdioClientTransport({
         command: 'node',
-        args: [mcpPath],
+        args: [
+          resolve('./node_modules/@progress/kendo-react-mcp/bin/index.js')
+        ],
         env: {
           ...process.env,
           TELERIK_LICENSE_PATH: licensePath
