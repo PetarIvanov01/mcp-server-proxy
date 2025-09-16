@@ -1,0 +1,14 @@
+{
+  "name": "kendo-mcp-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node proxy.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.0",
+    "@progress/kendo-react-mcp": "1.1.2",
+    "zod": "3"
+  }
+}
