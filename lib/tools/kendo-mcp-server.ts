@@ -21,26 +21,133 @@ const LICENSE_PATH_ENV_VAR = 'TELERIK_LICENSE_PATH';
 
 // Available Kendo React components
 const KENDO_COMPONENTS = [
-  'ActionSheet', 'AIPrompt', 'Animation', 'AppBar', 'ArcGauge', 'AutoComplete', 'Avatar',
-  'Badge', 'Barcode', 'BottomNavigation', 'Breadcrumb', 'Button', 'ButtonGroup', 'Calendar',
-  'Card', 'Chart', 'ChartWizard', 'Chat', 'Checkbox', 'Chip', 'ChipList', 'ChunkProgressBar',
-  'CircularGauge', 'ColorGradient', 'ColorPalette', 'ColorPicker', 'ComboBox', 'ContextMenu',
-  'ConversationalUI', 'DataGrid', 'Grid', 'DataQuery', 'DateMath', 'DateInput', 'DatePicker',
-  'DateRangePicker', 'DateTimePicker', 'Dialog', 'Drag&Drop', 'Drawer', 'Drawing',
-  'DropDownButton', 'DropDownList', 'DropDownTree', 'Editor', 'Error', 'ExcelExport',
-  'ExpansionPanel', 'ExternalDropZone', 'FileSaver', 'FileManager', 'Filter', 'FlatColorPicker',
-  'FloatingActionButton', 'FloatingLabel', 'FontIcon', 'Form', 'Gantt', 'Gauge', 'General',
-  'GridLayout', 'Hint', 'InlineAIPrompt', 'Input', 'Label', 'LinearGauge', 'ListBox',
-  'ListView', 'Loader', 'Map', 'MaskedTextBox', 'Menu', 'MultiColumnComboBox', 'MultiSelect',
-  'MultiSelectTree', 'MultiViewCalendar', 'Notification', 'NumericTextBox', 'OrgChart',
-  'PageTemplates/BuildingBlocks', 'Pager', 'PanelBar', 'PDFProcessing', 'PDFViewer',
-  'PivotGrid', 'Popover', 'Popup', 'ProgressBar', 'QRCode', 'RadialGauge', 'RadioButton',
-  'RadioGroup', 'RangeSlider', 'Rating', 'Ripple', 'Sankey', 'Scheduler', 'ScrollView',
-  'Signature', 'Skeleton', 'Slider', 'Sortable', 'Sparkline', 'SpeechToTextButton',
-  'SplitButton', 'Splitter', 'Spreadsheet', 'StackLayout', 'Stepper', 'StockChart', 'SVGIcon',
-  'Switch', 'TabStrip', 'TaskBoard', 'TextArea', 'TextBox', 'TileLayout', 'Timeline',
-  'TimePicker', 'Toolbar', 'Tooltip', 'TreeList', 'TreeView', 'Typography', 'Upload',
-  'VSCodeExtension', 'Window'
+  'ActionSheet',
+  'AIPrompt',
+  'Animation',
+  'AppBar',
+  'ArcGauge',
+  'AutoComplete',
+  'Avatar',
+  'Badge',
+  'Barcode',
+  'BottomNavigation',
+  'Breadcrumb',
+  'Button',
+  'ButtonGroup',
+  'Calendar',
+  'Card',
+  'Chart',
+  'ChartWizard',
+  'Chat',
+  'Checkbox',
+  'Chip',
+  'ChipList',
+  'ChunkProgressBar',
+  'CircularGauge',
+  'ColorGradient',
+  'ColorPalette',
+  'ColorPicker',
+  'ComboBox',
+  'ContextMenu',
+  'ConversationalUI',
+  'DataGrid',
+  'Grid',
+  'DataQuery',
+  'DateMath',
+  'DateInput',
+  'DatePicker',
+  'DateRangePicker',
+  'DateTimePicker',
+  'Dialog',
+  'Drag&Drop',
+  'Drawer',
+  'Drawing',
+  'DropDownButton',
+  'DropDownList',
+  'DropDownTree',
+  'Editor',
+  'Error',
+  'ExcelExport',
+  'ExpansionPanel',
+  'ExternalDropZone',
+  'FileSaver',
+  'FileManager',
+  'Filter',
+  'FlatColorPicker',
+  'FloatingActionButton',
+  'FloatingLabel',
+  'FontIcon',
+  'Form',
+  'Gantt',
+  'Gauge',
+  'General',
+  'GridLayout',
+  'Hint',
+  'InlineAIPrompt',
+  'Input',
+  'Label',
+  'LinearGauge',
+  'ListBox',
+  'ListView',
+  'Loader',
+  'Map',
+  'MaskedTextBox',
+  'Menu',
+  'MultiColumnComboBox',
+  'MultiSelect',
+  'MultiSelectTree',
+  'MultiViewCalendar',
+  'Notification',
+  'NumericTextBox',
+  'OrgChart',
+  'PageTemplates/BuildingBlocks',
+  'Pager',
+  'PanelBar',
+  'PDFProcessing',
+  'PDFViewer',
+  'PivotGrid',
+  'Popover',
+  'Popup',
+  'ProgressBar',
+  'QRCode',
+  'RadialGauge',
+  'RadioButton',
+  'RadioGroup',
+  'RangeSlider',
+  'Rating',
+  'Ripple',
+  'Sankey',
+  'Scheduler',
+  'ScrollView',
+  'Signature',
+  'Skeleton',
+  'Slider',
+  'Sortable',
+  'Sparkline',
+  'SpeechToTextButton',
+  'SplitButton',
+  'Splitter',
+  'Spreadsheet',
+  'StackLayout',
+  'Stepper',
+  'StockChart',
+  'SVGIcon',
+  'Switch',
+  'TabStrip',
+  'TaskBoard',
+  'TextArea',
+  'TextBox',
+  'TileLayout',
+  'Timeline',
+  'TimePicker',
+  'Toolbar',
+  'Tooltip',
+  'TreeList',
+  'TreeView',
+  'Typography',
+  'Upload',
+  'VSCodeExtension',
+  'Window'
 ] as const;
 
 // gRPC error codes
@@ -68,7 +175,7 @@ interface ToolResponse {
   [x: string]: unknown;
   content: Array<{
     [x: string]: unknown;
-    type: "text";
+    type: 'text';
     text: string;
     _meta?: { [x: string]: unknown } | undefined;
   }>;
@@ -91,7 +198,7 @@ const shouldSetupLogging = !!(debugLogFile && typeof debugLogFile === 'string');
 if (shouldSetupLogging) {
   const resolvedPath = path.resolve(debugLogFile);
   const dirPath = path.dirname(resolvedPath);
-  
+
   if (dirPath !== '.' && dirPath !== process.cwd() && !fs.existsSync(dirPath)) {
     try {
       fs.mkdirSync(dirPath, { recursive: true });
@@ -99,7 +206,7 @@ if (shouldSetupLogging) {
       console.error('Error creating log directory:', error);
     }
   }
-  
+
   if (!fs.existsSync(resolvedPath)) {
     try {
       fs.writeFileSync(resolvedPath, '');
@@ -109,13 +216,16 @@ if (shouldSetupLogging) {
   }
 }
 
-isLoggingEnabled = shouldSetupLogging && !!debugLogFile && fs.existsSync(path.resolve(debugLogFile));
+isLoggingEnabled =
+  shouldSetupLogging &&
+  !!debugLogFile &&
+  fs.existsSync(path.resolve(debugLogFile));
 
 function log(...messages: any[]): void {
   if (isLoggingEnabled && debugLogFile) {
     const logMessage = `${new Date().toISOString()}: ${messages.join(' ')}\n`;
     const resolvedPath = path.resolve(debugLogFile);
-    
+
     fs.appendFile(resolvedPath, logMessage, (error) => {
       if (error) {
         console.error('Error writing to log file:', error);
@@ -145,7 +255,7 @@ class ContextApiClient {
   constructor(contextApiUrl: string, protoPath: string) {
     this.contextApiUrl = contextApiUrl;
     this.protoPath = protoPath;
-    
+
     const packageDefinition = protoLoader.loadSync(this.protoPath, {
       keepCase: true,
       longs: String,
@@ -154,13 +264,19 @@ class ContextApiClient {
       oneofs: true
     });
 
-    this.isDev = this.contextApiUrl?.includes('localhost') || this.contextApiUrl?.includes('127.0.0.1');
+    this.isDev =
+      this.contextApiUrl?.includes('localhost') ||
+      this.contextApiUrl?.includes('127.0.0.1');
     log('Using ContextApi URL:', this.contextApiUrl);
 
-    const protoDescriptor = grpc.loadPackageDefinition(packageDefinition) as any;
+    const protoDescriptor = grpc.loadPackageDefinition(
+      packageDefinition
+    ) as any;
     this.client = new protoDescriptor.ContextQueryService(
       this.contextApiUrl || 'contextapi.telerik.com:443',
-      this.isDev ? grpc.credentials.createInsecure() : grpc.credentials.createSsl()
+      this.isDev
+        ? grpc.credentials.createInsecure()
+        : grpc.credentials.createSsl()
     );
   }
 
@@ -174,18 +290,24 @@ class ContextApiClient {
         metadata.add('x-license-key', cleanedKey);
       } catch (error: any) {
         log('Error adding license key to metadata:', error);
-        return Promise.reject(new Error(`Failed to use license key: ${error.message}`));
+        return Promise.reject(
+          new Error(`Failed to use license key: ${error.message}`)
+        );
       }
     }
 
     return new Promise((resolve, reject) => {
-      this.client.query(request, metadata, (error: any, response: ContextQueryResponse) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(response);
+      this.client.query(
+        request,
+        metadata,
+        (error: any, response: ContextQueryResponse) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(response);
+          }
         }
-      });
+      );
     });
   }
 }
@@ -193,10 +315,16 @@ class ContextApiClient {
 // Initialize context API client
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const protoPath = join(__dirname, 'service.proto');
-const contextApiClient = new ContextApiClient('contextapi.telerik.com:443', protoPath);
 
-async function queryContextApi(request: ContextQueryRequest): Promise<ContextQueryResponse> {
+const protoPath = join(__dirname, 'service.proto');
+const contextApiClient = new ContextApiClient(
+  'contextapi.telerik.com:443',
+  protoPath
+);
+
+async function queryContextApi(
+  request: ContextQueryRequest
+): Promise<ContextQueryResponse> {
   return contextApiClient.query(request);
 }
 
@@ -309,10 +437,13 @@ const mcpServer = new McpServer({
 });
 
 // Tool implementation function
-export async function kendoReactAssistantTool(params: { query: string; component: typeof KENDO_COMPONENTS[number] }): Promise<ToolResponse> {
+export async function kendoReactAssistantTool(params: {
+  query: string;
+  component: (typeof KENDO_COMPONENTS)[number];
+}): Promise<ToolResponse> {
   const { query, component } = params;
   log('Calling tool: ', JSON.stringify({ query, component }));
-  
+
   // Handle Grid component alias
   let normalizedComponent = component;
   if (component === 'Grid') {
@@ -335,14 +466,15 @@ export async function kendoReactAssistantTool(params: { query: string; component
     const responseText = response.values.join('\n\n');
     const trimmedResponse = responseText.trim();
 
-    const content = [{
-      type: 'text' as const,
-      text: responseText + (trimmedResponse ? '\n\n' + additionalDocs : '')
-    }];
+    const content = [
+      {
+        type: 'text' as const,
+        text: responseText + (trimmedResponse ? '\n\n' + additionalDocs : '')
+      }
+    ];
 
     log('Response from tool: ', JSON.stringify(content));
     return { content };
-
   } catch (error: any) {
     log('Error calling context API: ', JSON.stringify(error));
 
@@ -362,7 +494,9 @@ export async function kendoReactAssistantTool(params: { query: string; component
       log('License error: ', error.message);
       throw error;
     } else {
-      throw new Error(`Error: An error occurred while calling the service. Please try again later.\n\nError Message: ${error.message}`);
+      throw new Error(
+        `Error: An error occurred while calling the service. Please try again later.\n\nError Message: ${error.message}`
+      );
     }
   }
 }
@@ -385,9 +519,11 @@ specify its name in the 'component' parameter. This tool can be automatically tr
 - '@help_kendo'.`,
   {
     query: z.string().describe('The query to search for.'),
-    component: z.enum(KENDO_COMPONENTS).describe(
-      'The component to search for. If not specified, you can use General.'
-    )
+    component: z
+      .enum(KENDO_COMPONENTS)
+      .describe(
+        'The component to search for. If not specified, you can use General.'
+      )
   },
   kendoReactAssistantTool
 );

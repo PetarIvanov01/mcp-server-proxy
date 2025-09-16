@@ -1,5 +1,4 @@
-import { z } from 'zod';
-import { kendoReactAssistantTool, KENDO_COMPONENTS } from './kendo-mcp-server';
+import { KENDO_COMPONENTS } from '../kendo-components';
 
 // Hardcoded MCP proxy URL (replace with your deployed proxy URL)
 
@@ -113,34 +112,35 @@ export class KendoMCPClient {
 
         return await response.text();
       }
+      return '';
 
-      // Local direct-tool mode
-      const result = await kendoReactAssistantTool({
-        query,
-        component: component as (typeof KENDO_COMPONENTS)[number]
-      });
+      // // Local direct-tool mode
+      // const result = await kendoReactAssistantTool({
+      //   query,
+      //   component: component as (typeof KENDO_COMPONENTS)[number]
+      // });
 
-      const content = z
-        .object({
-          type: z.string(),
-          text: z.string()
-        })
-        .array()
-        .parse(result.content);
+      // const content = z
+      //   .object({
+      //     type: z.string(),
+      //     text: z.string()
+      //   })
+      //   .array()
+      //   .parse(result.content);
 
-      const responseText =
-        content
-          ?.filter((content: any) => content.type === 'text')
-          ?.map((content: any) => content.text)
-          ?.join('\n') || '';
+      // const responseText =
+      //   content
+      //     ?.filter((content: any) => content.type === 'text')
+      //     ?.map((content: any) => content.text)
+      //     ?.join('\n') || '';
 
-      console.log('📤 Kendo MCP Client: Response length:', responseText.length);
-      console.log(
-        '📤 Kendo MCP Client: Response preview:',
-        responseText.substring(0, 200) + '...'
-      );
+      // console.log('📤 Kendo MCP Client: Response length:', responseText.length);
+      // console.log(
+      //   '📤 Kendo MCP Client: Response preview:',
+      //   responseText.substring(0, 200) + '...'
+      // );
 
-      return responseText;
+      // return responseText;
     } catch (error) {
       console.error('❌ Kendo MCP Client: Query failed:', error);
       return '';
