@@ -5,6 +5,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --only=production
 
 COPY proxy.js ./
+COPY telerik-license.txt ./
 
 EXPOSE 8080
 ENV PORT=8080
