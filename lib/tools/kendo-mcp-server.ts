@@ -191,7 +191,9 @@ class ContextApiClient {
 }
 
 // Initialize context API client
-const protoPath = './lib/tools/service.proto';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const protoPath = join(__dirname, 'service.proto');
 const contextApiClient = new ContextApiClient('contextapi.telerik.com:443', protoPath);
 
 async function queryContextApi(request: ContextQueryRequest): Promise<ContextQueryResponse> {
