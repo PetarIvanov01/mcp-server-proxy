@@ -1,7 +1,7 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import http from 'http';
-import { resolve } from 'path';
+import { resolve, join } from 'path';
 
 const port = process.env.PORT || 8080;
 
