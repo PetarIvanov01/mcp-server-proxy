@@ -1,8 +1,0 @@
-{
-  "functions": {
-    "$schema": "https://openapi.vercel.sh/vercel.json",
-    "api/agents/generate/**/*.js": {
-      "includeFiles": "node_modules/@progress/kendo-react-mcp/dist/**"
-    }
-  }
-}

@@ -8,8 +8,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: true
-  },
-  transpilePackages: ['@progress/kendo-react-mcp']
+  }
 };
 
 export default nextConfig;
