@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import path from 'path';
 import { kendoReactAssistantTool, KENDO_COMPONENTS } from './kendo-mcp-server';
+
+// Hardcoded MCP proxy URL (replace with your deployed proxy URL)
 
 export interface KendoMCPQuery {
   query: string;
@@ -17,14 +18,27 @@ export interface KendoMCPResponse {
 export class KendoMCPClient {
   private isConnected = false;
   private initializationPromise: Promise<void> | null = null;
+  private remoteUrl: string | null = null;
+  private remoteToken: string | null = null;
 
   constructor() {
+    this.remoteUrl = process.env.MCP_REMOTE_URL || null;
+    this.remoteToken = process.env.KENDO_MCP_REMOTE_TOKEN || null;
     this.initializationPromise = this.initializeMCPConnection();
   }
 
   private async initializeMCPConnection(): Promise<void> {
     try {
-      // The MCP server is already initialized when imported
+      if (this.remoteUrl) {
+        console.log(
+          '🔌 Kendo MCP Client: Using remote MCP proxy at',
+          this.remoteUrl
+        );
+        this.isConnected = true;
+        return;
+      }
+
+      // The MCP server is already initialized when imported (local direct tool mode)
       console.log('🔌 Kendo MCP Client: Using direct MCP server connection...');
       this.isConnected = true;
     } catch (error) {
@@ -56,10 +70,54 @@ export class KendoMCPClient {
     }
 
     try {
-      // Call the tool function directly
+      // Remote HTTP proxy mode
+      if (this.remoteUrl) {
+        const response = await fetch(
+          `${this.remoteUrl.replace(/\/$/, '')}/mcp/query`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              ...(this.remoteToken
+                ? { Authorization: `Bearer ${this.remoteToken}` }
+                : {})
+            },
+            body: JSON.stringify({ query, component })
+          }
+        );
+
+        if (!response.ok) {
+          const text = await response.text().catch(() => '');
+          console.error(
+            '❌ Kendo MCP Client: Remote proxy error',
+            response.status,
+            text
+          );
+          return '';
+        }
+
+        const contentType = response.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          const data: any = await response.json();
+          if (typeof data === 'string') return data;
+          const content = Array.isArray(data?.content) ? data.content : [];
+          const responseText =
+            content
+              ?.filter(
+                (c: any) => c && c.type === 'text' && typeof c.text === 'string'
+              )
+              ?.map((c: any) => c.text)
+              ?.join('\n') || '';
+          return responseText;
+        }
+
+        return await response.text();
+      }
+
+      // Local direct-tool mode
       const result = await kendoReactAssistantTool({
         query,
-        component: component as typeof KENDO_COMPONENTS[number]
+        component: component as (typeof KENDO_COMPONENTS)[number]
       });
 
       const content = z
